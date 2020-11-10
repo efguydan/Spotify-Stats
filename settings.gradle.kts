@@ -1,2 +1,2 @@
 rootProject.name = "Spotify Stats"
-include ':app'
+include(":app")
