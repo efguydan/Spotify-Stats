@@ -17,6 +17,7 @@ spotless {
   kotlinGradle {
     target "*.gradle.kts"
     ktlint('0.37.2').userData(['indent_size': '4', 'continuation_indent_size': '4'])
+    trimTrailingWhitespace()
     endWithNewline()
   }
 }
