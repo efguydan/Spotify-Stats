@@ -14,7 +14,6 @@ object Config {
 
         object Misc {
             const val appID = "com.efedaniel.spotifystats"
-            // const val buildTools = ""
             const val testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         }
 

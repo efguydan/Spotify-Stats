@@ -1,6 +1,9 @@
 # Spotify Stats
 
-## \[ 🚧 Work in progress 🛠 👷🔧👷‍♀️️🔧️ 🚧 \]
+Spotify Stats is an Android Application to display statistics about your listening activity on Spotify
+
+## \[ 🚧 🛠👷🔧 Work in progress 🔧️👷🛠 🚧 \]
+- 
 
 ## Code Formatting
 Code Formatting is done with the gradle spotless plugin, using [ktlint](https://github.com/pinterest/ktlint) as the linter. Other settings for the plugin can be configured in [spotless.gradle](spotless.gradle). To format code, run
