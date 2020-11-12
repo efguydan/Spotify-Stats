@@ -4,12 +4,12 @@ Spotify Stats is an Android Application to display statistics about your listeni
 
 ## \[ 🚧 🛠👷🔧 Work in progress 🔧️👷🛠 🚧 \]
 
-# High Level TODOS
+### High Level TODOS
 - [ ] System Architecture with MVI
 - [ ] Dependency Injection with Hilt
 - [ ] User Interface using Jetpack Compose
 
-# Lower Level TODOS
+### Lower Level TODOS
 *Will fill in as they come up*
 
 ## Code Formatting
