@@ -8,11 +8,11 @@ import androidx.compose.ui.graphics.Color
 
 private val DarkColorPalette = darkColors(
     primary = spotifyBlack,
-    primaryVariant = Color.Black,
+    primaryVariant = spotifyBlackDark,
     secondary = spotifyLime,
     background = spotifyBlack,
     surface = spotifyBlack,
-    //error,
+    // error,
     onPrimary = Color.White,
     onSecondary = Color.White,
     onError = Color.White
