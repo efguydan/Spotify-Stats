@@ -1,0 +1,25 @@
+package com.efedaniel.spotifystats.presentation.mainactivity
+
+import androidx.annotation.StringRes
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Audiotrack
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.PeopleAlt
+import androidx.compose.material.icons.filled.Timeline
+import androidx.compose.ui.graphics.vector.VectorAsset
+import com.efedaniel.spotifystats.R
+import com.efedaniel.spotifystats.navigation.Destinations
+
+sealed class BottomNavigationScreens(
+    val route: String,
+    @StringRes val label: Int,
+    val icon: VectorAsset
+) {
+    object Tracks: BottomNavigationScreens(Destinations.tracks, R.string.tracks, Icons.Filled.Audiotrack)
+    object Artists: BottomNavigationScreens(Destinations.artists, R.string.artists, Icons.Filled.PeopleAlt)
+    object Activity: BottomNavigationScreens(Destinations.activity, R.string.activity, Icons.Filled.Home)
+    object Insights: BottomNavigationScreens(Destinations.insights, R.string.insights, Icons.Filled.Timeline)
+    // TODO Decide if this should be account or settings
+    object Account: BottomNavigationScreens(Destinations.account, R.string.account, Icons.Filled.AccountCircle)
+}

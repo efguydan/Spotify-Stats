@@ -58,8 +58,10 @@ android {
 
 dependencies {
     implementation(Config.Libs.Core.kotlinStd)
+    implementation(Config.Libs.Core.material)
     implementation(Config.Libs.AndroidX.core)
     implementation(Config.Libs.AndroidX.appCompat)
+    implementation(Config.Libs.AndroidX.lifecycle)
     implementation(Config.Libs.Compose.ui)
     implementation(Config.Libs.Compose.material)
     implementation(Config.Libs.Compose.uiTooling)
@@ -68,8 +70,6 @@ dependencies {
     implementation(Config.Libs.Compose.materialsIconsExtended)
     implementation(Config.Libs.Compose.runtimeLivedata)
     implementation(Config.Libs.Compose.navigation)
-    implementation(Config.Libs.AndroidX.lifecycle)
-    implementation(Config.Libs.Core.material)
 
     testImplementation(Config.Libs.Test.jUnit)
 

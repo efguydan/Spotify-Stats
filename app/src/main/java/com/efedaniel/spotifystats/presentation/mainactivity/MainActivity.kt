@@ -1,4 +1,4 @@
-package com.efedaniel.spotifystats
+package com.efedaniel.spotifystats.presentation.mainactivity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

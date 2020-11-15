@@ -52,7 +52,6 @@ object Config {
             const val core = "androidx.core:core-ktx:${Versions.androidXCore}"
             const val appCompat = "androidx.appcompat:appcompat:${Versions.appCompat}"
             const val lifecycle = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}"
-
         }
 
         object Compose {
