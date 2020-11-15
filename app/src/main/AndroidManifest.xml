@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.efedaniel.spotifystats">
 
     <application
+        android:name=".SpotifyStatsApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.SpotifyStats">
+        android:theme="@style/Theme.SpotifyStats"
+        android:usesCleartextTraffic="true"
+        tools:ignore="UnusedAttribute">
         <activity
             android:name=".presentation.mainactivity.MainActivity"
             android:label="@string/app_name"

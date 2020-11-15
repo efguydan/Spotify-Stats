@@ -32,6 +32,7 @@ object Config {
         const val jUnit = "4.13.1"
         const val androidJUnit = "1.1.2"
         const val espresso = "3.3.0"
+        const val timber = "4.7.1"
     }
 
     object Plugins {
@@ -63,6 +64,10 @@ object Config {
             const val materialsIconsExtended = "androidx.compose.material:material-icons-extended:${Versions.compose}"
             const val runtimeLivedata = "androidx.compose.runtime:runtime-livedata:${Versions.compose}"
             const val navigation = "androidx.navigation:navigation-compose:${Versions.composeNavigation}"
+        }
+
+        object Misc {
+            const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
         }
 
         object Test {

@@ -21,11 +21,11 @@ import androidx.navigation.compose.KEY_ROUTE
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.navigate
+import androidx.navigation.compose.rememberNavController
 import androidx.ui.tooling.preview.Preview
-import com.efedaniel.spotifystats.navigation.Destinations
 import com.efedaniel.spotifystats.ui.SpotifyStatsTheme
+import timber.log.Timber
 
 val botttomNavDestinations = listOf(
     BottomNavigationScreens.Tracks,
@@ -46,6 +46,7 @@ fun MainActivityContent() {
                 ) {
                     val navBackStackEntry = navController.currentBackStackEntryAsState()
                     val currentRoute = navBackStackEntry.value?.arguments?.getString(KEY_ROUTE)
+                    Timber.d("Current Route is $currentRoute")
                     botttomNavDestinations.forEach {
                         SpotifyStatsNavigationItem(
                             icon = it.icon,
