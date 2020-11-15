@@ -1,4 +1,5 @@
 # Spotify Stats
+![Android CI](https://github.com/efguydan/Spotify-Stats/workflows/Android%20CI/badge.svg)
 
 Spotify Stats is an Android Application to display statistics about your listening activity on Spotify
 

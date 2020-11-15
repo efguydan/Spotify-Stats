@@ -54,7 +54,7 @@ fun MainActivityContent() {
                             isSelected = currentRoute == it.route,
                             onClick = {
                                 // TODO would most likely do this a different way later
-                                // navController.popBackStack(navController.graph.startDestination, false)
+                                navController.popBackStack(navController.graph.startDestination, false)
 
                                 if (currentRoute != it.route) navController.navigate(it.route)
                             }

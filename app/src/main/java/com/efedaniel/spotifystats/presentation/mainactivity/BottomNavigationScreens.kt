@@ -9,7 +9,7 @@ import androidx.compose.material.icons.filled.PeopleAlt
 import androidx.compose.material.icons.filled.Timeline
 import androidx.compose.ui.graphics.vector.VectorAsset
 import com.efedaniel.spotifystats.R
-import com.efedaniel.spotifystats.navigation.Destinations
+import com.efedaniel.spotifystats.utils.Constants.Destinations
 
 sealed class BottomNavigationScreens(
     val route: String,
