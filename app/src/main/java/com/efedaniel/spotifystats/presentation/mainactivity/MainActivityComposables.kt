@@ -16,14 +16,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.VectorAsset
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.core.net.toUri
 import androidx.navigation.compose.KEY_ROUTE
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.compose.navigate
 import androidx.ui.tooling.preview.Preview
 import com.efedaniel.spotifystats.navigation.Destinations
 import com.efedaniel.spotifystats.ui.SpotifyStatsTheme
@@ -53,11 +52,11 @@ fun MainActivityContent() {
                             label = stringResource(it.label),
                             isSelected = currentRoute == it.route,
                             onClick = {
-                                //TODO would most likely do this a different way later
-                                navController.popBackStack(navController.graph.startDestination, false)
+                                // TODO would most likely do this a different way later
+                                // navController.popBackStack(navController.graph.startDestination, false)
 
                                 if (currentRoute != it.route) {
-                                    navController.navigate(it.route.toUri())
+                                    navController.navigate(it.route)
                                 }
                             }
                         )
@@ -67,13 +66,13 @@ fun MainActivityContent() {
         ) {
             NavHost(
                 navController = navController,
-                startDestination = Destinations.tracks
+                startDestination = BottomNavigationScreens.Tracks.route
             ) {
-                composable(Destinations.tracks) { SampleNavHostDestination(text = "Tracks", color = Color.Yellow) }
-                composable(Destinations.artists) { SampleNavHostDestination(text = "Artists", color = Color.Cyan) }
-                composable(Destinations.activity) { SampleNavHostDestination(text = "Activity", color = Color.Green) }
-                composable(Destinations.insights) { SampleNavHostDestination(text = "Insights", color = Color.Blue) }
-                composable(Destinations.account) { SampleNavHostDestination(text = "Account", color = Color.White) }
+                composable(BottomNavigationScreens.Tracks.route) { SampleNavHostDestination(text = "Tracks", color = Color.Yellow) }
+                composable(BottomNavigationScreens.Artists.route) { SampleNavHostDestination(text = "Artists", color = Color.Cyan) }
+                composable(BottomNavigationScreens.Activity.route) { SampleNavHostDestination(text = "Activity", color = Color.Green) }
+                composable(BottomNavigationScreens.Insights.route) { SampleNavHostDestination(text = "Insights", color = Color.Blue) }
+                composable(BottomNavigationScreens.Account.route) { SampleNavHostDestination(text = "Account", color = Color.White) }
             }
         }
     }
