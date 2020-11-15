@@ -67,6 +67,7 @@ dependencies {
     implementation(Config.Libs.Compose.materialsIconsCore)
     implementation(Config.Libs.Compose.materialsIconsExtended)
     implementation(Config.Libs.Compose.runtimeLivedata)
+    implementation(Config.Libs.Compose.navigation)
     implementation(Config.Libs.AndroidX.lifecycle)
     implementation(Config.Libs.Core.material)
 

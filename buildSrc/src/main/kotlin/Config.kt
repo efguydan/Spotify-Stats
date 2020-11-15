@@ -24,6 +24,7 @@ object Config {
         const val kotlin = "1.4.10"
         const val spotless = "5.7.0"
         const val compose = "1.0.0-alpha06"
+        const val composeNavigation = "1.0.0-alpha01"
         const val androidXCore = "1.3.2"
         const val appCompat = "1.2.0"
         const val material = "1.2.1"
@@ -62,6 +63,7 @@ object Config {
             const val materialsIconsCore = "androidx.compose.material:material-icons-core:${Versions.compose}"
             const val materialsIconsExtended = "androidx.compose.material:material-icons-extended:${Versions.compose}"
             const val runtimeLivedata = "androidx.compose.runtime:runtime-livedata:${Versions.compose}"
+            const val navigation = "androidx.navigation:navigation-compose:${Versions.composeNavigation}"
         }
 
         object Test {
