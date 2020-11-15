@@ -27,7 +27,7 @@ import androidx.ui.tooling.preview.Preview
 import com.efedaniel.spotifystats.ui.SpotifyStatsTheme
 import timber.log.Timber
 
-val botttomNavDestinations = listOf(
+val bottomNavDestinations = listOf(
     BottomNavigationScreens.Tracks,
     BottomNavigationScreens.Artists,
     BottomNavigationScreens.Activity,
@@ -47,7 +47,7 @@ fun MainActivityContent() {
                     val navBackStackEntry = navController.currentBackStackEntryAsState()
                     val currentRoute = navBackStackEntry.value?.arguments?.getString(KEY_ROUTE)
                     Timber.d("Current Route is $currentRoute")
-                    botttomNavDestinations.forEach {
+                    bottomNavDestinations.forEach {
                         SpotifyStatsNavigationItem(
                             icon = it.icon,
                             label = stringResource(it.label),
@@ -56,9 +56,7 @@ fun MainActivityContent() {
                                 // TODO would most likely do this a different way later
                                 // navController.popBackStack(navController.graph.startDestination, false)
 
-                                if (currentRoute != it.route) {
-                                    navController.navigate(it.route)
-                                }
+                                if (currentRoute != it.route) navController.navigate(it.route)
                             }
                         )
                     }
@@ -98,8 +96,7 @@ fun SpotifyStatsNavigationItem(
     BottomNavigationItem(
         icon = { Icon(icon) },
         selected = isSelected,
-        // TODO change always show labels to false later
-        alwaysShowLabels = true,
+        alwaysShowLabels = false,
         onClick = onClick,
         label = { Text(label) },
         selectedContentColor = MaterialTheme.colors.secondary,
