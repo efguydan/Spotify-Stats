@@ -70,6 +70,8 @@ dependencies {
     implementation(Config.Libs.Compose.materialsIconsExtended)
     implementation(Config.Libs.Compose.runtimeLivedata)
     implementation(Config.Libs.Compose.navigation)
+    implementation(Config.Libs.Accompanist.coil)
+    implementation(Config.Libs.Accompanist.insets)
     implementation(Config.Libs.Misc.timber)
 
     testImplementation(Config.Libs.Test.jUnit)

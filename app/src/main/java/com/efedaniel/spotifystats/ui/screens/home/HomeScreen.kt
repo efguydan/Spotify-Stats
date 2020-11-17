@@ -1,4 +1,4 @@
-package com.efedaniel.spotifystats.ui.mainactivity
+package com.efedaniel.spotifystats.ui.screens.home
 
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.layout.fillMaxSize
@@ -36,7 +36,7 @@ val bottomNavDestinations = listOf(
 )
 
 @Composable
-fun MainActivityContent() {
+fun HomeScreen() {
     SpotifyStatsTheme {
         val navController = rememberNavController()
         Scaffold(
@@ -107,8 +107,8 @@ fun SpotifyStatsNavigationItem(
 
 @Preview
 @Composable
-fun PreviewMainActivityContent() {
-    MainActivityContent()
+fun PreviewHomeScreen() {
+    HomeScreen()
 }
 
 @Preview

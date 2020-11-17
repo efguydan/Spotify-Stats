@@ -1,4 +1,4 @@
-package com.efedaniel.spotifystats.ui.mainactivity
+package com.efedaniel.spotifystats.ui.screens.home
 
 import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons

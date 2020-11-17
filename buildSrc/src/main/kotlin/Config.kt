@@ -33,6 +33,7 @@ object Config {
         const val androidJUnit = "1.1.2"
         const val espresso = "3.3.0"
         const val timber = "4.7.1"
+        const val accompanist = "0.3.3.1"
     }
 
     object Plugins {
@@ -46,7 +47,6 @@ object Config {
         object Core {
             const val kotlinStd = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
             const val material = "com.google.android.material:material:${Versions.material}"
-
         }
 
         object AndroidX {
@@ -64,6 +64,11 @@ object Config {
             const val materialsIconsExtended = "androidx.compose.material:material-icons-extended:${Versions.compose}"
             const val runtimeLivedata = "androidx.compose.runtime:runtime-livedata:${Versions.compose}"
             const val navigation = "androidx.navigation:navigation-compose:${Versions.composeNavigation}"
+        }
+
+        object Accompanist {
+            const val insets = "dev.chrisbanes.accompanist:accompanist-insets:${Versions.accompanist}"
+            const val coil = "dev.chrisbanes.accompanist:accompanist-coil:${Versions.accompanist}"
         }
 
         object Misc {
