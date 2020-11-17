@@ -1,4 +1,4 @@
-package com.efedaniel.spotifystats.ui
+package com.efedaniel.spotifystats.ui.theme
 
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors

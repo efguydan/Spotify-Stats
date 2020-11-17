@@ -8,6 +8,7 @@ status=$?
 
 if [ "$status" = 0 ] ; then
     echo "Auto-format successful, no problem 😄"
+    git add .
     exit 0
 else
     echo 1>&2 "☹️ Spotless plugin found code-format issues it could not fix, you might want to check through your files manually."

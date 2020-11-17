@@ -1,4 +1,4 @@
-package com.efedaniel.spotifystats.presentation.mainactivity
+package com.efedaniel.spotifystats.ui.mainactivity
 
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.layout.fillMaxSize
@@ -24,7 +24,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.navigate
 import androidx.navigation.compose.rememberNavController
 import androidx.ui.tooling.preview.Preview
-import com.efedaniel.spotifystats.ui.SpotifyStatsTheme
+import com.efedaniel.spotifystats.ui.theme.SpotifyStatsTheme
 import timber.log.Timber
 
 val bottomNavDestinations = listOf(
