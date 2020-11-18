@@ -17,6 +17,7 @@ import dev.chrisbanes.accompanist.insets.ProvideWindowInsets
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
             Content(backDispatcher = onBackPressedDispatcher)
         }
