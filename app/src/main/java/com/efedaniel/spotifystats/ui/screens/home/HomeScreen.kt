@@ -53,10 +53,12 @@ fun HomeScreen() {
                             label = stringResource(it.label),
                             isSelected = currentRoute == it.route,
                             onClick = {
-                                // TODO would most likely do this a different way later
-                                navController.popBackStack(navController.graph.startDestination, false)
+                                if (currentRoute != it.route) {
+                                    // TODO would most likely do this a different way later
+                                    navController.popBackStack(navController.graph.startDestination, false)
 
-                                if (currentRoute != it.route) navController.navigate(it.route)
+                                    navController.navigate(it.route)
+                                }
                             }
                         )
                     }
@@ -65,7 +67,7 @@ fun HomeScreen() {
         ) {
             NavHost(
                 navController = navController,
-                startDestination = BottomNavigationScreens.Tracks.route
+                startDestination = BottomNavigationScreens.Activity.route
             ) {
                 composable(BottomNavigationScreens.Tracks.route) { TracksScreen() }
                 composable(BottomNavigationScreens.Artists.route) { ArtistsScreen() }
