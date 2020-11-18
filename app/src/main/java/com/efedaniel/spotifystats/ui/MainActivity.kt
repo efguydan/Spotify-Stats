@@ -1,4 +1,4 @@
-package com.efedaniel.spotifystats.ui.mainactivity
+package com.efedaniel.spotifystats.ui
 
 import android.os.Bundle
 import androidx.activity.OnBackPressedDispatcher

@@ -1,19 +1,15 @@
 package com.efedaniel.spotifystats.ui.screens.home
 
-import androidx.compose.foundation.Text
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.AmbientEmphasisLevels
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.VectorAsset
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -24,6 +20,10 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.navigate
 import androidx.navigation.compose.rememberNavController
 import androidx.ui.tooling.preview.Preview
+import com.efedaniel.spotifystats.ui.screens.account.AccountScreen
+import com.efedaniel.spotifystats.ui.screens.activity.ActivityScreen
+import com.efedaniel.spotifystats.ui.screens.artists.ArtistsScreen
+import com.efedaniel.spotifystats.ui.screens.tracks.TracksScreen
 import com.efedaniel.spotifystats.ui.theme.SpotifyStatsTheme
 import timber.log.Timber
 
@@ -67,21 +67,13 @@ fun HomeScreen() {
                 navController = navController,
                 startDestination = BottomNavigationScreens.Tracks.route
             ) {
-                composable(BottomNavigationScreens.Tracks.route) { SampleNavHostDestination(text = "Tracks", color = Color.Yellow) }
-                composable(BottomNavigationScreens.Artists.route) { SampleNavHostDestination(text = "Artists", color = Color.Cyan) }
-                composable(BottomNavigationScreens.Activity.route) { SampleNavHostDestination(text = "Activity", color = Color.Green) }
-                composable(BottomNavigationScreens.Insights.route) { SampleNavHostDestination(text = "Insights", color = Color.Blue) }
-                composable(BottomNavigationScreens.Account.route) { SampleNavHostDestination(text = "Account", color = Color.White) }
+                composable(BottomNavigationScreens.Tracks.route) { TracksScreen() }
+                composable(BottomNavigationScreens.Artists.route) { ArtistsScreen() }
+                composable(BottomNavigationScreens.Activity.route) { ActivityScreen() }
+                composable(BottomNavigationScreens.Insights.route) { ArtistsScreen() }
+                composable(BottomNavigationScreens.Account.route) { AccountScreen() }
             }
         }
-    }
-}
-
-// TODO remove this later
-@Composable
-fun SampleNavHostDestination(text: String, color: Color) {
-    Surface(color = color, modifier = Modifier.fillMaxSize()) {
-        Text(text = text, color = Color.Black)
     }
 }
 
@@ -100,7 +92,7 @@ fun SpotifyStatsNavigationItem(
         onClick = onClick,
         label = { Text(label) },
         selectedContentColor = MaterialTheme.colors.secondary,
-        unselectedContentColor = AmbientEmphasisLevels.current.medium.applyEmphasis(MaterialTheme.colors.onPrimary),
+        unselectedContentColor = MaterialTheme.colors.onPrimary,
         modifier = modifier
     )
 }
