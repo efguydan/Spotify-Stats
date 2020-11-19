@@ -32,7 +32,7 @@ private val LightColorPalette = lightColors(
 
 // TODO Change to isSystemInDarkTheme() later; when ready to implement light theme
 @Composable
-fun SpotifyStatsTheme(darkTheme: Boolean = true, content: @Composable() () -> Unit) {
+fun SpotifyStatsTheme(darkTheme: Boolean = true, content: @Composable () -> Unit) {
     val colors = if (darkTheme) {
         DarkColorPalette
     } else {

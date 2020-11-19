@@ -39,6 +39,8 @@ fun ActivityScreen() {
                 Text(text = "Currently Playing", style = MaterialTheme.typography.h6)
                 Spacer(modifier = Modifier.height(8.dp))
                 CurrentlyPlayingTrackCard()
+                Spacer(modifier = Modifier.height(16.dp))
+                Text(text = "Recently Played", style = MaterialTheme.typography.h6)
             }
         }
     }
@@ -54,11 +56,22 @@ fun CurrentlyPlayingTrackCard(modifier: Modifier = Modifier) {
         Row(Modifier.fillMaxWidth()) {
             TrackImage(modifier = Modifier.padding(8.dp))
             Column(
-                modifier = Modifier.fillMaxHeight()
+                modifier = Modifier.fillMaxHeight().weight(1f),
             ) {
-                Text(text = "Blinding Lights", modifier = Modifier.padding(top = 6.dp))
-                Text(text = "The Weeknd")
-                Text(text = "After Hours", modifier = Modifier.padding(bottom = 6.dp))
+                Text(
+                    text = "Blinding Lights",
+                    modifier = Modifier.padding(top = 6.dp),
+                    style = MaterialTheme.typography.h6
+                )
+                Text(
+                    text = "The Weeknd",
+                    style = MaterialTheme.typography.body1
+                )
+                Text(
+                    text = "After Hours",
+                    modifier = Modifier.padding(bottom = 6.dp),
+                    style = MaterialTheme.typography.body2
+                )
             }
         }
     }
@@ -74,8 +87,22 @@ fun TrackImage(modifier: Modifier = Modifier) {
     )
 }
 
+// TODO Move these to appropriate files later
+
+@Composable
+fun TrackCard() {
+}
+
+// Previews
+
 @Preview
 @Composable
 fun PreviewActivityScreen() {
     ActivityScreen()
+}
+
+@Preview
+@Composable
+fun PreviewCurrentlyPlayingTrackCard() {
+    CurrentlyPlayingTrackCard()
 }
