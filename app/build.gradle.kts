@@ -59,9 +59,11 @@ android {
 dependencies {
     implementation(Config.Libs.Core.kotlinStd)
     implementation(Config.Libs.Core.material)
+
     implementation(Config.Libs.AndroidX.core)
     implementation(Config.Libs.AndroidX.appCompat)
     implementation(Config.Libs.AndroidX.lifecycle)
+
     implementation(Config.Libs.Compose.ui)
     implementation(Config.Libs.Compose.material)
     implementation(Config.Libs.Compose.uiTooling)
@@ -72,6 +74,7 @@ dependencies {
     implementation(Config.Libs.Compose.navigation)
     implementation(Config.Libs.Compose.foundationLayout)
     implementation(Config.Libs.Compose.animation)
+
     implementation(Config.Libs.Accompanist.coil)
     implementation(Config.Libs.Accompanist.insets)
     implementation(Config.Libs.Misc.timber)

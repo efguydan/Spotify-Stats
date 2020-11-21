@@ -1,6 +1,7 @@
 package com.efedaniel.spotifystats.ui.screens.activity
 
 import androidx.compose.foundation.ScrollableColumn
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
@@ -23,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
 import com.efedaniel.spotifystats.R
 import com.efedaniel.spotifystats.ui.commons.SpotifyStatsAppBar
+import com.efedaniel.spotifystats.ui.commons.VerticalGrid
 import com.efedaniel.spotifystats.ui.theme.SpotifyStatsTheme
 import com.efedaniel.spotifystats.utils.Constants
 import dev.chrisbanes.accompanist.coil.CoilImage
@@ -41,6 +44,18 @@ fun ActivityScreen() {
                 CurrentlyPlayingTrackCard()
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(text = "Recently Played", style = MaterialTheme.typography.h6)
+                VerticalGrid {
+                    TrackCard(modifier = Modifier.padding(top = 8.dp))
+                    TrackCard(modifier = Modifier.padding(top = 8.dp))
+                    TrackCard(modifier = Modifier.padding(top = 8.dp))
+                    TrackCard(modifier = Modifier.padding(top = 8.dp))
+                    TrackCard(modifier = Modifier.padding(top = 8.dp))
+                    TrackCard(modifier = Modifier.padding(top = 8.dp))
+                    TrackCard(modifier = Modifier.padding(top = 8.dp))
+                    TrackCard(modifier = Modifier.padding(top = 8.dp))
+                    TrackCard(modifier = Modifier.padding(top = 8.dp))
+                    TrackCard(modifier = Modifier.padding(top = 8.dp))
+                }
             }
         }
     }
@@ -90,7 +105,20 @@ fun TrackImage(modifier: Modifier = Modifier) {
 // TODO Move these to appropriate files later
 
 @Composable
-fun TrackCard() {
+fun TrackCard(modifier: Modifier = Modifier) {
+    Card(modifier = modifier) {
+        Box {
+            CoilImage(
+                data = Constants.Misc.randomImage,
+                contentScale = ContentScale.Crop,
+                fadeIn = true,
+                modifier = modifier
+                    .width(120.dp)
+                    .height(120.dp)
+                    .clip(MaterialTheme.shapes.medium)
+            )
+        }
+    }
 }
 
 // Previews
@@ -104,5 +132,11 @@ fun PreviewActivityScreen() {
 @Preview
 @Composable
 fun PreviewCurrentlyPlayingTrackCard() {
-    CurrentlyPlayingTrackCard()
+    SpotifyStatsTheme { CurrentlyPlayingTrackCard() }
+}
+
+@Preview
+@Composable
+fun PreviewTrackCard() {
+    SpotifyStatsTheme { TrackCard() }
 }
