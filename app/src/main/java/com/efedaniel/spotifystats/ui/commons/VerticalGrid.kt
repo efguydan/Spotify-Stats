@@ -3,6 +3,7 @@ package com.efedaniel.spotifystats.ui.commons
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.Layout
+import timber.log.Timber
 
 /**
  * Taken from Jetsnack sample. Right now there is no inbuilt grid but we can make
@@ -21,6 +22,8 @@ fun VerticalGrid(
         modifier = modifier
     ) { measurables, constraints ->
         val itemWidth = constraints.maxWidth / columns
+
+        Timber.d(itemWidth.toString())
 
         // Keep given height constraints, but set an exact width
         val itemConstraints = constraints.copy(

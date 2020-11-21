@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
@@ -24,8 +23,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
 import com.efedaniel.spotifystats.R
+import com.efedaniel.spotifystats.ui.commons.DynamicVerticalGrid
 import com.efedaniel.spotifystats.ui.commons.SpotifyStatsAppBar
-import com.efedaniel.spotifystats.ui.commons.VerticalGrid
 import com.efedaniel.spotifystats.ui.theme.SpotifyStatsTheme
 import com.efedaniel.spotifystats.utils.Constants
 import dev.chrisbanes.accompanist.coil.CoilImage
@@ -44,7 +43,11 @@ fun ActivityScreen() {
                 CurrentlyPlayingTrackCard()
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(text = "Recently Played", style = MaterialTheme.typography.h6)
-                VerticalGrid {
+
+                DynamicVerticalGrid(
+                    preferredItemWidth = 120.dp,
+                    preferredColumns = null
+                ) {
                     TrackCard(modifier = Modifier.padding(top = 8.dp))
                     TrackCard(modifier = Modifier.padding(top = 8.dp))
                     TrackCard(modifier = Modifier.padding(top = 8.dp))
@@ -112,8 +115,8 @@ fun TrackCard(modifier: Modifier = Modifier) {
                 data = Constants.Misc.randomImage,
                 contentScale = ContentScale.Crop,
                 fadeIn = true,
-                modifier = modifier
-                    .width(120.dp)
+                modifier = Modifier
+                    .fillMaxWidth()
                     .height(120.dp)
                     .clip(MaterialTheme.shapes.medium)
             )
