@@ -3,7 +3,6 @@ package com.efedaniel.spotifystats.ui.screens.activity
 import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -19,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.ContextAmbient
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
@@ -27,6 +27,8 @@ import com.efedaniel.spotifystats.ui.commons.DynamicVerticalGrid
 import com.efedaniel.spotifystats.ui.commons.SpotifyStatsAppBar
 import com.efedaniel.spotifystats.ui.theme.SpotifyStatsTheme
 import com.efedaniel.spotifystats.utils.Constants
+import com.efedaniel.spotifystats.utils.sePaddingModifier
+import com.efedaniel.spotifystats.utils.toPx
 import dev.chrisbanes.accompanist.coil.CoilImage
 
 @Composable
@@ -36,28 +38,23 @@ fun ActivityScreen() {
             topBar = { SpotifyStatsAppBar(title = stringResource(R.string.activity)) }
         ) {
             ScrollableColumn(
-                contentPadding = PaddingValues(16.dp)
+                contentPadding = it
             ) {
-                Text(text = "Currently Playing", style = MaterialTheme.typography.h6)
-                Spacer(modifier = Modifier.height(8.dp))
-                CurrentlyPlayingTrackCard()
                 Spacer(modifier = Modifier.height(16.dp))
-                Text(text = "Recently Played", style = MaterialTheme.typography.h6)
+                Text(text = "Currently Playing", style = MaterialTheme.typography.h6, modifier = sePaddingModifier())
+                Spacer(modifier = Modifier.height(8.dp))
+                CurrentlyPlayingTrackCard(modifier = sePaddingModifier())
+                Spacer(modifier = Modifier.height(16.dp))
+                Text(text = "Recently Played", style = MaterialTheme.typography.h6, modifier = sePaddingModifier())
 
                 DynamicVerticalGrid(
-                    preferredItemWidth = 120.dp,
+                    modifier = sePaddingModifier(12.dp).padding(top = 4.dp),
+                    preferredItemWidth = 120.dp.toPx(ContextAmbient.current).dp,
                     preferredColumns = null
                 ) {
-                    TrackCard(modifier = Modifier.padding(top = 8.dp))
-                    TrackCard(modifier = Modifier.padding(top = 8.dp))
-                    TrackCard(modifier = Modifier.padding(top = 8.dp))
-                    TrackCard(modifier = Modifier.padding(top = 8.dp))
-                    TrackCard(modifier = Modifier.padding(top = 8.dp))
-                    TrackCard(modifier = Modifier.padding(top = 8.dp))
-                    TrackCard(modifier = Modifier.padding(top = 8.dp))
-                    TrackCard(modifier = Modifier.padding(top = 8.dp))
-                    TrackCard(modifier = Modifier.padding(top = 8.dp))
-                    TrackCard(modifier = Modifier.padding(top = 8.dp))
+                    repeat(times = 11) {
+                        TrackCard(modifier = Modifier.padding(all = 4.dp))
+                    }
                 }
             }
         }
@@ -101,7 +98,7 @@ fun TrackImage(modifier: Modifier = Modifier) {
         data = Constants.Misc.randomImage,
         contentScale = ContentScale.Crop,
         fadeIn = true,
-        modifier = modifier.size(100.dp).clip(MaterialTheme.shapes.medium),
+        modifier = modifier.size(100.dp).clip(MaterialTheme.shapes.medium)
     )
 }
 
@@ -109,15 +106,15 @@ fun TrackImage(modifier: Modifier = Modifier) {
 
 @Composable
 fun TrackCard(modifier: Modifier = Modifier) {
-    Card(modifier = modifier) {
+    Card(modifier = modifier.height(140.dp)) {
         Box {
             CoilImage(
                 data = Constants.Misc.randomImage,
                 contentScale = ContentScale.Crop,
                 fadeIn = true,
                 modifier = Modifier
+                    .fillMaxHeight()
                     .fillMaxWidth()
-                    .height(120.dp)
                     .clip(MaterialTheme.shapes.medium)
             )
         }

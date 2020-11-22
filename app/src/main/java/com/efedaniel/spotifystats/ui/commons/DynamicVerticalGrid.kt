@@ -65,6 +65,8 @@ fun DynamicVerticalGrid(
                     y = columnY[column]
                 )
                 columnY[column] += placeable.height
+                Timber.d("Placeable Width is %s", placeable.width.toString())
+                Timber.d("Placeable Height is %s", placeable.height.toString())
             }
         }
     }
