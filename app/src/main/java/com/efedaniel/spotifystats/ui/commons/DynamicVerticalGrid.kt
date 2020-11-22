@@ -4,7 +4,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.unit.Dp
-import timber.log.Timber
 
 /**
  * Normally is expected to set only one of columns or itemWidth.
@@ -30,9 +29,6 @@ fun DynamicVerticalGrid(
         val itemWidth = preferredItemWidth?.value?.toInt()?.let { constraints.maxWidth / (constraints.maxWidth / it) }
             ?: preferredColumns?.let { constraints.maxWidth / it }
             ?: throw Exception("No valid value for preferredItemWidth and preferredColumns")
-
-        Timber.d(itemWidth.toString())
-        Timber.d(constraints.toString())
 
         val columns = constraints.maxWidth / itemWidth
 
@@ -65,8 +61,6 @@ fun DynamicVerticalGrid(
                     y = columnY[column]
                 )
                 columnY[column] += placeable.height
-                Timber.d("Placeable Width is %s", placeable.width.toString())
-                Timber.d("Placeable Height is %s", placeable.height.toString())
             }
         }
     }

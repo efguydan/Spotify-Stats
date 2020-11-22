@@ -1,6 +1,7 @@
 package com.efedaniel.spotifystats.ui.screens.activity
 
 import androidx.compose.foundation.ScrollableColumn
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -15,16 +16,19 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.ContextAmbient
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
 import com.efedaniel.spotifystats.R
 import com.efedaniel.spotifystats.ui.commons.DynamicVerticalGrid
 import com.efedaniel.spotifystats.ui.commons.SpotifyStatsAppBar
+import com.efedaniel.spotifystats.ui.commons.scrim
 import com.efedaniel.spotifystats.ui.theme.SpotifyStatsTheme
 import com.efedaniel.spotifystats.utils.Constants
 import com.efedaniel.spotifystats.utils.sePaddingModifier
@@ -69,7 +73,7 @@ fun CurrentlyPlayingTrackCard(modifier: Modifier = Modifier) {
         modifier = modifier.fillMaxWidth()
     ) {
         Row(Modifier.fillMaxWidth()) {
-            TrackImage(modifier = Modifier.padding(8.dp))
+            NetworkImage(url = Constants.Misc.randomImage, modifier = Modifier.padding(8.dp).size(100.dp))
             Column(
                 modifier = Modifier.fillMaxHeight().weight(1f),
             ) {
@@ -93,12 +97,15 @@ fun CurrentlyPlayingTrackCard(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun TrackImage(modifier: Modifier = Modifier) {
+fun NetworkImage(url: String, modifier: Modifier = Modifier) {
     CoilImage(
-        data = Constants.Misc.randomImage,
+        data = url,
         contentScale = ContentScale.Crop,
         fadeIn = true,
-        modifier = modifier.size(100.dp).clip(MaterialTheme.shapes.medium)
+        modifier = modifier
+            .fillMaxHeight()
+            .fillMaxWidth()
+            .clip(MaterialTheme.shapes.medium)
     )
 }
 
@@ -108,15 +115,26 @@ fun TrackImage(modifier: Modifier = Modifier) {
 fun TrackCard(modifier: Modifier = Modifier) {
     Card(modifier = modifier.height(140.dp)) {
         Box {
-            CoilImage(
-                data = Constants.Misc.randomImage,
-                contentScale = ContentScale.Crop,
-                fadeIn = true,
+            NetworkImage(url = Constants.Misc.randomImage)
+            Column(
                 modifier = Modifier
-                    .fillMaxHeight()
                     .fillMaxWidth()
-                    .clip(MaterialTheme.shapes.medium)
-            )
+                    .align(Alignment.BottomStart)
+                    .background(brush = scrim)
+            ) {
+                Text(
+                    text = "The Weeknd",
+                    style = MaterialTheme.typography.body1,
+                    modifier = Modifier.padding(top = 16.dp, start = 4.dp)
+                )
+                Text(
+                    text = "Blinding Lights",
+                    style = MaterialTheme.typography.h6,
+                    modifier = Modifier.padding(bottom = 4.dp, start = 4.dp),
+                    maxLines = 3,
+                    overflow = TextOverflow.Ellipsis
+                )
+            }
         }
     }
 }
