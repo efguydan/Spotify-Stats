@@ -22,24 +22,22 @@ import androidx.compose.material.icons.filled.History
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.ContextAmbient
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.ui.tooling.preview.Preview
 import com.efedaniel.spotifystats.R
-import com.efedaniel.spotifystats.ui.commons.DynamicVerticalGrid
-import com.efedaniel.spotifystats.ui.commons.SpotifyStatsAppBar
+import com.efedaniel.spotifystats.ui.commons.components.NetworkImage
+import com.efedaniel.spotifystats.ui.commons.components.SpotifyStatsAppBar
+import com.efedaniel.spotifystats.ui.commons.components.TrackCard
 import com.efedaniel.spotifystats.ui.commons.getScrim
+import com.efedaniel.spotifystats.ui.commons.layouts.DynamicVerticalGrid
 import com.efedaniel.spotifystats.ui.theme.SpotifyStatsTheme
 import com.efedaniel.spotifystats.ui.theme.spotifyBlack
 import com.efedaniel.spotifystats.utils.Constants
 import com.efedaniel.spotifystats.utils.sePaddingModifier
 import com.efedaniel.spotifystats.utils.toPx
-import dev.chrisbanes.accompanist.coil.CoilImage
 
 @Composable
 fun ActivityScreen() {
@@ -101,21 +99,6 @@ fun CurrentlyPlayingTrackCard(modifier: Modifier = Modifier) {
     }
 }
 
-// TODO Move these to appropriate files later
-
-@Composable
-fun NetworkImage(url: String, modifier: Modifier = Modifier) {
-    CoilImage(
-        data = url,
-        contentScale = ContentScale.Crop,
-        fadeIn = true,
-        modifier = modifier
-            .fillMaxHeight()
-            .fillMaxWidth()
-            .clip(MaterialTheme.shapes.medium)
-    )
-}
-
 @Composable
 fun RecentlyPlayedTrackCard(modifier: Modifier = Modifier) {
     Box(modifier = modifier) {
@@ -133,56 +116,8 @@ fun RecentlyPlayedTrackCard(modifier: Modifier = Modifier) {
     }
 }
 
-@Composable
-fun TrackCard(modifier: Modifier = Modifier) {
-    Card(modifier = modifier.height(140.dp)) {
-        Box {
-            NetworkImage(url = Constants.Misc.randomImage)
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .align(Alignment.BottomStart)
-                    .background(brush = getScrim(startY = 100f, endY = 0f))
-            ) {
-                Text(
-                    text = "The Weeknd",
-                    style = MaterialTheme.typography.body1,
-                    modifier = Modifier.padding(top = 16.dp, start = 4.dp)
-                )
-                Text(
-                    text = "Blinding Lights",
-                    style = MaterialTheme.typography.h6,
-                    modifier = Modifier.padding(bottom = 4.dp, start = 4.dp),
-                    maxLines = 3,
-                    overflow = TextOverflow.Ellipsis
-                )
-            }
-        }
-    }
-}
-
-// Previews
-
 @Preview
 @Composable
 fun PreviewActivityScreen() {
     ActivityScreen()
-}
-
-@Preview
-@Composable
-fun PreviewCurrentlyPlayingTrackCard() {
-    SpotifyStatsTheme { CurrentlyPlayingTrackCard() }
-}
-
-@Preview
-@Composable
-fun PreviewTrackCard() {
-    SpotifyStatsTheme { TrackCard() }
-}
-
-@Preview
-@Composable
-fun PreviewRecentlyPlayedTrackCard() {
-    SpotifyStatsTheme { RecentlyPlayedTrackCard() }
 }

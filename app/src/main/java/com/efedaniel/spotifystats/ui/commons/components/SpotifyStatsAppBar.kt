@@ -1,4 +1,4 @@
-package com.efedaniel.spotifystats.ui.commons
+package com.efedaniel.spotifystats.ui.commons.components
 
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar

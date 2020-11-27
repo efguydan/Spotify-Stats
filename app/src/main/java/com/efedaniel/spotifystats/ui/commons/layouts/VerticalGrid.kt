@@ -1,38 +1,29 @@
-package com.efedaniel.spotifystats.ui.commons
+package com.efedaniel.spotifystats.ui.commons.layouts
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.Layout
-import androidx.compose.ui.unit.Dp
+import timber.log.Timber
 
 /**
- * Normally is expected to set only one of columns or itemWidth.
- * Currently, if both is set columns should get higher priority.
- * TODO come back to enforce this. Not both, or none. Only one.
- *
- * Currently, preferredWidth takes priority
+ * Taken from Jetsnack sample. Right now there is no inbuilt grid but we can make
+ * Custom layout like below which takes number of items and place them in Grid fashion.
+
+ * A simple grid which lays elements out vertically in evenly sized [columns].
  */
 @Composable
-fun DynamicVerticalGrid(
+fun VerticalGrid(
     modifier: Modifier = Modifier,
-    preferredColumns: Int? = null,
-    preferredItemWidth: Dp? = null,
+    columns: Int = 2,
     content: @Composable () -> Unit
 ) {
     Layout(
         children = content,
         modifier = modifier
     ) { measurables, constraints ->
-        // Make sure only one of colums and item width have set values
-        preferredColumns?.let { preferredItemWidth?.let { error("Both Columns and Item Width have values") } }
+        val itemWidth = constraints.maxWidth / columns
 
-        // Use the closest item width that would use all space if a preferred width is given
-        // Or use the number of columns to get width from total width available
-        val itemWidth = preferredItemWidth?.value?.toInt()?.let { constraints.maxWidth / (constraints.maxWidth / it) }
-            ?: preferredColumns?.let { constraints.maxWidth / it }
-            ?: error("None of itemWidth and Columns")
-
-        val columns = constraints.maxWidth / itemWidth
+        Timber.d(itemWidth.toString())
 
         // Keep given height constraints, but set an exact width
         val itemConstraints = constraints.copy(
