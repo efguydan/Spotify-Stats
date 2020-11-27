@@ -9,7 +9,6 @@ import androidx.compose.ui.unit.Dp
  * Normally is expected to set only one of columns or itemWidth.
  * Currently, if both is set columns should get higher priority.
  * TODO come back to enforce this. Not both, or none. Only one.
- * TODO Consider adding a spacer for items
  *
  * Currently, preferredWidth takes priority
  */
@@ -24,11 +23,14 @@ fun DynamicVerticalGrid(
         children = content,
         modifier = modifier
     ) { measurables, constraints ->
+        // Make sure only one of colums and item width have set values
+        preferredColumns?.let { preferredItemWidth?.let { error("Both Columns and Item Width have values") } }
+
         // Use the closest item width that would use all space if a preferred width is given
         // Or use the number of columns to get width from total width available
         val itemWidth = preferredItemWidth?.value?.toInt()?.let { constraints.maxWidth / (constraints.maxWidth / it) }
             ?: preferredColumns?.let { constraints.maxWidth / it }
-            ?: throw Exception("No valid value for preferredItemWidth and preferredColumns")
+            ?: error("None of itemWidth and Columns")
 
         val columns = constraints.maxWidth / itemWidth
 

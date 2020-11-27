@@ -11,10 +11,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.Card
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.History
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,12 +28,14 @@ import androidx.compose.ui.platform.ContextAmbient
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.ui.tooling.preview.Preview
 import com.efedaniel.spotifystats.R
 import com.efedaniel.spotifystats.ui.commons.DynamicVerticalGrid
 import com.efedaniel.spotifystats.ui.commons.SpotifyStatsAppBar
-import com.efedaniel.spotifystats.ui.commons.scrim
+import com.efedaniel.spotifystats.ui.commons.getScrim
 import com.efedaniel.spotifystats.ui.theme.SpotifyStatsTheme
+import com.efedaniel.spotifystats.ui.theme.spotifyBlack
 import com.efedaniel.spotifystats.utils.Constants
 import com.efedaniel.spotifystats.utils.sePaddingModifier
 import com.efedaniel.spotifystats.utils.toPx
@@ -53,11 +59,10 @@ fun ActivityScreen() {
 
                 DynamicVerticalGrid(
                     modifier = sePaddingModifier(12.dp).padding(top = 4.dp),
-                    preferredItemWidth = 120.dp.toPx(ContextAmbient.current).dp,
-                    preferredColumns = null
+                    preferredItemWidth = 120.dp.toPx(ContextAmbient.current).dp
                 ) {
                     repeat(times = 11) {
-                        TrackCard(modifier = Modifier.padding(all = 4.dp))
+                        RecentlyPlayedTrackCard(modifier = Modifier.padding(all = 4.dp))
                     }
                 }
             }
@@ -96,6 +101,8 @@ fun CurrentlyPlayingTrackCard(modifier: Modifier = Modifier) {
     }
 }
 
+// TODO Move these to appropriate files later
+
 @Composable
 fun NetworkImage(url: String, modifier: Modifier = Modifier) {
     CoilImage(
@@ -109,7 +116,22 @@ fun NetworkImage(url: String, modifier: Modifier = Modifier) {
     )
 }
 
-// TODO Move these to appropriate files later
+@Composable
+fun RecentlyPlayedTrackCard(modifier: Modifier = Modifier) {
+    Box(modifier = modifier) {
+        TrackCard()
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(brush = getScrim(colors = listOf(spotifyBlack.copy(alpha = 0.2f), spotifyBlack.copy(alpha = 0.0f))))
+                .padding(top = 4.dp, start = 4.dp, bottom = 8.dp)
+        ) {
+            Icon(Icons.Filled.History, modifier = Modifier.size(12.dp).align(Alignment.CenterVertically))
+            Spacer(modifier = Modifier.width(2.dp))
+            Text(text = "Just Now", fontSize = 12.sp)
+        }
+    }
+}
 
 @Composable
 fun TrackCard(modifier: Modifier = Modifier) {
@@ -120,7 +142,7 @@ fun TrackCard(modifier: Modifier = Modifier) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .align(Alignment.BottomStart)
-                    .background(brush = scrim)
+                    .background(brush = getScrim(startY = 100f, endY = 0f))
             ) {
                 Text(
                     text = "The Weeknd",
@@ -157,4 +179,10 @@ fun PreviewCurrentlyPlayingTrackCard() {
 @Composable
 fun PreviewTrackCard() {
     SpotifyStatsTheme { TrackCard() }
+}
+
+@Preview
+@Composable
+fun PreviewRecentlyPlayedTrackCard() {
+    SpotifyStatsTheme { RecentlyPlayedTrackCard() }
 }
