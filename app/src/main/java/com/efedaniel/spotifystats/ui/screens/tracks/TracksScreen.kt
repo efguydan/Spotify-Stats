@@ -1,10 +1,8 @@
 package com.efedaniel.spotifystats.ui.screens.tracks
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Surface
 import androidx.compose.material.Tab
 import androidx.compose.material.TabRow
 import androidx.compose.material.Text
@@ -12,8 +10,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
+import androidx.ui.tooling.preview.Preview
 import com.efedaniel.spotifystats.R
 import com.efedaniel.spotifystats.ui.commons.components.SpotifyStatsAppBar
 import com.efedaniel.spotifystats.ui.screens.activity.TracksTimeFrame
@@ -26,7 +25,7 @@ import com.efedaniel.spotifystats.ui.theme.SpotifyStatsTheme
 fun TracksScreen() {
     SpotifyStatsTheme {
         Scaffold(
-            topBar = { SpotifyStatsAppBar(title = stringResource(R.string.tracks)) }
+            topBar = { SpotifyStatsAppBar(title = stringResource(R.string.tracks), elevation = 0.dp) }
         ) {
             val (selectedIndex, updateSelectedIndex) = remember { mutableStateOf(WEEKS.ordinal) }
             Column(modifier = Modifier.fillMaxSize()) {
@@ -37,30 +36,30 @@ fun TracksScreen() {
     }
 }
 
+// TODO Move these to appropriate screens later
+
 @Composable
 fun TabLayout(
     selectedIndex: Int,
     updateSelectedIndex: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val tabsName = remember { TracksTimeFrame.values().map { it.name } }
+    val tabsName = remember { TracksTimeFrame.values().map { it.title } }
 
-    Column {
-        // TODO Decide whether this or ScrollableTabRow should be used later
-        TabRow(selectedTabIndex = selectedIndex) {
-            tabsName.forEachIndexed { index, title ->
-                Tab(
-                    selected = selectedIndex == index,
-                    onClick = {
-                        when (title) {
-                            WEEKS.name -> updateSelectedIndex(WEEKS.ordinal)
-                            MONTHS.name -> updateSelectedIndex(MONTHS.ordinal)
-                            ALL_TIME.name -> updateSelectedIndex(ALL_TIME.ordinal)
-                        }
-                    },
-                    text = { Text(title) }
-                )
-            }
+    // TODO Decide whether this or ScrollableTabRow should be used later
+    TabRow(selectedTabIndex = selectedIndex, modifier = modifier) {
+        tabsName.forEachIndexed { index, title ->
+            Tab(
+                selected = selectedIndex == index,
+                onClick = {
+                    when (title) {
+                        WEEKS.title -> updateSelectedIndex(WEEKS.ordinal)
+                        MONTHS.title -> updateSelectedIndex(MONTHS.ordinal)
+                        ALL_TIME.title -> updateSelectedIndex(ALL_TIME.ordinal)
+                    }
+                },
+                text = { Text(title.toUpperCase()) }
+            )
         }
     }
 }
@@ -71,33 +70,30 @@ fun ViewPagerContent(
     updateSelectedIndex: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    // TODO Come later to update selected Index based on left and right scrolls
     when (selectedIndex) {
-        WEEKS.ordinal -> WeeksTracksContent(modifier)
-        MONTHS.ordinal -> MonthsTracksContent(modifier)
-        ALL_TIME.ordinal -> AllTimeTracksContent(modifier)
+        WEEKS.ordinal -> TracksListContent(timeFrame = WEEKS)
+        MONTHS.ordinal -> TracksListContent(timeFrame = MONTHS)
+        ALL_TIME.ordinal -> TracksListContent(timeFrame = ALL_TIME)
     }
 }
 
 @Composable
-fun WeeksTracksContent(
-    modifier: Modifier = Modifier
+fun TracksListContent(
+    modifier: Modifier = Modifier,
+    timeFrame: TracksTimeFrame
 ) {
-    Surface(modifier = modifier.background(Color.Blue)) {
-    }
+    Text(timeFrame.title)
 }
 
+@Preview
 @Composable
-fun MonthsTracksContent(
-    modifier: Modifier = Modifier
-) {
-    Surface(modifier = modifier.background(Color.Red)) {
-    }
+fun PreviewTracksScreen() {
+    TracksScreen()
 }
 
+@Preview
 @Composable
-fun AllTimeTracksContent(
-    modifier: Modifier = Modifier
-) {
-    Surface(modifier = modifier.background(Color.Yellow)) {
-    }
+fun PreviewTracksListContent() {
+    SpotifyStatsTheme { TracksListContent(timeFrame = WEEKS) }
 }
