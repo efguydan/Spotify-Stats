@@ -1,7 +1,10 @@
 package com.efedaniel.spotifystats.ui.screens.tracks
 
+import androidx.compose.foundation.ScrollableColumn
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Tab
 import androidx.compose.material.TabRow
@@ -10,16 +13,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ContextAmbient
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.ui.tooling.preview.Preview
 import com.efedaniel.spotifystats.R
 import com.efedaniel.spotifystats.ui.commons.components.SpotifyStatsAppBar
-import com.efedaniel.spotifystats.ui.screens.activity.TracksTimeFrame
-import com.efedaniel.spotifystats.ui.screens.activity.TracksTimeFrame.ALL_TIME
-import com.efedaniel.spotifystats.ui.screens.activity.TracksTimeFrame.MONTHS
-import com.efedaniel.spotifystats.ui.screens.activity.TracksTimeFrame.WEEKS
+import com.efedaniel.spotifystats.ui.commons.components.TrackCard
+import com.efedaniel.spotifystats.ui.commons.layouts.DynamicVerticalGrid
+import com.efedaniel.spotifystats.ui.screens.tracks.TracksTimeFrame.ALL_TIME
+import com.efedaniel.spotifystats.ui.screens.tracks.TracksTimeFrame.MONTHS
+import com.efedaniel.spotifystats.ui.screens.tracks.TracksTimeFrame.WEEKS
 import com.efedaniel.spotifystats.ui.theme.SpotifyStatsTheme
+import com.efedaniel.spotifystats.utils.sePaddingModifier
+import com.efedaniel.spotifystats.utils.toPx
 
 @Composable
 fun TracksScreen() {
@@ -72,9 +80,9 @@ fun ViewPagerContent(
 ) {
     // TODO Come later to update selected Index based on left and right scrolls
     when (selectedIndex) {
-        WEEKS.ordinal -> TracksListContent(timeFrame = WEEKS)
-        MONTHS.ordinal -> TracksListContent(timeFrame = MONTHS)
-        ALL_TIME.ordinal -> TracksListContent(timeFrame = ALL_TIME)
+        WEEKS.ordinal -> TracksListContent(timeFrame = WEEKS, modifier = modifier)
+        MONTHS.ordinal -> TracksListContent(timeFrame = MONTHS, modifier = modifier)
+        ALL_TIME.ordinal -> TracksListContent(timeFrame = ALL_TIME, modifier = modifier)
     }
 }
 
@@ -83,7 +91,30 @@ fun TracksListContent(
     modifier: Modifier = Modifier,
     timeFrame: TracksTimeFrame
 ) {
-    Text(timeFrame.title)
+    ScrollableColumn {
+        DynamicVerticalGrid(
+            modifier = sePaddingModifier(12.dp).padding(top = 4.dp),
+            preferredItemWidth = 120.dp.toPx(ContextAmbient.current).dp
+        ) {
+            repeat(times = 11) {
+                TopTrackCard(modifier = Modifier.padding(all = 4.dp))
+            }
+        }
+    }
+}
+
+@Composable
+fun TopTrackCard(
+    modifier: Modifier = Modifier,
+) {
+    Box(modifier = modifier) {
+        TrackCard()
+        Text(
+            text = "1",
+            fontSize = 20.sp,
+            modifier = Modifier.padding(start = 8.dp, top = 8.dp)
+        )
+    }
 }
 
 @Preview
