@@ -67,7 +67,7 @@ fun HomeScreen() {
         ) {
             NavHost(
                 navController = navController,
-                startDestination = BottomNavigationScreens.Tracks.route
+                startDestination = BottomNavigationScreens.Artists.route
             ) {
                 composable(BottomNavigationScreens.Tracks.route) { TracksScreen() }
                 composable(BottomNavigationScreens.Artists.route) { ArtistsScreen() }

@@ -16,13 +16,14 @@ import com.efedaniel.spotifystats.ui.commons.components.TrackCard
 import com.efedaniel.spotifystats.ui.commons.getScrim
 import com.efedaniel.spotifystats.ui.commons.layouts.DynamicVerticalGrid
 import com.efedaniel.spotifystats.ui.theme.SpotifyStatsTheme
+import com.efedaniel.spotifystats.utils.StatsTimeFrame
 import com.efedaniel.spotifystats.utils.sePaddingModifier
 import com.efedaniel.spotifystats.utils.toPx
 
 @Composable
 fun TracksListContent(
     modifier: Modifier = Modifier,
-    timeFrame: TracksTimeFrame
+    timeFrame: StatsTimeFrame
 ) {
     ScrollableColumn {
         DynamicVerticalGrid(
@@ -57,5 +58,5 @@ fun TopTrackCard(
 @Preview
 @Composable
 fun PreviewTracksListContent() {
-    SpotifyStatsTheme { TracksListContent(timeFrame = TracksTimeFrame.WEEKS) }
+    SpotifyStatsTheme { TracksListContent(timeFrame = StatsTimeFrame.WEEKS) }
 }
