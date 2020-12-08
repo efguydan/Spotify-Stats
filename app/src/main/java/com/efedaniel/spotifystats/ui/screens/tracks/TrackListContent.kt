@@ -51,7 +51,7 @@ fun TopTrackCard(
             style = MaterialTheme.typography.h4,
             modifier = Modifier
                 .fillMaxWidth()
-                .background(brush = getScrim(startY = 100f, endY = 0f))
+                .background(brush = getScrim())
                 .padding(start = 8.dp, top = 4.dp)
         )
     }
