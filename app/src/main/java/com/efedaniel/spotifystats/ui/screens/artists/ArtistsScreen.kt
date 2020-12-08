@@ -13,6 +13,9 @@ import com.efedaniel.spotifystats.ui.commons.components.SpotifyStatsAppBar
 import com.efedaniel.spotifystats.ui.commons.layouts.TabLayout
 import com.efedaniel.spotifystats.ui.theme.SpotifyStatsTheme
 import com.efedaniel.spotifystats.utils.StatsTimeFrame
+import com.efedaniel.spotifystats.utils.StatsTimeFrame.ALL_TIME
+import com.efedaniel.spotifystats.utils.StatsTimeFrame.MONTHS
+import com.efedaniel.spotifystats.utils.StatsTimeFrame.WEEKS
 
 @Composable
 fun ArtistsScreen() {
@@ -21,7 +24,7 @@ fun ArtistsScreen() {
             // TODO Fix elevation of this app bar too
             topBar = { SpotifyStatsAppBar(title = stringResource(R.string.artists)) }
         ) {
-            val (selectedIndex, updateSelectedIndex) = remember { mutableStateOf(StatsTimeFrame.WEEKS.ordinal) }
+            val (selectedIndex, updateSelectedIndex) = remember { mutableStateOf(WEEKS.ordinal) }
             Column(modifier = Modifier.fillMaxSize()) {
                 TabLayout(
                     selectedIndex = selectedIndex,
@@ -29,14 +32,27 @@ fun ArtistsScreen() {
                     tabsName = remember { StatsTimeFrame.values().map { it.title } },
                     onClick = {
                         when (it) {
-                            StatsTimeFrame.WEEKS.title -> updateSelectedIndex(StatsTimeFrame.WEEKS.ordinal)
-                            StatsTimeFrame.MONTHS.title -> updateSelectedIndex(StatsTimeFrame.MONTHS.ordinal)
-                            StatsTimeFrame.ALL_TIME.title -> updateSelectedIndex(StatsTimeFrame.ALL_TIME.ordinal)
+                            WEEKS.title -> updateSelectedIndex(WEEKS.ordinal)
+                            MONTHS.title -> updateSelectedIndex(MONTHS.ordinal)
+                            ALL_TIME.title -> updateSelectedIndex(ALL_TIME.ordinal)
                         }
                     }
                 )
-                // TracksPagerContent(selectedIndex, updateSelectedIndex, modifier = Modifier.weight(1f))
+                ArtistsPagerContent(selectedIndex, updateSelectedIndex, modifier = Modifier.weight(1f))
             }
         }
+    }
+}
+
+@Composable
+fun ArtistsPagerContent(
+    selectedIndex: Int,
+    updateSelectedIndex: (Int) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    when (selectedIndex) {
+        WEEKS.ordinal -> ArtistListContent(timeFrame = WEEKS, modifier = modifier)
+        MONTHS.ordinal -> ArtistListContent(timeFrame = MONTHS, modifier = modifier)
+        ALL_TIME.ordinal -> ArtistListContent(timeFrame = ALL_TIME, modifier = modifier)
     }
 }

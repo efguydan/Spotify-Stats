@@ -23,6 +23,7 @@ import androidx.ui.tooling.preview.Preview
 import com.efedaniel.spotifystats.ui.screens.account.AccountScreen
 import com.efedaniel.spotifystats.ui.screens.activity.ActivityScreen
 import com.efedaniel.spotifystats.ui.screens.artists.ArtistsScreen
+import com.efedaniel.spotifystats.ui.screens.insights.InsightsScreen
 import com.efedaniel.spotifystats.ui.screens.tracks.TracksScreen
 import com.efedaniel.spotifystats.ui.theme.SpotifyStatsTheme
 import timber.log.Timber
@@ -72,7 +73,7 @@ fun HomeScreen() {
                 composable(BottomNavigationScreens.Tracks.route) { TracksScreen() }
                 composable(BottomNavigationScreens.Artists.route) { ArtistsScreen() }
                 composable(BottomNavigationScreens.Activity.route) { ActivityScreen() }
-                composable(BottomNavigationScreens.Insights.route) { ArtistsScreen() }
+                composable(BottomNavigationScreens.Insights.route) { InsightsScreen() }
                 composable(BottomNavigationScreens.Account.route) { AccountScreen() }
             }
         }

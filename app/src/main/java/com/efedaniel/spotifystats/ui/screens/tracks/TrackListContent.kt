@@ -5,12 +5,12 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ContextAmbient
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.ui.tooling.preview.Preview
 import com.efedaniel.spotifystats.ui.commons.components.TrackCard
 import com.efedaniel.spotifystats.ui.commons.getScrim
@@ -38,6 +38,8 @@ fun TracksListContent(
 }
 
 // TODO Try and fix the way the scrim looks from top to bottom. It is not fading out per se.
+// TODO Also Consider using a radial scrim
+
 @Composable
 fun TopTrackCard(
     modifier: Modifier = Modifier,
@@ -46,11 +48,11 @@ fun TopTrackCard(
         TrackCard()
         Text(
             text = "1",
-            fontSize = 35.sp,
+            style = MaterialTheme.typography.h4,
             modifier = Modifier
                 .fillMaxWidth()
                 .background(brush = getScrim(startY = 100f, endY = 0f))
-                .padding(start = 4.dp, top = 4.dp)
+                .padding(start = 8.dp, top = 4.dp)
         )
     }
 }
