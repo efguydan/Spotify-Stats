@@ -2,6 +2,7 @@ package com.efedaniel.spotifystats.ui.screens.artists
 
 import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -31,7 +32,7 @@ fun ArtistListContent(
             preferredItemWidth = 120.dp.toPx(ContextAmbient.current).dp
         ) {
             repeat(times = 11) {
-                TopArtistCard(modifier = Modifier.padding(all = 4.dp))
+                TopArtistCard(modifier = Modifier.padding(all = 4.dp).clickable(onClick = { /* To Input later */ }))
             }
         }
     }

@@ -66,6 +66,8 @@ fun HomeScreen() {
                 }
             }
         ) {
+            // TODO Use these padding values later
+            Timber.d("Padding Values is %s", it.toString())
             NavHost(
                 navController = navController,
                 startDestination = BottomNavigationScreens.Artists.route
