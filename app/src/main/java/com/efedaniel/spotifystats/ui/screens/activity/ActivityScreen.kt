@@ -34,7 +34,6 @@ import com.efedaniel.spotifystats.ui.commons.components.TrackCard
 import com.efedaniel.spotifystats.ui.commons.getScrim
 import com.efedaniel.spotifystats.ui.commons.layouts.DynamicVerticalGrid
 import com.efedaniel.spotifystats.ui.theme.SpotifyStatsTheme
-import com.efedaniel.spotifystats.ui.theme.spotifyBlack
 import com.efedaniel.spotifystats.utils.Constants
 import com.efedaniel.spotifystats.utils.sePaddingModifier
 import com.efedaniel.spotifystats.utils.toPx
@@ -106,7 +105,7 @@ fun RecentlyPlayedTrackCard(modifier: Modifier = Modifier) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(brush = getScrim(colors = listOf(spotifyBlack.copy(alpha = 0.2f), spotifyBlack.copy(alpha = 0.0f))))
+                .background(brush = getScrim(startY = 0f, endY = 40f))
                 .padding(top = 4.dp, start = 4.dp, bottom = 8.dp)
         ) {
             Icon(Icons.Filled.History, modifier = Modifier.size(12.dp).align(Alignment.CenterVertically))
