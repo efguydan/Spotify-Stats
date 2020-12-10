@@ -1,5 +1,6 @@
 plugins {
     id("com.android.application")
+    id("dagger.hilt.android.plugin")
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
@@ -64,6 +65,7 @@ dependencies {
     implementation(Config.Libs.AndroidX.appCompat)
     implementation(Config.Libs.AndroidX.lifecycle)
     implementation(Config.Libs.AndroidX.datastore)
+    implementation(Config.Libs.AndroidX.startup)
 
     implementation(Config.Libs.Compose.ui)
     implementation(Config.Libs.Compose.material)
@@ -76,8 +78,12 @@ dependencies {
     implementation(Config.Libs.Compose.foundationLayout)
     implementation(Config.Libs.Compose.animation)
 
+    implementation(Config.Libs.DI.hilt)
+    kapt(Config.Libs.DI.hiltAnnotations)
+
     implementation(Config.Libs.Accompanist.coil)
     implementation(Config.Libs.Accompanist.insets)
+
     implementation(Config.Libs.Misc.timber)
 
     testImplementation(Config.Libs.Test.jUnit)

@@ -23,6 +23,7 @@ object Config {
         const val gradle = "4.2.0-alpha15"
         const val kotlin = "1.4.10"
         const val spotless = "5.7.0"
+        const val hilt = "2.28-alpha"
         const val compose = "1.0.0-alpha07"
         const val composeNavigation = "1.0.0-alpha02"
         const val androidXCore = "1.5.0-alpha05"
@@ -35,13 +36,14 @@ object Config {
         const val timber = "4.7.1"
         const val accompanist = "0.3.3.1"
         const val datastore = "1.0.0-alpha05"
+        const val startup = "1.0.0"
     }
 
     object Plugins {
         const val gradle = "com.android.tools.build:gradle:${Versions.gradle}"
         const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
         const val spotless = "com.diffplug.spotless:spotless-plugin-gradle:${Versions.spotless}"
-        const val hilt = ""
+        const val hilt = "com.google.dagger:hilt-android-gradle-plugin:${Versions.hilt}"
     }
 
     object Libs {
@@ -56,6 +58,7 @@ object Config {
             const val appCompat = "androidx.appcompat:appcompat:${Versions.appCompat}"
             const val lifecycle = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}"
             const val datastore = "androidx.datastore:datastore-preferences:${Versions.datastore}"
+            const val startup = "androidx.startup:startup-runtime:${Versions.startup}"
         }
 
         object Compose {
@@ -69,6 +72,11 @@ object Config {
             const val materialsIconsExtended = "androidx.compose.material:material-icons-extended:${Versions.compose}"
             const val runtime = "androidx.compose.runtime:runtime:${Versions.compose}"
             const val navigation = "androidx.navigation:navigation-compose:${Versions.composeNavigation}"
+        }
+
+        object DI {
+            const val hilt = "com.google.dagger:hilt-android:${Versions.hilt}"
+            const val hiltAnnotations = "com.google.dagger:hilt-android-compiler:${Versions.hilt}"
         }
 
         object Accompanist {

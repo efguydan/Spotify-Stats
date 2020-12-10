@@ -1,12 +1,7 @@
 package com.efedaniel.spotifystats
 
 import android.app.Application
-import timber.log.Timber
+import dagger.hilt.android.HiltAndroidApp
 
-class SpotifyStatsApp : Application() {
-
-    override fun onCreate() {
-        super.onCreate()
-        if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
-    }
-}
+@HiltAndroidApp
+class SpotifyStatsApp : Application()
