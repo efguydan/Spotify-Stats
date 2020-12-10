@@ -23,7 +23,8 @@ object Config {
         const val gradle = "4.2.0-alpha15"
         const val kotlin = "1.4.10"
         const val spotless = "5.7.0"
-        const val hilt = "2.28-alpha"
+        const val hilt = "2.29.1-alpha"
+        const val androidxHilt = "1.0.0-alpha02"
         const val compose = "1.0.0-alpha07"
         const val composeNavigation = "1.0.0-alpha02"
         const val androidXCore = "1.5.0-alpha05"
@@ -76,7 +77,10 @@ object Config {
 
         object DI {
             const val hilt = "com.google.dagger:hilt-android:${Versions.hilt}"
-            const val hiltAnnotations = "com.google.dagger:hilt-android-compiler:${Versions.hilt}"
+            const val hiltCompiler = "com.google.dagger:hilt-android-compiler:${Versions.hilt}"
+            const val hiltCommons = "androidx.hilt:hilt-common:${Versions.androidxHilt}"
+            const val androidxHiltCompiler = "androidx.hilt:hilt-compiler:${Versions.androidxHilt}"
+
         }
 
         object Accompanist {

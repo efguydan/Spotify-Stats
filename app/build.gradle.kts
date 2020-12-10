@@ -79,7 +79,9 @@ dependencies {
     implementation(Config.Libs.Compose.animation)
 
     implementation(Config.Libs.DI.hilt)
-    kapt(Config.Libs.DI.hiltAnnotations)
+    kapt(Config.Libs.DI.hiltCompiler)
+    implementation(Config.Libs.DI.hiltCommons)
+    kapt(Config.Libs.DI.androidxHiltCompiler)
 
     implementation(Config.Libs.Accompanist.coil)
     implementation(Config.Libs.Accompanist.insets)

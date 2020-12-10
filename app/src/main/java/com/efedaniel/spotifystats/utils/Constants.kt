@@ -2,6 +2,10 @@ package com.efedaniel.spotifystats.utils
 
 object Constants {
 
+    object AppVariables {
+        const val datastoreName = "global_datastore"
+    }
+
     object Destinations {
         const val tracks = "tracks"
         const val artists = "artists"
