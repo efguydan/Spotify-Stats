@@ -28,6 +28,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.ui.tooling.preview.Preview
 import com.efedaniel.spotifystats.R
+import com.efedaniel.spotifystats.extensions.sePaddingModifier
+import com.efedaniel.spotifystats.extensions.toPx
 import com.efedaniel.spotifystats.ui.commons.components.NetworkImage
 import com.efedaniel.spotifystats.ui.commons.components.SpotifyStatsAppBar
 import com.efedaniel.spotifystats.ui.commons.components.TrackCard
@@ -35,8 +37,6 @@ import com.efedaniel.spotifystats.ui.commons.getScrim
 import com.efedaniel.spotifystats.ui.commons.layouts.DynamicVerticalGrid
 import com.efedaniel.spotifystats.ui.theme.SpotifyStatsTheme
 import com.efedaniel.spotifystats.utils.Constants
-import com.efedaniel.spotifystats.utils.sePaddingModifier
-import com.efedaniel.spotifystats.utils.toPx
 
 @Composable
 fun ActivityScreen() {
@@ -75,7 +75,7 @@ fun CurrentlyPlayingTrackCard(modifier: Modifier = Modifier) {
         modifier = modifier.fillMaxWidth()
     ) {
         Row(Modifier.fillMaxWidth()) {
-            NetworkImage(url = Constants.Misc.randomImage, modifier = Modifier.padding(8.dp).size(100.dp))
+            NetworkImage(url = Constants.Misc.weekndImage, modifier = Modifier.padding(8.dp).size(100.dp))
             Column(
                 modifier = Modifier.fillMaxHeight().weight(1f),
             ) {

@@ -1,4 +1,4 @@
-package com.efedaniel.spotifystats.utils
+package com.efedaniel.spotifystats.extensions
 
 import android.content.Context
 import android.util.DisplayMetrics

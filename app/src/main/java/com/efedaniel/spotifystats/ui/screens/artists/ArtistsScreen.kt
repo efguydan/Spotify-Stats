@@ -9,13 +9,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.efedaniel.spotifystats.R
+import com.efedaniel.spotifystats.ui.commons.StatsTimeFrame
+import com.efedaniel.spotifystats.ui.commons.StatsTimeFrame.ALL_TIME
+import com.efedaniel.spotifystats.ui.commons.StatsTimeFrame.MONTHS
+import com.efedaniel.spotifystats.ui.commons.StatsTimeFrame.WEEKS
 import com.efedaniel.spotifystats.ui.commons.components.SpotifyStatsAppBar
 import com.efedaniel.spotifystats.ui.commons.layouts.TabLayout
 import com.efedaniel.spotifystats.ui.theme.SpotifyStatsTheme
-import com.efedaniel.spotifystats.utils.StatsTimeFrame
-import com.efedaniel.spotifystats.utils.StatsTimeFrame.ALL_TIME
-import com.efedaniel.spotifystats.utils.StatsTimeFrame.MONTHS
-import com.efedaniel.spotifystats.utils.StatsTimeFrame.WEEKS
 
 @Composable
 fun ArtistsScreen() {

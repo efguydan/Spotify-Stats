@@ -63,6 +63,7 @@ dependencies {
     implementation(Config.Libs.AndroidX.core)
     implementation(Config.Libs.AndroidX.appCompat)
     implementation(Config.Libs.AndroidX.lifecycle)
+    implementation(Config.Libs.AndroidX.datastore)
 
     implementation(Config.Libs.Compose.ui)
     implementation(Config.Libs.Compose.material)

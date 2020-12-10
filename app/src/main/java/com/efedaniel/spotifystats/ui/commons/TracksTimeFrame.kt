@@ -1,4 +1,4 @@
-package com.efedaniel.spotifystats.utils
+package com.efedaniel.spotifystats.ui.commons
 
 enum class StatsTimeFrame(val title: String) {
     WEEKS("4 Weeks"),

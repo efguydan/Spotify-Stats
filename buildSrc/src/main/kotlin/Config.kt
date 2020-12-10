@@ -34,12 +34,14 @@ object Config {
         const val espresso = "3.3.0"
         const val timber = "4.7.1"
         const val accompanist = "0.3.3.1"
+        const val datastore = "1.0.0-alpha05"
     }
 
     object Plugins {
         const val gradle = "com.android.tools.build:gradle:${Versions.gradle}"
         const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
         const val spotless = "com.diffplug.spotless:spotless-plugin-gradle:${Versions.spotless}"
+        const val hilt = ""
     }
 
     object Libs {
@@ -53,6 +55,7 @@ object Config {
             const val core = "androidx.core:core-ktx:${Versions.androidXCore}"
             const val appCompat = "androidx.appcompat:appcompat:${Versions.appCompat}"
             const val lifecycle = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}"
+            const val datastore = "androidx.datastore:datastore-preferences:${Versions.datastore}"
         }
 
         object Compose {

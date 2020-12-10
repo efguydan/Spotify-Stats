@@ -12,13 +12,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ContextAmbient
 import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
+import com.efedaniel.spotifystats.extensions.sePaddingModifier
+import com.efedaniel.spotifystats.extensions.toPx
+import com.efedaniel.spotifystats.ui.commons.StatsTimeFrame
 import com.efedaniel.spotifystats.ui.commons.components.TrackCard
 import com.efedaniel.spotifystats.ui.commons.getScrim
 import com.efedaniel.spotifystats.ui.commons.layouts.DynamicVerticalGrid
 import com.efedaniel.spotifystats.ui.theme.SpotifyStatsTheme
-import com.efedaniel.spotifystats.utils.StatsTimeFrame
-import com.efedaniel.spotifystats.utils.sePaddingModifier
-import com.efedaniel.spotifystats.utils.toPx
 
 @Composable
 fun TracksListContent(
