@@ -8,10 +8,21 @@ Spotify Stats is an Android Application to display statistics about your listeni
 ### High Level TODOS
 - [ ] System Architecture with MVI
 - [ ] Dependency Injection with Hilt
-- [ ] User Interface using Jetpack Compose
+- [x] User Interface using Jetpack Compose
 
 ### Lower Level TODOS
 *Will fill in as they come up*
+
+### Libraries Used
+- Compose
+- Timber
+- Accompanist
+
+### Libraries still to integrate
+- Jetpack Datastore
+- RxJava
+- Hilt
+- Retrofit
 
 ## Code Formatting
 Code Formatting is done with the gradle spotless plugin, using [ktlint](https://github.com/pinterest/ktlint) as the linter. Other settings for the plugin can be configured in [spotless.gradle](spotless.gradle). To format code, run
