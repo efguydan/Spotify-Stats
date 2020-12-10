@@ -29,12 +29,12 @@
 
         <provider
             android:name="androidx.startup.InitializationProvider"
-            android:authorities="${applicationId}.androidx-startup"
+            android:authorities="com.efedaniel.spotifystats.androidx-startup"
             android:exported="false"
             tools:node="merge">
 
             <meta-data
-                android:name="om.efedaniel.spotifystats.initializers.TimberInitializer"
+                android:name="com.efedaniel.spotifystats.initializers.TimberInitializer"
                 android:value="androidx.startup" />
 
         </provider>

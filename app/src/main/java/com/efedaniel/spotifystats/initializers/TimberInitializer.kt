@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package com.efedaniel.spotifystats.initializers
 
 import android.content.Context
