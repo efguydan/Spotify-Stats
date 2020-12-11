@@ -12,6 +12,8 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
+// TODO Make sure this singleton component works
+
 @Module
 @InstallIn(SingletonComponent::class)
 object LocalDataModule {

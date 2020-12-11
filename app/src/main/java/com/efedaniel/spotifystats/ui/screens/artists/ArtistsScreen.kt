@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ContextAmbient
 import androidx.compose.ui.res.stringResource
 import com.efedaniel.spotifystats.R
 import com.efedaniel.spotifystats.ui.commons.StatsTimeFrame
@@ -24,6 +25,7 @@ fun ArtistsScreen() {
             // TODO Fix elevation of this app bar too
             topBar = { SpotifyStatsAppBar(title = stringResource(R.string.artists)) }
         ) {
+            ContextAmbient.current.applicationContext
             val (selectedIndex, updateSelectedIndex) = remember { mutableStateOf(WEEKS.ordinal) }
             Column(modifier = Modifier.fillMaxSize()) {
                 TabLayout(

@@ -83,6 +83,11 @@ dependencies {
     implementation(Config.Libs.DI.hiltCommons)
     kapt(Config.Libs.DI.androidxHiltCompiler)
 
+    implementation(Config.Libs.Network.retrofit)
+    implementation(Config.Libs.Network.gsonConverter)
+    implementation(Config.Libs.Network.retrofitMock)
+    implementation(Config.Libs.Network.loggingInterceptor)
+
     implementation(Config.Libs.Accompanist.coil)
     implementation(Config.Libs.Accompanist.insets)
 

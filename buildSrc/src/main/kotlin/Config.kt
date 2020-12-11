@@ -38,6 +38,8 @@ object Config {
         const val accompanist = "0.3.3.1"
         const val datastore = "1.0.0-alpha05"
         const val startup = "1.0.0"
+        const val retrofit = "2.9.0"
+        const val okhttp = "4.9.0"
     }
 
     object Plugins {
@@ -86,6 +88,13 @@ object Config {
         object Accompanist {
             const val insets = "dev.chrisbanes.accompanist:accompanist-insets:${Versions.accompanist}"
             const val coil = "dev.chrisbanes.accompanist:accompanist-coil:${Versions.accompanist}"
+        }
+
+        object Network {
+            const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
+            const val gsonConverter = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
+            const val retrofitMock = "com.squareup.retrofit2:retrofit-mock:${Versions.retrofit}"
+            const val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okhttp}"
         }
 
         object Misc {
