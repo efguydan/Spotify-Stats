@@ -1,9 +1,13 @@
 package com.efedaniel.spotifystats.utils
 
+import com.efedaniel.spotifystats.BuildConfig
+
 object Constants {
 
     object AppVariables {
         const val datastoreName = "global_datastore"
+        const val clientID = BuildConfig.CLIENT_ID
+        const val clientSecret = BuildConfig.CLIENT_SECRET
     }
 
     object Destinations {

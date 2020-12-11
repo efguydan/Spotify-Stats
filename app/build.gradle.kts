@@ -1,3 +1,7 @@
+import com.android.build.gradle.api.ApplicationVariant
+import com.android.build.gradle.internal.api.BaseVariantOutputImpl
+import org.jetbrains.kotlin.konan.properties.Properties
+
 plugins {
     id("com.android.application")
     id("dagger.hilt.android.plugin")
@@ -47,14 +51,71 @@ android {
         kotlinCompilerVersion = Config.Versions.kotlin
     }
 
+    signingConfigs {
+        val path = "keystore.properties"
+        if (!rootProject.file(path).exists()) return@signingConfigs
+
+        val keystoreProperties = Properties()
+        keystoreProperties.load(File(path).inputStream())
+        create("config") {
+            storeFile = rootProject.file(keystoreProperties.getProperty("storeFileName"))
+            storePassword = keystoreProperties.getProperty("storePassword")
+            keyAlias = keystoreProperties.getProperty("keyAlias")
+            keyPassword = keystoreProperties.getProperty("keyPassword")
+        }
+    }
+
     buildTypes {
         getByName("release") {
             isMinifyEnabled = true
-            isDebuggable = false
             isShrinkResources = true
+            isDebuggable = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            versionNameSuffix = "-release"
+            signingConfig = signingConfigs.getByName("config")
+        }
+        getByName("debug") {
+            versionNameSuffix = "-debug"
+            signingConfig = signingConfigs.getByName("config")
         }
     }
+
+    flavorDimensions("implementation")
+
+    productFlavors {
+        val path = "envs.properties"
+        if (!rootProject.file(path).exists()) return@productFlavors
+
+        val envProperties = Properties()
+        envProperties.load(File(path).inputStream())
+
+        create("staging") {
+            val clientID = envProperties.getProperty("stagingClientID").toString()
+            val clientSecret = envProperties.getProperty("stagingClientSecret").toString()
+            buildConfigField("String", "CLIENT_ID", clientID)
+            buildConfigField("String", "CLIENT_SECRET", clientSecret)
+            dimension = "implementation"
+            versionNameSuffix = "-staging"
+        }
+
+        create("production") {
+            val clientID = envProperties.getProperty("prodClientID").toString()
+            val clientSecret = envProperties.getProperty("prodClientSecret").toString()
+            buildConfigField("String", "CLIENT_ID", clientID)
+            buildConfigField("String", "CLIENT_SECRET", clientSecret)
+            dimension = "implementation"
+            versionNameSuffix = "-production"
+        }
+    }
+
+    applicationVariants.all(object : Action<ApplicationVariant> {
+        override fun execute(variant: ApplicationVariant) {
+            variant.outputs.map { it as BaseVariantOutputImpl }.forEach { output ->
+                println("The variant is: ${variant.versionName}")
+                output.outputFileName = "SpotifyStats-${variant.versionName}.apk"
+            }
+        }
+    })
 }
 
 dependencies {
