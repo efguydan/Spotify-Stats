@@ -5,21 +5,34 @@ import com.efedaniel.spotifystats.BuildConfig
 object Constants {
 
     object AppVariables {
-        const val datastoreName = "global_datastore"
-        const val clientID = BuildConfig.CLIENT_ID
-        const val clientSecret = BuildConfig.CLIENT_SECRET
+        const val DATASTORE_NAME = "global_datastore"
     }
 
     object Destinations {
-        const val tracks = "tracks"
-        const val artists = "artists"
-        const val activity = "activity"
-        const val insights = "insights"
-        const val account = "account"
+        const val TRACKS = "tracks"
+        const val ARTISTS = "artists"
+        const val ACTIVITY = "activity"
+        const val INSIGHTS = "insights"
+        const val ACCOUNT = "account"
+    }
+
+    object DataStoreKeys {
+
+    }
+
+    object ApiKeys {
+        const val CLIENT_ID = BuildConfig.CLIENT_ID
+        const val CLIENT_SECRET = BuildConfig.CLIENT_SECRET
+
+        const val AUTH_BASE_URL = "https://accounts.spotify.com/"
+        const val RESPONSE_TYPE = "code"
+        const val REDIRECT_URI = "" // TODO set and whitelist redirect uri
+        const val SCOPE = "" // TODO come and set scope
+        const val AUTH_FULL_URL = "${AUTH_BASE_URL}authorize?client_id=$CLIENT_ID&response_type=$RESPONSE_TYPE&redirect_uri=$REDIRECT_URI&scope=$SCOPE" // TODO Add State
     }
 
     object Misc {
-        const val weekndImage = "https://www.rap-up.com/app/uploads/2020/02/the-weeknd-after-hours.jpg"
-        const val siaImage = "https://i.scdn.co/image/63e7afb473ac268477b4436dc66510bebbc73791"
+        const val WEEKND_IMAGE = "https://www.rap-up.com/app/uploads/2020/02/the-weeknd-after-hours.jpg"
+        const val SIA_IMAGE = "https://i.scdn.co/image/63e7afb473ac268477b4436dc66510bebbc73791"
     }
 }

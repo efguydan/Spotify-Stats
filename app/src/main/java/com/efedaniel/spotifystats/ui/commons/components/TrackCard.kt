@@ -23,7 +23,7 @@ import com.efedaniel.spotifystats.utils.Constants
 fun TrackCard(modifier: Modifier = Modifier) {
     Card(modifier = modifier.height(140.dp)) {
         Box {
-            NetworkImage(url = Constants.Misc.weekndImage)
+            NetworkImage(url = Constants.Misc.WEEKND_IMAGE)
             Column(
                 modifier = Modifier
                     .fillMaxWidth()

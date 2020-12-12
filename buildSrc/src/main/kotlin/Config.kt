@@ -40,6 +40,7 @@ object Config {
         const val startup = "1.0.0"
         const val retrofit = "2.9.0"
         const val okhttp = "4.9.0"
+        const val coroutines = "1.3.9"
     }
 
     object Plugins {
@@ -54,6 +55,8 @@ object Config {
         object Core {
             const val kotlinStd = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
             const val material = "com.google.android.material:material:${Versions.material}"
+            const val coroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
+            const val coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android::${Versions.coroutines}"
         }
 
         object AndroidX {

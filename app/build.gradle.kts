@@ -121,6 +121,8 @@ android {
 dependencies {
     implementation(Config.Libs.Core.kotlinStd)
     implementation(Config.Libs.Core.material)
+    implementation(Config.Libs.Core.coroutinesCore)
+    implementation(Config.Libs.Core.coroutinesAndroid)
 
     implementation(Config.Libs.AndroidX.core)
     implementation(Config.Libs.AndroidX.appCompat)

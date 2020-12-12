@@ -16,10 +16,10 @@ sealed class BottomNavigationScreens(
     @StringRes val label: Int,
     val icon: VectorAsset
 ) {
-    object Tracks : BottomNavigationScreens(Destinations.tracks, R.string.tracks, Icons.Filled.Audiotrack)
-    object Artists : BottomNavigationScreens(Destinations.artists, R.string.artists, Icons.Filled.PeopleAlt)
-    object Activity : BottomNavigationScreens(Destinations.activity, R.string.activity, Icons.Filled.Home)
-    object Insights : BottomNavigationScreens(Destinations.insights, R.string.insights, Icons.Filled.Timeline)
+    object Tracks : BottomNavigationScreens(Destinations.TRACKS, R.string.tracks, Icons.Filled.Audiotrack)
+    object Artists : BottomNavigationScreens(Destinations.ARTISTS, R.string.artists, Icons.Filled.PeopleAlt)
+    object Activity : BottomNavigationScreens(Destinations.ACTIVITY, R.string.activity, Icons.Filled.Home)
+    object Insights : BottomNavigationScreens(Destinations.INSIGHTS, R.string.insights, Icons.Filled.Timeline)
     // TODO Decide if this should be account or settings
-    object Account : BottomNavigationScreens(Destinations.account, R.string.account, Icons.Filled.AccountCircle)
+    object Account : BottomNavigationScreens(Destinations.ACCOUNT, R.string.account, Icons.Filled.AccountCircle)
 }

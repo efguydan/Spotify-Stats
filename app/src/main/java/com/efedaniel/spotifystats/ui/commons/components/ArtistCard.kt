@@ -24,7 +24,7 @@ fun ArtistCard(
 ) {
     Card(modifier = modifier.height(140.dp)) {
         Box {
-            NetworkImage(url = Constants.Misc.siaImage)
+            NetworkImage(url = Constants.Misc.SIA_IMAGE)
             Text(
                 text = "Sia",
                 style = MaterialTheme.typography.h6,

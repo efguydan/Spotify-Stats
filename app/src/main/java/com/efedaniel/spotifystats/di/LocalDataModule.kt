@@ -21,6 +21,6 @@ object LocalDataModule {
     @Provides
     @Singleton
     fun providesDatastore(@ApplicationContext context: Context): DataStore<Preferences> {
-        return context.createDataStore(AppVariables.datastoreName)
+        return context.createDataStore(AppVariables.DATASTORE_NAME)
     }
 }

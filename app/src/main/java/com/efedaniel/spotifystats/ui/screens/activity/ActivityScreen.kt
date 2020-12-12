@@ -75,7 +75,7 @@ fun CurrentlyPlayingTrackCard(modifier: Modifier = Modifier) {
         modifier = modifier.fillMaxWidth()
     ) {
         Row(Modifier.fillMaxWidth()) {
-            NetworkImage(url = Constants.Misc.weekndImage, modifier = Modifier.padding(8.dp).size(100.dp))
+            NetworkImage(url = Constants.Misc.WEEKND_IMAGE, modifier = Modifier.padding(8.dp).size(100.dp))
             Column(
                 modifier = Modifier.fillMaxHeight().weight(1f),
             ) {
