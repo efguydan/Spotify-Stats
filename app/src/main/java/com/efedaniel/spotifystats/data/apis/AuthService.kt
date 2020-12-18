@@ -6,5 +6,4 @@ interface AuthService {
 
     @POST("/api/token")
     suspend fun getAccessToken()
-
 }

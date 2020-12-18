@@ -27,8 +27,11 @@ object Constants {
         const val AUTH_BASE_URL = "https://accounts.spotify.com/"
         const val RESPONSE_TYPE = "code"
         const val REDIRECT_URI = "" // TODO set and whitelist redirect uri
-        const val SCOPE = "" // TODO come and set scope
-        const val AUTH_FULL_URL = "${AUTH_BASE_URL}authorize?client_id=$CLIENT_ID&response_type=$RESPONSE_TYPE&redirect_uri=$REDIRECT_URI&scope=$SCOPE" // TODO Add State
+        const val SCOPE = "user-read-recently-played,user-read-playback-state,user-top-read," +
+            "user-modify-playback-state,user-follow-modify,user-read-currently-playing," +
+            "user-library-modify,user-read-private"
+        const val AUTH_FULL_URL = "${AUTH_BASE_URL}authorize?client_id=$CLIENT_ID" +
+            "&response_type=$RESPONSE_TYPE&redirect_uri=$REDIRECT_URI&scope=$SCOPE" // TODO Add State
     }
 
     object Misc {
