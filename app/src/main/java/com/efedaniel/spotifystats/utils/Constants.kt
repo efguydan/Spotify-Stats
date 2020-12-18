@@ -16,9 +16,7 @@ object Constants {
         const val ACCOUNT = "account"
     }
 
-    object DataStoreKeys {
-
-    }
+    object DataStoreKeys
 
     object ApiKeys {
         const val CLIENT_ID = BuildConfig.CLIENT_ID
