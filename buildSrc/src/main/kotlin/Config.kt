@@ -41,6 +41,10 @@ object Config {
         const val retrofit = "2.9.0"
         const val okhttp = "4.9.0"
         const val coroutines = "1.3.9"
+        const val rxJava = "3.0.9"
+        const val rxKotlin = "3.0.1"
+        const val rxAndroid = "3.0.0"
+        const val rxRetrofitAdapter = "2.9.0"
     }
 
     object Plugins {
@@ -56,7 +60,7 @@ object Config {
             const val kotlinStd = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
             const val material = "com.google.android.material:material:${Versions.material}"
             const val coroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
-            const val coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android::${Versions.coroutines}"
+            const val coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
         }
 
         object AndroidX {
@@ -98,6 +102,13 @@ object Config {
             const val gsonConverter = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
             const val retrofitMock = "com.squareup.retrofit2:retrofit-mock:${Versions.retrofit}"
             const val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okhttp}"
+        }
+
+        object Reactive {
+            const val rxJava = "io.reactivex.rxjava3:rxjava:${Versions.rxJava}"
+            const val rxAndroid = "io.reactivex.rxjava3:rxandroid:${Versions.rxAndroid}"
+            const val rxKotlin = "io.reactivex.rxjava3:rxkotlin:${Versions.rxKotlin}"
+            const val rxRetrofitAdapter = "com.squareup.retrofit2:adapter-rxjava3:${Versions.rxRetrofitAdapter}"
         }
 
         object Misc {

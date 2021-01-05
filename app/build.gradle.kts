@@ -151,6 +151,11 @@ dependencies {
     implementation(Config.Libs.Network.retrofitMock)
     implementation(Config.Libs.Network.loggingInterceptor)
 
+    implementation(Config.Libs.Reactive.rxJava)
+    implementation(Config.Libs.Reactive.rxAndroid)
+    implementation(Config.Libs.Reactive.rxKotlin)
+    implementation(Config.Libs.Reactive.rxRetrofitAdapter)
+
     implementation(Config.Libs.Accompanist.coil)
     implementation(Config.Libs.Accompanist.insets)
 
