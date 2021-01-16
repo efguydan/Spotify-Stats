@@ -25,6 +25,12 @@ import com.efedaniel.spotifystats.ui.theme.SpotifyStatsTheme
 fun TracksScreen() {
     val viewModel: TracksViewModel by (ContextAmbient.current as MainActivity).viewModels()
 
+    // TODO Subscribe to this and use it to render
+    // viewModel.states()
+
+    // TODO Create the intents object and pass it to the viewmodel
+    // viewModel.processIntents()
+
     SpotifyStatsTheme {
         Scaffold(
             // TODO Fix elevation of this app bar
