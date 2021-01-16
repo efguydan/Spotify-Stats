@@ -2,6 +2,8 @@ package com.efedaniel.spotifystats.base.mvi
 
 import io.reactivex.rxjava3.core.Observable
 
+// TODO This is not going to be used. So how is the intents going to be used? Interesting....
+
 /**
  * Object representing a UI that will
  * a) emit its intents to a view model,

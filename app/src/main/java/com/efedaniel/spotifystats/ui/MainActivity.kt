@@ -12,10 +12,11 @@ import com.efedaniel.spotifystats.ui.navigation.AmbientBackDispatcher
 import com.efedaniel.spotifystats.ui.navigation.Destination
 import com.efedaniel.spotifystats.ui.navigation.Navigator
 import com.efedaniel.spotifystats.ui.screens.home.HomeScreen
+import dagger.hilt.android.AndroidEntryPoint
 import dev.chrisbanes.accompanist.insets.ProvideWindowInsets
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {

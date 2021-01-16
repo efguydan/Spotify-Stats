@@ -144,6 +144,7 @@ dependencies {
     implementation(Config.Libs.DI.hilt)
     kapt(Config.Libs.DI.hiltCompiler)
     implementation(Config.Libs.DI.hiltCommons)
+    implementation(Config.Libs.DI.hiltViewModel)
     kapt(Config.Libs.DI.androidxHiltCompiler)
 
     implementation(Config.Libs.Network.retrofit)
