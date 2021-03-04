@@ -20,7 +20,7 @@ object Config {
     }
 
     object Versions {
-        const val gradle = "4.2.0-alpha15"
+        const val gradle = "7.0.0-alpha08"
         const val kotlin = "1.4.10"
         const val spotless = "5.7.0"
         const val hilt = "2.29.1-alpha"
