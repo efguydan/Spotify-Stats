@@ -36,7 +36,7 @@ android {
         isExperimental = true
     }
 
-    lintOptions {
+    lint {
         isAbortOnError = false
         isIgnoreWarnings = true
         isQuiet = true
@@ -48,7 +48,6 @@ android {
 
     composeOptions {
         kotlinCompilerExtensionVersion = Config.Versions.compose
-        kotlinCompilerVersion = Config.Versions.kotlin
     }
 
     signingConfigs {
