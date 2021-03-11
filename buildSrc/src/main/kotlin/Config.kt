@@ -15,6 +15,8 @@ object Config {
         object Misc {
             const val appID = "com.efedaniel.spotifystats"
             const val testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+            const val keysPath = "keystore.properties"
+            const val envsPath = "envs.properties"
         }
 
     }

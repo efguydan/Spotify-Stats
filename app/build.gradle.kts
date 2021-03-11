@@ -51,11 +51,10 @@ android {
     }
 
     signingConfigs {
-        val path = "keystore.properties"
-        if (!rootProject.file(path).exists()) return@signingConfigs
+        if (!rootProject.file(Config.App.Misc.keysPath).exists()) return@signingConfigs
 
         val keystoreProperties = Properties()
-        keystoreProperties.load(File(path).inputStream())
+        keystoreProperties.load(File(Config.App.Misc.keysPath).inputStream())
         create("config") {
             storeFile = rootProject.file(keystoreProperties.getProperty("storeFileName"))
             storePassword = keystoreProperties.getProperty("storePassword")
@@ -65,6 +64,8 @@ android {
     }
 
     buildTypes {
+        if (!rootProject.file(Config.App.Misc.keysPath).exists()) return@buildTypes
+
         getByName("release") {
             isMinifyEnabled = true
             isShrinkResources = true
@@ -82,11 +83,10 @@ android {
     flavorDimensions("implementation")
 
     productFlavors {
-        val path = "envs.properties"
-        if (!rootProject.file(path).exists()) return@productFlavors
+        if (!rootProject.file(Config.App.Misc.envsPath).exists()) return@productFlavors
 
         val envProperties = Properties()
-        envProperties.load(File(path).inputStream())
+        envProperties.load(File(Config.App.Misc.envsPath).inputStream())
 
         create("staging") {
             val clientID = envProperties.getProperty("stagingClientID").toString()
