@@ -83,8 +83,6 @@ android {
     flavorDimensions("implementation")
 
     productFlavors {
-        if (!rootProject.file(Config.App.Misc.envsPath).exists()) return@productFlavors
-
         val envProperties = Properties()
         envProperties.load(File(Config.App.Misc.envsPath).inputStream())
 
