@@ -1,6 +1,5 @@
 package com.efedaniel.spotifystats.base.mvi
 
-import androidx.lifecycle.LiveData
 import io.reactivex.rxjava3.core.Observable
 
 /**
@@ -14,5 +13,5 @@ import io.reactivex.rxjava3.core.Observable
 interface MviViewModel<I : MviIntent, S : MviViewState> {
     fun processIntents(intents: Observable<I>)
 
-    fun states(): LiveData<S>
+    fun states(): Observable<S>
 }

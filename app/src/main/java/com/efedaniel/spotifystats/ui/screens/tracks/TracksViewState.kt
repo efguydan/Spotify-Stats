@@ -11,7 +11,7 @@ data class TracksViewState(
 ) : MviViewState {
 
     companion object {
-        fun idle() = TracksViewState(
+        fun idle(): TracksViewState = TracksViewState(
             isLoading = false,
             tracks = emptyList(),
             error = null,

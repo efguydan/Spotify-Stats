@@ -1,6 +1,5 @@
 package com.efedaniel.spotifystats.ui.screens.tracks
 
-import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Scaffold
@@ -8,11 +7,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.ContextAmbient
 import androidx.compose.ui.res.stringResource
 import androidx.ui.tooling.preview.Preview
 import com.efedaniel.spotifystats.R
-import com.efedaniel.spotifystats.ui.MainActivity
 import com.efedaniel.spotifystats.ui.commons.StatsTimeFrame
 import com.efedaniel.spotifystats.ui.commons.StatsTimeFrame.ALL_TIME
 import com.efedaniel.spotifystats.ui.commons.StatsTimeFrame.MONTHS
@@ -23,14 +20,6 @@ import com.efedaniel.spotifystats.ui.theme.SpotifyStatsTheme
 
 @Composable
 fun TracksScreen() {
-    val viewModel: TracksViewModel by (ContextAmbient.current as MainActivity).viewModels()
-
-    // TODO Subscribe to this and use it to render
-    // viewModel.states()
-
-    // TODO Create the intents object and pass it to the viewmodel
-    // viewModel.processIntents()
-
     SpotifyStatsTheme {
         Scaffold(
             // TODO Fix elevation of this app bar
