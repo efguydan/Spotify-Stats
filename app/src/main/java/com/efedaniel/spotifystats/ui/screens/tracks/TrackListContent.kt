@@ -38,10 +38,12 @@ fun TracksListContent(
     // val state = viewModel.states().
 
     // TODO Create the intents object and pass it to the viewmodel
-    viewModel.processIntents(Observable.merge(
-        Observable.just(TracksIntent.InitialIntent),
-        Observable.just(TracksIntent.RefreshIntent(timeFrame))
-    ))
+    viewModel.processIntents(
+        Observable.merge(
+            Observable.just(TracksIntent.InitialIntent),
+            Observable.just(TracksIntent.RefreshIntent(timeFrame))
+        )
+    )
 
     ScrollableColumn {
         DynamicVerticalGrid(

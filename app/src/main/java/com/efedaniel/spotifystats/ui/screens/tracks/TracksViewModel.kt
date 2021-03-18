@@ -1,7 +1,6 @@
 package com.efedaniel.spotifystats.ui.screens.tracks
 
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.efedaniel.spotifystats.base.mvi.MviViewModel
 import com.efedaniel.spotifystats.extensions.notOfType
@@ -59,11 +58,10 @@ class TracksViewModel @ViewModelInject constructor(
 
     companion object {
         private val reducer = BiFunction { previousState: TracksViewState, result: TracksResult ->
-            when(result) {
+            when (result) {
                 is LoadTracksResult -> TODO("Not Yet Implemented")
                 is SelectTracksResult -> TODO("Not Yet Implemented")
             }
         }
     }
-
 }
