@@ -22,8 +22,8 @@ class TracksViewModel @ViewModelInject constructor(
 
     private fun compose(): Observable<TracksViewState> {
         return intentsSubject
-            .compose<TracksIntent>(intentsFilter)
-            .map<TracksAction>(this::actionFromIntent)
+            .compose(intentsFilter)
+            .map(this::actionFromIntent)
             .compose(actionProcessorHolder.actionProcessor)
             .scan(TracksViewState.idle(), reducer)
             .distinctUntilChanged()
@@ -59,8 +59,8 @@ class TracksViewModel @ViewModelInject constructor(
     companion object {
         private val reducer = BiFunction { previousState: TracksViewState, result: TracksResult ->
             when (result) {
-                is LoadTracksResult -> TODO("Not Yet Implemented")
-                is SelectTracksResult -> TODO("Not Yet Implemented")
+                is LoadTracksResult -> previousState
+                is SelectTracksResult -> previousState
             }
         }
     }
