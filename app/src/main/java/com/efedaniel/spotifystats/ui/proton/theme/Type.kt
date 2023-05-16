@@ -1,4 +1,4 @@
-package com.efedaniel.spotifystats.ui.theme
+package com.efedaniel.spotifystats.ui.proton.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
