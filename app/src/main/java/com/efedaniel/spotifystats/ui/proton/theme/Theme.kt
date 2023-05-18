@@ -8,29 +8,33 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
+import com.efedaniel.spotifystats.ui.proton.tokens.color.ProtonColor
+import com.efedaniel.spotifystats.ui.proton.tokens.color.ProtonColorPalette
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Black,
-    onPrimary = White,
-    secondary = Green,
-    onSecondary = Black,
-    tertiary = White,
-    onTertiary = Black,
-    background = Black,
-    onBackground = White,
-    surface = Black,
-    onSurface = White,
+    primary = ProtonColor.Black,
+    onPrimary = ProtonColor.White,
+    secondary = ProtonColor.Green,
+    onSecondary = ProtonColor.Black,
+    tertiary = ProtonColor.White,
+    onTertiary = ProtonColor.Black,
+    background = ProtonColor.Black,
+    onBackground = ProtonColor.White,
+    surface = ProtonColor.Black,
+    onSurface = ProtonColor.White,
 )
 
 private val LightColorScheme = lightColorScheme()
 
 @Composable
-fun SpotifyStatsTheme(
+fun ProtonTheme(
     darkTheme: Boolean = true,
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = false, // Fixme: Do we want this on?
@@ -54,9 +58,23 @@ fun SpotifyStatsTheme(
         }
     }
 
-    MaterialTheme(
-        colorScheme = colorScheme,
-        typography = Typography,
-        content = content
-    )
+    val colorPalette = ProtonColorPalette()
+
+    CompositionLocalProvider(
+        LocalProtonColorPalette provides colorPalette
+    ) {
+        MaterialTheme(
+            colorScheme = colorScheme,
+            typography = Typography,
+            content = content
+        )
+    }
 }
+
+object ProtonTheme {
+    val colors: ProtonColorPalette
+        @Composable
+        get() = LocalProtonColorPalette.current
+}
+
+val LocalProtonColorPalette = staticCompositionLocalOf { ProtonColorPalette() }
