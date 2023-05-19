@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
+        android:name=".core.SpotifyStatsApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -22,10 +23,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".MainActivity"
+
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx-startup"
             android:exported="false"
-            android:theme="@style/Theme.SpotifyStats" />
+            tools:node="merge">
+            <meta-data
+                android:name="com.efedaniel.spotifystats.core.startup.TimberInitializer"
+                android:value="androidx.startup" />
+        </provider>
     </application>
 
 </manifest>

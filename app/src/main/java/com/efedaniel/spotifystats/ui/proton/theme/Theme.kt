@@ -36,6 +36,7 @@ private val LightColorScheme = lightColorScheme()
 @Composable
 fun ProtonTheme(
     darkTheme: Boolean = true,
+    lightStatusBarColors: Boolean = true,
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = false, // Fixme: Do we want this on?
     content: @Composable () -> Unit
@@ -54,7 +55,7 @@ fun ProtonTheme(
         SideEffect {
             val window = (view.context as Activity).window
             window.statusBarColor = colorScheme.primary.toArgb()
-            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
+            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !lightStatusBarColors
         }
     }
 
