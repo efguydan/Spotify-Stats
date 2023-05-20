@@ -1,4 +1,4 @@
-import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 
 plugins {
     id("com.android.application")
@@ -25,7 +25,13 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField("String", "CLIENT_ID", gradleLocalProperties(rootDir).getProperty("clientId"))
+            buildConfigField("String", "CLIENT_SECRET", gradleLocalProperties(rootDir).getProperty("clientSecret"))
+        }
         release {
+            buildConfigField("String", "CLIENT_ID", gradleLocalProperties(rootDir).getProperty("clientId"))
+            buildConfigField("String", "CLIENT_SECRET", gradleLocalProperties(rootDir).getProperty("clientSecret"))
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -61,6 +67,7 @@ dependencies {
     implementation("androidx.core:core-ktx:1.10.1")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
     implementation("androidx.startup:startup-runtime:1.1.1")
+    implementation("androidx.browser:browser:1.5.0")
     implementation("androidx.activity:activity-compose:1.7.1")
     implementation(platform("androidx.compose:compose-bom:2023.05.01"))
     implementation("androidx.compose.ui:ui")

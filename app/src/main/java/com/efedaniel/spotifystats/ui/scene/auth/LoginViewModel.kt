@@ -17,7 +17,8 @@ class LoginViewModel @Inject constructor(
     var state by mutableStateOf(LoginUiState())
         private set
 
-    fun onConnectSpotifyClicked() {
-        navigator.navigateToSpotifyWebLogin()
+    fun onConnectSpotifyResult(code: String?, error: String?) {
+        Timber.e(code.toString())
+        Timber.e(error.toString())
     }
 }

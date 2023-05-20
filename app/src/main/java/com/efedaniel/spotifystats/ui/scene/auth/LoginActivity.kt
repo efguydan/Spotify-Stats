@@ -1,27 +1,48 @@
 package com.efedaniel.spotifystats.ui.scene.auth
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
 import com.efedaniel.spotifystats.ui.proton.theme.ProtonTheme
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginActivity : ComponentActivity() {
+
+    private val viewModel: LoginViewModel by viewModels()
+    @Inject lateinit var navigator: LoginNavigator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         makeFullScreen()
         setContent {
             ProtonTheme {
-                LoginScreen()
+                LoginScreen(
+                    onConnectWithSpotify = ::connectWithSpotify,
+                    viewModel = viewModel,
+                )
             }
         }
+    }
+
+    private fun connectWithSpotify() {
+        navigator.openLoginWithSpotify(context = this)
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        viewModel.onConnectSpotifyResult(
+            code = intent?.data?.getQueryParameter("code"),
+            error = intent?.data?.getQueryParameter("error"),
+        )
     }
 
     private fun makeFullScreen() {

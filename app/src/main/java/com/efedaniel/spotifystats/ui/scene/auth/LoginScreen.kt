@@ -22,6 +22,7 @@ import com.efedaniel.spotifystats.ui.proton.tokens.icon.ProtonIconAsset
 
 @Composable
 fun LoginScreen(
+    onConnectWithSpotify: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: LoginViewModel = hiltViewModel()
 ) {
@@ -38,7 +39,7 @@ fun LoginScreen(
             text = stringResource(R.string.connect_with_spotify),
             size = ProtonButtonSize.LARGE,
             type = ProtonButtonType.ROUNDED,
-            onClick = viewModel::onConnectSpotifyClicked,
+            onClick = onConnectWithSpotify,
             fillMaxWidth = true,
             icon = {
                 ProtonIcon(
