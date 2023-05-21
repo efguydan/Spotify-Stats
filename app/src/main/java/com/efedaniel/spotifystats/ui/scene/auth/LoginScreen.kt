@@ -39,14 +39,11 @@ fun LoginScreen(
             text = stringResource(R.string.connect_with_spotify),
             size = ProtonButtonSize.LARGE,
             type = ProtonButtonType.ROUNDED,
+            isLoading = viewModel.state.isConnecting,
             onClick = onConnectWithSpotify,
             fillMaxWidth = true,
-            icon = {
-                ProtonIcon(
-                    asset = ProtonIconAsset.Spotify,
-                    tint = ProtonTheme.colors.green
-                )
-            },
+            icon = ProtonIconAsset.Spotify,
+            iconTint = ProtonTheme.colors.green,
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .padding(

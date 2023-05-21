@@ -6,7 +6,6 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.efedaniel.spotifystats.ui.scene.auth.state.LoginUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -18,7 +17,6 @@ class LoginViewModel @Inject constructor(
         private set
 
     fun onConnectSpotifyResult(code: String?, error: String?) {
-        Timber.e(code.toString())
-        Timber.e(error.toString())
+        state = state.copy(isConnecting = true)
     }
 }

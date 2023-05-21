@@ -8,16 +8,23 @@ object ProtonDimension {
 
     // region Component Size
 
+    @Stable
     val ComponentSize24 = 24.dp
 
+    @Stable
+    val ComponentSize28 = 28.dp
+
+    @Stable
     val ComponentSize36 = 36.dp
 
+    @Stable
     val ComponentSize48 = 48.dp
 
     // endregion
 
     // region Icon Size
 
+    @Stable
     val IconSize24 = 24.dp
 
     // endregion
@@ -38,6 +45,16 @@ object ProtonDimension {
 
     @Stable
     val Spacing48 = 48.dp
+
+    // endregion
+
+    // region Stroke
+
+    @Stable
+    val Stroke1 = 1.dp
+
+    @Stable
+    val Stroke2 = 2.dp
 
     // endregion
 }
