@@ -4,7 +4,8 @@ import android.content.Context
 import android.net.Uri
 import androidx.browser.customtabs.CustomTabsIntent
 import com.efedaniel.spotifystats.BuildConfig
-import com.efedaniel.spotifystats.utility.constants.Constants
+import com.efedaniel.spotifystats.utility.constants.Constants.REDIRECT_URI
+import com.efedaniel.spotifystats.utility.constants.Constants.SPOTIFY_AUTH_URL
 import javax.inject.Inject
 
 class LoginNavigator @Inject constructor() {
@@ -13,7 +14,7 @@ class LoginNavigator @Inject constructor() {
         context: Context,
     ) {
         val uri = Uri
-            .parse(Constants.URL.SPOTIFY_AUTH)
+            .parse(SPOTIFY_AUTH_URL)
             .buildUpon()
             .appendQueryParameter(SCOPE_KEY, scopes)
             .appendQueryParameter(RESPONSE_TYPE_KEY, RESPONSE_TYPE)
@@ -41,6 +42,5 @@ class LoginNavigator @Inject constructor() {
         const val REDIRECT_URI_KEY = "redirect_uri"
 
         const val RESPONSE_TYPE = "code"
-        const val REDIRECT_URI = "mystats://authenticate"
     }
 }

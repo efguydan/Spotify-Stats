@@ -44,7 +44,6 @@ fun ProtonButton(
     fillMaxWidth: Boolean = false,
     enabled: Boolean = true,
     isLoading: Boolean = false,
-    colors: ButtonColors = ButtonDefaults.buttonColors(),
     elevation: ButtonElevation? = ButtonDefaults.buttonElevation(),
     border: BorderStroke? = null,
     contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
@@ -55,9 +54,14 @@ fun ProtonButton(
         modifier = modifier
             .conditional(fillMaxWidth) { fillMaxWidth() }
             .requiredHeight(getHeightForSize(size)),
-        enabled = enabled,
+        enabled = enabled && isLoading.not(),
         shape = getShapeForType(type = type),
-        colors = colors,
+        colors = ButtonDefaults.buttonColors(
+            containerColor = colors.black,
+            contentColor = colors.white,
+            disabledContainerColor = colors.black,
+            disabledContentColor = colors.white,
+        ),
         elevation = elevation,
         border = border,
         contentPadding = contentPadding,
@@ -74,7 +78,7 @@ fun ProtonButton(
                         modifier = Modifier.requiredSize(
                             ProtonDimension.ComponentSize28,
                         ),
-                        color = ProtonTheme.colors.white,
+                        color = colors.white,
                         strokeWidth = ProtonDimension.Stroke2
                     )
                 }
