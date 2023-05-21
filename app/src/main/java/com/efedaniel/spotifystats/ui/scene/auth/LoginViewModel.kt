@@ -41,9 +41,15 @@ class LoginViewModel @Inject constructor(
             .subscribe(
                 {
                     state = state.copy(isConnecting = false)
-                    Timber.e(it.toString())
+                    // TODO Navigate to Main Screen!!
                 },
-                { Timber.e(it.toString()) }
+                { exception ->
+                    Timber.e(exception)
+                    state = state.copy(
+                        isConnecting = false,
+                        error = Event(exception.message.orEmpty())
+                    )
+                }
             )
             .addTo(disposables)
     }

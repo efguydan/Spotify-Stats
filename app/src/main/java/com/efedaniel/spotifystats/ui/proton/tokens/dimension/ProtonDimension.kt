@@ -32,6 +32,9 @@ object ProtonDimension {
     // region Spacing
 
     @Stable
+    val Spacing2 = 2.dp
+
+    @Stable
     val Spacing4 = 4.dp
 
     @Stable
@@ -45,6 +48,9 @@ object ProtonDimension {
 
     @Stable
     val Spacing48 = 48.dp
+
+    @Stable
+    val Spacing64 = 64.dp
 
     // endregion
 
