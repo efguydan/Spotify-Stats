@@ -1,4 +1,5 @@
-import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+import java.io.FileInputStream
+import java.util.Properties
 
 plugins {
     id("com.android.application")
@@ -26,12 +27,12 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField("String", "CLIENT_ID", gradleLocalProperties(rootDir).getProperty("clientId"))
-            buildConfigField("String", "CLIENT_SECRET", gradleLocalProperties(rootDir).getProperty("clientSecret"))
+            buildConfigField("String", "CLIENT_ID", getSecret("CLIENT_ID"))
+            buildConfigField("String", "CLIENT_SECRET", getSecret("CLIENT_SECRET"))
         }
         release {
-            buildConfigField("String", "CLIENT_ID", gradleLocalProperties(rootDir).getProperty("clientId"))
-            buildConfigField("String", "CLIENT_SECRET", gradleLocalProperties(rootDir).getProperty("clientSecret"))
+            buildConfigField("String", "CLIENT_ID", getSecret("CLIENT_ID"))
+            buildConfigField("String", "CLIENT_SECRET", getSecret("CLIENT_SECRET"))
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -95,4 +96,17 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation(platform("androidx.compose:compose-bom:2023.05.01"))
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+}
+
+// Fixme: Move to different file
+fun getSecret(key: String): String {
+    val isCi = System.getenv("CI") == "true"
+
+    return if (isCi) {
+        System.getenv(key)
+    } else {
+        val properties = Properties()
+        properties.load(FileInputStream(rootProject.file("secret.properties")))
+        properties.getProperty(key)
+    }
 }
