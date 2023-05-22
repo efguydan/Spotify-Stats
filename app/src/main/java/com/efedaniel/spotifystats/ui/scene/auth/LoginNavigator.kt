@@ -2,6 +2,7 @@ package com.efedaniel.spotifystats.ui.scene.auth
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import androidx.browser.customtabs.CustomTabsIntent
 import com.efedaniel.spotifystats.BuildConfig
@@ -33,7 +34,7 @@ class LoginNavigator @Inject constructor() {
 
     fun navigateToMain(activity: Activity) {
         activity.run {
-            val intent = MainActivity.getIntent(this)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         }
