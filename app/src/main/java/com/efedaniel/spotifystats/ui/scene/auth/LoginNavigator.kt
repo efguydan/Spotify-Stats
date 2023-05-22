@@ -1,9 +1,11 @@
 package com.efedaniel.spotifystats.ui.scene.auth
 
+import android.app.Activity
 import android.content.Context
 import android.net.Uri
 import androidx.browser.customtabs.CustomTabsIntent
 import com.efedaniel.spotifystats.BuildConfig
+import com.efedaniel.spotifystats.ui.scene.main.MainActivity
 import com.efedaniel.spotifystats.utility.constants.Constants.REDIRECT_URI
 import com.efedaniel.spotifystats.utility.constants.Constants.SPOTIFY_AUTH_BASE_URL
 import javax.inject.Inject
@@ -27,6 +29,14 @@ class LoginNavigator @Inject constructor() {
             .Builder()
             .build()
             .launchUrl(context, uri)
+    }
+
+    fun navigateToMain(activity: Activity) {
+        activity.run {
+            val intent = MainActivity.getIntent(this)
+            startActivity(intent)
+            finish()
+        }
     }
 
     private companion object {

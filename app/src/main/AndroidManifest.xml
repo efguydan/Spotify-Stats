@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".core.SpotifyStatsApp"
@@ -18,22 +18,28 @@
         <activity
             android:name=".ui.scene.auth.LoginActivity"
             android:exported="true"
-            android:theme="@style/Theme.SpotifyStats"
-            android:launchMode="singleTask">
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.SpotifyStats">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
                 <data
-                    android:scheme="mystats"
-                    android:host="authenticate" />
+                    android:host="authenticate"
+                    android:scheme="mystats" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ui.scene.main.MainActivity"
+            android:exported="false"
+            android:theme="@style/Theme.SpotifyStats" />
 
         <provider
             android:name="androidx.startup.InitializationProvider"

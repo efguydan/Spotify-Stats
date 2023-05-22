@@ -23,6 +23,8 @@ import com.efedaniel.spotifystats.ui.proton.components.snackbar.ProtonSnackbar
 import com.efedaniel.spotifystats.ui.proton.theme.ProtonTheme
 import com.efedaniel.spotifystats.ui.proton.tokens.dimension.ProtonDimension
 import com.efedaniel.spotifystats.ui.proton.tokens.icon.ProtonIconAsset
+import com.efedaniel.spotifystats.ui.scene.auth.state.LoginDestination
+import com.efedaniel.spotifystats.ui.scene.auth.state.LoginDestination.SPOTIFY_CONNECT
 import com.efedaniel.spotifystats.ui.scene.auth.state.LoginUiState
 import com.efedaniel.spotifystats.utility.extensions.rememberSnackbarHostState
 import com.efedaniel.spotifystats.utility.extensions.showSnackbarNow
@@ -31,7 +33,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun LoginScreen(
-    onConnectWithSpotify: () -> Unit,
+    onNewDestination: (LoginDestination) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: LoginViewModel = hiltViewModel(),
     snackbarHostState: SnackbarHostState = rememberSnackbarHostState(),
@@ -48,13 +50,14 @@ fun LoginScreen(
     ) { padding ->
         LoginContent(
             state = viewModel.state,
-            onConnectWithSpotify = onConnectWithSpotify,
+            onConnectWithSpotify = { onNewDestination(SPOTIFY_CONNECT) },
             modifier = Modifier
                 .padding(padding)
                 .fillMaxSize(),
         )
     }
 
+    viewModel.state.destination?.get()?.let(onNewDestination)
     viewModel.state.error?.get()?.let {
         coroutineScope.launch { snackbarHostState.showSnackbarNow(message = it) }
     }

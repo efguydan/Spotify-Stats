@@ -1,4 +1,4 @@
-package com.efedaniel.spotifystats.core.event
+package com.efedaniel.spotifystats.core
 
 import androidx.compose.runtime.Immutable
 

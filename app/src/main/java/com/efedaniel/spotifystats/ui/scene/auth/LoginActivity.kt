@@ -11,6 +11,9 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
 import com.efedaniel.spotifystats.ui.proton.theme.ProtonTheme
+import com.efedaniel.spotifystats.ui.scene.auth.state.LoginDestination
+import com.efedaniel.spotifystats.ui.scene.auth.state.LoginDestination.MAIN
+import com.efedaniel.spotifystats.ui.scene.auth.state.LoginDestination.SPOTIFY_CONNECT
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -26,15 +29,18 @@ class LoginActivity : ComponentActivity() {
         setContent {
             ProtonTheme {
                 LoginScreen(
-                    onConnectWithSpotify = ::connectWithSpotify,
+                    onNewDestination = ::onNewDestination,
                     viewModel = viewModel,
                 )
             }
         }
     }
 
-    private fun connectWithSpotify() {
-        navigator.openLoginWithSpotify(context = this)
+    private fun onNewDestination(destination: LoginDestination) {
+        when (destination) {
+            SPOTIFY_CONNECT -> navigator.openLoginWithSpotify(context = this)
+            MAIN -> navigator.navigateToMain(activity = this)
+        }
     }
 
     override fun onNewIntent(intent: Intent?) {
