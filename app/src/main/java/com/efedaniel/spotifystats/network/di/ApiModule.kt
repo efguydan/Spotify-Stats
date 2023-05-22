@@ -1,6 +1,8 @@
 package com.efedaniel.spotifystats.network.di
 
-import com.efedaniel.spotifystats.utility.constants.Constants.SPOTIFY_BASE_URL
+import com.efedaniel.spotifystats.network.interceptors.AuthorizationInterceptor
+import com.efedaniel.spotifystats.network.interceptors.ErrorInterceptor
+import com.efedaniel.spotifystats.utility.constants.Constants.SPOTIFY_AUTH_BASE_URL
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -35,15 +37,19 @@ class ApiModule {
         .addCallAdapterFactory(callAdapterFactory)
         .addConverterFactory(converterFactory)
         .client(client)
-        .baseUrl(SPOTIFY_BASE_URL)
+        .baseUrl(SPOTIFY_AUTH_BASE_URL)
         .build()
 
     @Provides
     @Singleton
     internal fun provideOkHttpClient(
+        authInterceptor: AuthorizationInterceptor,
+        errorInterceptor: ErrorInterceptor,
         logger: HttpLoggingInterceptor,
     ): OkHttpClient = OkHttpClient
         .Builder()
+        .addInterceptor(authInterceptor)
+        .addInterceptor(errorInterceptor)
         .addInterceptor(logger)
         .build()
 

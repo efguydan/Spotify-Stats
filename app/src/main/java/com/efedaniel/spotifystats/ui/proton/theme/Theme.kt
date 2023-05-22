@@ -29,6 +29,8 @@ private val DarkColorScheme = darkColorScheme(
     onBackground = ProtonColor.White,
     surface = ProtonColor.Black,
     onSurface = ProtonColor.White,
+    error = ProtonColor.Red,
+    onError = ProtonColor.White
 )
 
 private val LightColorScheme = lightColorScheme()

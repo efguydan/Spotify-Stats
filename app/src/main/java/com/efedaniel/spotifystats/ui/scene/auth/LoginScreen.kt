@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Snackbar
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
@@ -20,6 +19,7 @@ import com.efedaniel.spotifystats.R
 import com.efedaniel.spotifystats.ui.proton.components.button.ProtonButton
 import com.efedaniel.spotifystats.ui.proton.components.button.ProtonButtonSize
 import com.efedaniel.spotifystats.ui.proton.components.button.ProtonButtonType
+import com.efedaniel.spotifystats.ui.proton.components.snackbar.ProtonSnackbar
 import com.efedaniel.spotifystats.ui.proton.theme.ProtonTheme
 import com.efedaniel.spotifystats.ui.proton.tokens.dimension.ProtonDimension
 import com.efedaniel.spotifystats.ui.proton.tokens.icon.ProtonIconAsset
@@ -41,10 +41,9 @@ fun LoginScreen(
         modifier = modifier,
         snackbarHost = {
             SnackbarHost(
-                hostState = snackbarHostState
-            ) {
-                Snackbar(snackbarData = it)
-            }
+                hostState = snackbarHostState,
+                snackbar = { ProtonSnackbar(it) }
+            )
         }
     ) { padding ->
         LoginContent(

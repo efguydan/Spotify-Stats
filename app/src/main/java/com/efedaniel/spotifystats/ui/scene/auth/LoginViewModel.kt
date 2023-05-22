@@ -40,14 +40,17 @@ class LoginViewModel @Inject constructor(
             .doOnSubscribe { state = state.copy(isConnecting = true) }
             .subscribe(
                 {
-                    state = state.copy(isConnecting = false)
+                    state = state.copy(
+                        isConnecting = false,
+                        error = Event("Login Successful!!") // Fixme: Remove later
+                    )
                     // TODO Navigate to Main Screen!!
                 },
                 { exception ->
                     Timber.e(exception)
                     state = state.copy(
                         isConnecting = false,
-                        error = Event(exception.message.orEmpty())
+                        error = Event(exception.message ?: DEFAULT_ERROR_MESSAGE)
                     )
                 }
             )
