@@ -18,4 +18,7 @@ class SessionCache @Inject constructor(
 
     fun fetchAccessToken(): String? = prefsHelper
         .readString(PrefKeys.ACCESS_TOKEN)
+
+    fun retrieveRefreshToken(): String? = prefsHelper
+        .readString(PrefKeys.REFRESH_TOKEN)
 }

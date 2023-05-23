@@ -16,17 +16,22 @@
         android:theme="@style/Theme.SpotifyStats"
         tools:targetApi="31">
         <activity
+            android:name=".ui.scene.routing.RoutingActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Starting">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".ui.scene.auth.LoginActivity"
             android:exported="true"
             android:launchMode="singleTask"
             android:theme="@style/Theme.SpotifyStats">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
@@ -35,7 +40,6 @@
                     android:scheme="mystats" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.scene.main.MainActivity"
             android:exported="false"

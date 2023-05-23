@@ -20,6 +20,12 @@ class AuthDomainManager @Inject constructor(
         .doOnSuccess { sessionCache.storeAuthTokens(it.accessToken, it.refreshToken) }
         .ignoreElement()
 
+    fun isUserAuthenticated(): Boolean =
+        sessionCache
+            .retrieveRefreshToken()
+            .isNullOrEmpty()
+            .not()
+
     companion object {
         const val GRANT_TYPE = "authorization_code"
     }

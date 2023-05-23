@@ -2,4 +2,9 @@
 <resources>
 
     <style name="Theme.SpotifyStats" parent="android:Theme.Material.Light.NoActionBar" />
+
+    <style name="Theme.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/black</item>
+        <item name="postSplashScreenTheme">@style/Theme.SpotifyStats</item>
+    </style>
 </resources>
