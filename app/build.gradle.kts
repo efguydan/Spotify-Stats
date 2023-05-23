@@ -72,7 +72,7 @@ dependencies {
     implementation("androidx.browser:browser:1.5.0")
     implementation("androidx.activity:activity-compose:1.7.1")
     implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("androidx.security:security-crypto:1.1.0-alpha01")
+    implementation("androidx.security:security-crypto:1.1.0-alpha06")
     implementation("com.google.android.material:material:1.9.0")
 
     // Compose
