@@ -3,6 +3,7 @@ package com.efedaniel.spotifystats.network.di
 import com.efedaniel.spotifystats.network.interceptors.AuthorizationInterceptor
 import com.efedaniel.spotifystats.network.interceptors.ErrorInterceptor
 import com.efedaniel.spotifystats.utility.constants.Constants.SPOTIFY_AUTH_BASE_URL
+import com.efedaniel.spotifystats.utility.constants.Constants.SPOTIFY_BASE_URL
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -18,6 +19,7 @@ import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module(includes = [
@@ -27,17 +29,31 @@ import javax.inject.Singleton
 class ApiModule {
 
     @Provides
-    @Singleton
-    internal fun provideRetrofit(
+    internal fun provideRetrofitBuilder(
         client: OkHttpClient,
         callAdapterFactory: CallAdapter.Factory,
         converterFactory: Converter.Factory,
-    ): Retrofit = Retrofit
+    ): Retrofit.Builder = Retrofit
         .Builder()
         .addCallAdapterFactory(callAdapterFactory)
         .addConverterFactory(converterFactory)
         .client(client)
+
+    @Provides
+    @Singleton
+    @Named("Auth_Retrofit")
+    internal fun provideAuthRetrofit(
+        builder: Retrofit.Builder
+    ): Retrofit = builder
         .baseUrl(SPOTIFY_AUTH_BASE_URL)
+        .build()
+
+    @Provides
+    @Singleton
+    internal fun provideRetrofit(
+        builder: Retrofit.Builder
+    ): Retrofit = builder
+        .baseUrl(SPOTIFY_BASE_URL)
         .build()
 
     @Provides

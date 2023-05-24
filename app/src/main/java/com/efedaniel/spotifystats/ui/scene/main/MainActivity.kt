@@ -23,7 +23,9 @@ import com.efedaniel.spotifystats.ui.scene.artist.ArtistScreen
 import com.efedaniel.spotifystats.ui.scene.music.MusicScreen
 import com.efedaniel.spotifystats.ui.scene.overview.OverviewScreen
 import com.efedaniel.spotifystats.ui.scene.profile.ProfileScreen
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

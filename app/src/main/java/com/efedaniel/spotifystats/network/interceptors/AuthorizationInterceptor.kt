@@ -2,13 +2,16 @@ package com.efedaniel.spotifystats.network.interceptors
 
 import android.util.Base64
 import com.efedaniel.spotifystats.BuildConfig
+import com.efedaniel.spotifystats.persistence.cache.SessionCache
 import okhttp3.Interceptor
 import okhttp3.Response
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class AuthorizationInterceptor @Inject constructor(): Interceptor {
+class AuthorizationInterceptor @Inject constructor(
+    private val sessionCache: SessionCache,
+): Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val original = chain.request()
@@ -19,7 +22,8 @@ class AuthorizationInterceptor @Inject constructor(): Interceptor {
             val token = Base64.encodeToString(client.toByteArray(), Base64.NO_WRAP)
             "Basic $token"
         } else {
-            "Bearer " // TODO Add token here
+            val token = sessionCache.retrieveAccessToken()
+            "Bearer $token"
         }
 
         val updated = builder

@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import com.efedaniel.spotifystats.core.BaseViewModel
 import com.efedaniel.spotifystats.core.Event
 import com.efedaniel.spotifystats.domain.manager.AuthDomainManager
+import com.efedaniel.spotifystats.domain.manager.UserDomainManager
 import com.efedaniel.spotifystats.ui.scene.auth.state.LoginDestination.MAIN
 import com.efedaniel.spotifystats.ui.scene.auth.state.LoginUiState
 import com.efedaniel.spotifystats.utility.constants.Constants.DEFAULT_ERROR_MESSAGE
@@ -17,7 +18,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val domain: AuthDomainManager,
+    private val authDomainManager: AuthDomainManager,
+    private val userDomainManager: UserDomainManager,
 ): BaseViewModel() {
 
     var state by mutableStateOf(LoginUiState())
@@ -34,11 +36,13 @@ class LoginViewModel @Inject constructor(
     }
 
     private fun authenticateUser(code: String) {
-        domain
+        authDomainManager
             .authenticateUser(code)
+            .andThen(userDomainManager.fetchCurrentUser())
             .doOnSubscribe { state = state.copy(isConnecting = true) }
             .subscribeBy(
-                onComplete = {
+                onSuccess = {
+                    Timber.e(it.toString())
                     state = state.copy(
                         isConnecting = false,
                         destination = Event(MAIN)

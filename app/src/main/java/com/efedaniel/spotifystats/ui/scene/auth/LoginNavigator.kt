@@ -42,7 +42,6 @@ class LoginNavigator @Inject constructor() {
 
     private companion object {
         val scopes = listOf(
-            "user-read-email",
             "user-read-private",
             "user-top-read",
             "user-read-recently-played"
