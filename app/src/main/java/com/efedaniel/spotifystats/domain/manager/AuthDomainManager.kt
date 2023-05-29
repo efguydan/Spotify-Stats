@@ -26,6 +26,8 @@ class AuthDomainManager @Inject constructor(
             .isNullOrEmpty()
             .not()
 
+    fun logout() = sessionCache.clearPrefs()
+
     companion object {
         const val GRANT_TYPE = "authorization_code"
     }

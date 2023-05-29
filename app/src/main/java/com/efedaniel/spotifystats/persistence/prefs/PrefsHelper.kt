@@ -50,4 +50,6 @@ class PrefsHelper @Inject constructor(
             defaultValue
         }
     }
+
+    fun clearData() = prefs.edit { clear() }
 }

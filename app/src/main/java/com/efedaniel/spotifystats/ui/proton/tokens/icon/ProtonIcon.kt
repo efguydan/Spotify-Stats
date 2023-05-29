@@ -29,7 +29,7 @@ fun ProtonIcon(
 @Composable
 fun ProtonIcon(
     icon: ImageVector,
-    contentDescription: String,
+    contentDescription: String = "Icon",
     modifier: Modifier = Modifier,
     size: Dp = ProtonDimension.IconSize24,
     tint: Color = LocalContentColor.current,

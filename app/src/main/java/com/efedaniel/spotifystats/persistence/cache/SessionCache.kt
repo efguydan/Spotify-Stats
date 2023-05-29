@@ -21,4 +21,6 @@ class SessionCache @Inject constructor(
 
     fun retrieveRefreshToken(): String? = prefsHelper
         .readString(PrefKeys.REFRESH_TOKEN)
+
+    fun clearPrefs() = prefsHelper.clearData()
 }

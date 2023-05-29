@@ -29,6 +29,13 @@ object ProtonDimension {
 
     // endregion
 
+    // region Image Size
+
+    @Stable
+    val ImageSize56 = 56.dp
+
+    // endregion
+
     // region Spacing
 
     @Stable
@@ -36,6 +43,9 @@ object ProtonDimension {
 
     @Stable
     val Spacing4 = 4.dp
+
+    @Stable
+    val Spacing8 = 8.dp
 
     @Stable
     val Spacing16 = 16.dp
