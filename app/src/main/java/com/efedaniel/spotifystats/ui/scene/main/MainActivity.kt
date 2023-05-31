@@ -19,7 +19,7 @@ import androidx.navigation.compose.rememberNavController
 import com.efedaniel.spotifystats.ui.proton.components.text.ProtonText
 import com.efedaniel.spotifystats.ui.proton.theme.ProtonTheme
 import com.efedaniel.spotifystats.ui.proton.tokens.icon.ProtonIcon
-import com.efedaniel.spotifystats.ui.scene.artist.ArtistScreen
+import com.efedaniel.spotifystats.ui.scene.artist.TopArtistScreen
 import com.efedaniel.spotifystats.ui.scene.music.MusicScreen
 import com.efedaniel.spotifystats.ui.scene.overview.OverviewScreen
 import com.efedaniel.spotifystats.ui.scene.profile.ProfileScreen
@@ -73,7 +73,7 @@ class MainActivity : ComponentActivity() {
             ) {
                 composable(MainDestination.Overview.route) { OverviewScreen() }
                 composable(MainDestination.Music.route) { MusicScreen() }
-                composable(MainDestination.Artist.route) { ArtistScreen() }
+                composable(MainDestination.Artist.route) { TopArtistScreen() }
                 composable(MainDestination.Profile.route) { ProfileScreen() }
             }
         }

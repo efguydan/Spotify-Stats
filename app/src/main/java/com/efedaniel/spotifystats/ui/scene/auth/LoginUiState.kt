@@ -1,4 +1,4 @@
-package com.efedaniel.spotifystats.ui.scene.auth.state
+package com.efedaniel.spotifystats.ui.scene.auth
 
 import androidx.compose.runtime.Immutable
 import com.efedaniel.spotifystats.core.Event

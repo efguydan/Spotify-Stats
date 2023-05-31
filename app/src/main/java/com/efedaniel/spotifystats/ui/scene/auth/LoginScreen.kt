@@ -23,9 +23,7 @@ import com.efedaniel.spotifystats.ui.proton.components.snackbar.ProtonSnackbar
 import com.efedaniel.spotifystats.ui.proton.theme.ProtonTheme
 import com.efedaniel.spotifystats.ui.proton.tokens.dimension.ProtonDimension
 import com.efedaniel.spotifystats.ui.proton.tokens.icon.ProtonIconAsset
-import com.efedaniel.spotifystats.ui.scene.auth.state.LoginDestination
-import com.efedaniel.spotifystats.ui.scene.auth.state.LoginDestination.SPOTIFY_CONNECT
-import com.efedaniel.spotifystats.ui.scene.auth.state.LoginUiState
+import com.efedaniel.spotifystats.ui.scene.auth.LoginDestination.SPOTIFY_CONNECT
 import com.efedaniel.spotifystats.utility.extensions.rememberSnackbarHostState
 import com.efedaniel.spotifystats.utility.extensions.showSnackbarNow
 import kotlinx.coroutines.CoroutineScope

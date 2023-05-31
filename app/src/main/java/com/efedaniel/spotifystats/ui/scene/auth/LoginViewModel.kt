@@ -7,8 +7,7 @@ import com.efedaniel.spotifystats.core.BaseViewModel
 import com.efedaniel.spotifystats.core.Event
 import com.efedaniel.spotifystats.domain.manager.AuthDomainManager
 import com.efedaniel.spotifystats.domain.manager.UserDomainManager
-import com.efedaniel.spotifystats.ui.scene.auth.state.LoginDestination.MAIN
-import com.efedaniel.spotifystats.ui.scene.auth.state.LoginUiState
+import com.efedaniel.spotifystats.ui.scene.auth.LoginDestination.MAIN
 import com.efedaniel.spotifystats.utility.constants.Constants.DEFAULT_ERROR_MESSAGE
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.kotlin.addTo

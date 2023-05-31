@@ -11,9 +11,8 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
 import com.efedaniel.spotifystats.ui.proton.theme.ProtonTheme
-import com.efedaniel.spotifystats.ui.scene.auth.state.LoginDestination
-import com.efedaniel.spotifystats.ui.scene.auth.state.LoginDestination.MAIN
-import com.efedaniel.spotifystats.ui.scene.auth.state.LoginDestination.SPOTIFY_CONNECT
+import com.efedaniel.spotifystats.ui.scene.auth.LoginDestination.MAIN
+import com.efedaniel.spotifystats.ui.scene.auth.LoginDestination.SPOTIFY_CONNECT
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
