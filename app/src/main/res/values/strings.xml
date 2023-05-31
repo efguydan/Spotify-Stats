@@ -6,4 +6,7 @@
     <string name="artist">Artist</string>
     <string name="overview">Overview</string>
     <string name="logout">Logout</string>
+    <string name="four_weeks">4 Weeks</string>
+    <string name="six_months">6 Months</string>
+    <string name="all_time">All Time</string>
 </resources>

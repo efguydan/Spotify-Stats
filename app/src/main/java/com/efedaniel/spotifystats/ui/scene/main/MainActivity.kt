@@ -3,6 +3,7 @@ package com.efedaniel.spotifystats.ui.scene.main
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
@@ -19,10 +20,10 @@ import androidx.navigation.compose.rememberNavController
 import com.efedaniel.spotifystats.ui.proton.components.text.ProtonText
 import com.efedaniel.spotifystats.ui.proton.theme.ProtonTheme
 import com.efedaniel.spotifystats.ui.proton.tokens.icon.ProtonIcon
-import com.efedaniel.spotifystats.ui.scene.artist.TopArtistScreen
 import com.efedaniel.spotifystats.ui.scene.music.MusicScreen
 import com.efedaniel.spotifystats.ui.scene.overview.OverviewScreen
 import com.efedaniel.spotifystats.ui.scene.profile.ProfileScreen
+import com.efedaniel.spotifystats.ui.scene.topartist.TopArtistScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -37,6 +38,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    @OptIn(ExperimentalFoundationApi::class)
     @Composable
     fun MainScreen() {
         val navController = rememberNavController()

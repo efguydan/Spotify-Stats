@@ -21,7 +21,7 @@ class StatsDomainManager @Inject constructor(
     ): Single<List<TopArtist>> =
         statsApi
             .getTopArtists(
-                timeRange = timeRange.value,
+                timeRange = timeRange.key,
                 offset = offset,
                 limit = limit,
             )
