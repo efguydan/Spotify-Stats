@@ -22,10 +22,10 @@ class TopArtistViewModel @Inject constructor(
     var state by mutableStateOf(TopArtistUiState())
         private set
 
-    fun fetchTopArtists(timeRange: TimeRange) {
+    fun fetchTopArtists() {
         statsDomainManager
             .getTopArtists(
-                timeRange = timeRange,
+                timeRange = state.timeRange,
                 limit = STATS_LIMIT,
                 offset = STATS_OFFSET,
             )
@@ -37,5 +37,12 @@ class TopArtistViewModel @Inject constructor(
                 }
             )
             .addTo(disposables)
+    }
+
+    fun onTimeRangeSelected(timeRange: TimeRange) {
+        if (state.timeRange != timeRange) {
+            state = state.copy(timeRange = timeRange)
+            fetchTopArtists()
+        }
     }
 }
