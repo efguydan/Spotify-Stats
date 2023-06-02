@@ -7,4 +7,5 @@ object ProtonColor {
     val Black = Color(0xFF191414)
     val White = Color(0xFFFFFFFF)
     val Red = Color(0xFFC2072B)
+    val Transparent = Color(0x00FFFFFF)
 }

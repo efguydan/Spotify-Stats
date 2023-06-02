@@ -8,5 +8,6 @@ data class ProtonColorPalette(
     val green: Color = ProtonColor.Green,
     val black: Color = ProtonColor.Black,
     val white: Color = ProtonColor.White,
-    val red: Color = ProtonColor.Red
+    val red: Color = ProtonColor.Red,
+    val transparent: Color = ProtonColor.Transparent,
 )

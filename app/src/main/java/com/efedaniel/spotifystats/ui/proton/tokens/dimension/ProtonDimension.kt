@@ -73,4 +73,14 @@ object ProtonDimension {
     val Stroke2 = 2.dp
 
     // endregion
+
+    // region Corner
+
+    @Stable
+    val Corner4 = 4.dp
+
+    @Stable
+    val Corner8 = 8.dp
+
+    // endregion
 }

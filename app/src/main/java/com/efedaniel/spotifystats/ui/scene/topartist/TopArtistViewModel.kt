@@ -4,6 +4,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import com.efedaniel.spotifystats.core.BaseViewModel
+import com.efedaniel.spotifystats.core.ScreenState
 import com.efedaniel.spotifystats.domain.manager.StatsDomainManager
 import com.efedaniel.spotifystats.domain.model.TimeRange
 import com.efedaniel.spotifystats.utility.constants.Constants.STATS_LIMIT
@@ -29,9 +30,16 @@ class TopArtistViewModel @Inject constructor(
                 limit = STATS_LIMIT,
                 offset = STATS_OFFSET,
             )
+            .doOnSubscribe { state = state.copy(screenState = ScreenState.LOADING) }
             .subscribeBy(
-                onSuccess = { state = state.copy(artists = it) },
+                onSuccess = {
+                    state = state.copy(
+                        screenState = ScreenState.SUCCESS,
+                        artists = it,
+                    )
+                },
                 onError = {
+                    state = TopArtistUiState(screenState = ScreenState.ERROR)
                     Timber.e("There was an error")
                     Timber.e(it)
                 }
@@ -39,7 +47,13 @@ class TopArtistViewModel @Inject constructor(
             .addTo(disposables)
     }
 
-    fun onTimeRangeSelected(timeRange: TimeRange) {
+    fun onNewEvent(event: TopArtistEvent) {
+        when (event) {
+            is TopArtistEvent.TimeRangeChange -> onTimeRangeSelected(event.timeRange)
+        }
+    }
+
+    private fun onTimeRangeSelected(timeRange: TimeRange) {
         if (state.timeRange != timeRange) {
             state = state.copy(timeRange = timeRange)
             fetchTopArtists()
