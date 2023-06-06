@@ -24,6 +24,8 @@ class TopArtistViewModel @Inject constructor(
         private set
 
     fun fetchTopArtists() {
+        disposables.dispose()
+
         statsDomainManager
             .getTopArtists(
                 timeRange = state.timeRange,
