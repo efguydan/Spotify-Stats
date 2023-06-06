@@ -13,7 +13,9 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -93,6 +95,7 @@ fun TopArtistScreen(
         ) {
             when(it) {
                 ScreenState.LOADING -> {
+                    // FixMe: Replace with shimmer effect loading
                     Box(
                         modifier = Modifier.fillMaxSize(),
                         contentAlignment = Alignment.Center
@@ -179,12 +182,21 @@ private fun TopArtistCard(
                         )
                     )
             )
-            ProtonText(
-                text = artist.name,
+            Row(
                 modifier = Modifier
-                    .align(Alignment.BottomStart)
+                    .fillMaxWidth()
                     .padding(all = ProtonDimension.Spacing8)
-            )
+                    .align(Alignment.BottomStart)
+            ) {
+                ProtonText(
+                    text = artist.name,
+                    modifier = Modifier
+                        .weight(1.0f)
+                )
+                ProtonText(
+                    text = artist.position.toString()
+                )
+            }
         }
     }
 
