@@ -186,15 +186,17 @@ private fun TopArtistCard(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(all = ProtonDimension.Spacing8)
-                    .align(Alignment.BottomStart)
+                    .align(Alignment.BottomStart),
+                verticalAlignment = Alignment.Bottom
             ) {
                 ProtonText(
                     text = artist.name,
                     modifier = Modifier
-                        .weight(1.0f)
+                        .weight(1.0f),
                 )
                 ProtonText(
-                    text = artist.position.toString()
+                    text = artist.position.toString(),
+                    style = ProtonTheme.typography.titleLarge
                 )
             }
         }
