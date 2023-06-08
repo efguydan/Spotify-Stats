@@ -5,6 +5,7 @@ import androidx.compose.runtime.Immutable
 @Immutable
 data class TopArtist(
     val id: String,
+    val position: Int,
     val name: String,
     val imageUrl: String?,
     val popularity: Int,

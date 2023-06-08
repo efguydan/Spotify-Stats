@@ -6,8 +6,12 @@ import javax.inject.Inject
 
 class TopArtistMapper @Inject constructor() {
 
-    private fun dtoToDomain(dto: TopArtistDto): TopArtist = TopArtist(
+    private fun dtoToDomain(
+        dto: TopArtistDto,
+        position: Int,
+    ): TopArtist = TopArtist(
         id = dto.id,
+        position = position,
         name = dto.name,
         imageUrl = dto.images.firstOrNull()?.url,
         popularity = dto.popularity,
@@ -17,5 +21,10 @@ class TopArtistMapper @Inject constructor() {
     )
 
     fun dtoListToDomainList(dtos: List<TopArtistDto>): List<TopArtist> =
-        dtos.map(::dtoToDomain)
+        dtos.mapIndexed { index, dto ->
+            dtoToDomain(
+                dto = dto,
+                position = index + 1,
+            )
+        }
 }

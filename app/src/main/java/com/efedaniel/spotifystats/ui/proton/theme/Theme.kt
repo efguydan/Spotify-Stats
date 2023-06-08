@@ -17,6 +17,7 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 import com.efedaniel.spotifystats.ui.proton.tokens.color.ProtonColor
 import com.efedaniel.spotifystats.ui.proton.tokens.color.ProtonColorPalette
+import com.efedaniel.spotifystats.ui.proton.tokens.typography.ProtonTypographySystem
 
 private val DarkColorScheme = darkColorScheme(
     primary = ProtonColor.Black,
@@ -34,6 +35,11 @@ private val DarkColorScheme = darkColorScheme(
 )
 
 private val LightColorScheme = lightColorScheme()
+
+val LocalProtonColorPalette = staticCompositionLocalOf { ProtonColorPalette() }
+
+val LocalProtonTypographySystem = staticCompositionLocalOf { ProtonTypographySystem }
+
 
 @Composable
 fun ProtonTheme(
@@ -62,13 +68,16 @@ fun ProtonTheme(
     }
 
     val colorPalette = ProtonColorPalette()
+    val typography = ProtonTypographySystem
+
 
     CompositionLocalProvider(
-        LocalProtonColorPalette provides colorPalette
+        LocalProtonColorPalette provides colorPalette,
+        LocalProtonTypographySystem provides typography
     ) {
         MaterialTheme(
             colorScheme = colorScheme,
-            typography = Typography,
+            typography = typography,
             content = content
         )
     }
@@ -78,6 +87,8 @@ object ProtonTheme {
     val colors: ProtonColorPalette
         @Composable
         get() = LocalProtonColorPalette.current
-}
 
-val LocalProtonColorPalette = staticCompositionLocalOf { ProtonColorPalette() }
+    val typography
+        @Composable
+        get() = LocalProtonTypographySystem.current
+}

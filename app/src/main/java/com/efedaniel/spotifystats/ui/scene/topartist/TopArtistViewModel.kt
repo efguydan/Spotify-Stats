@@ -50,6 +50,7 @@ class TopArtistViewModel @Inject constructor(
     fun onNewEvent(event: TopArtistEvent) {
         when (event) {
             is TopArtistEvent.TimeRangeChange -> onTimeRangeSelected(event.timeRange)
+            is TopArtistEvent.ArtistClick -> Timber.e(event.id)
         }
     }
 

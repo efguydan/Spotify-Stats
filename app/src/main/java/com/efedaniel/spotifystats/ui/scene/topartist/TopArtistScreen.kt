@@ -13,7 +13,9 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -38,7 +40,6 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.efedaniel.spotifystats.core.ScreenState
 import com.efedaniel.spotifystats.domain.model.TimeRange
@@ -47,6 +48,7 @@ import com.efedaniel.spotifystats.ui.proton.components.image.ProtonImage
 import com.efedaniel.spotifystats.ui.proton.components.text.ProtonText
 import com.efedaniel.spotifystats.ui.proton.theme.ProtonTheme
 import com.efedaniel.spotifystats.ui.proton.tokens.dimension.ProtonDimension
+import com.efedaniel.spotifystats.ui.scene.topartist.TopArtistEvent.ArtistClick
 
 @OptIn(ExperimentalLayoutApi::class, ExperimentalMaterialApi::class,
     ExperimentalAnimationApi::class
@@ -93,6 +95,7 @@ fun TopArtistScreen(
         ) {
             when(it) {
                 ScreenState.LOADING -> {
+                    // FixMe: Replace with shimmer effect loading
                     Box(
                         modifier = Modifier.fillMaxSize(),
                         contentAlignment = Alignment.Center
@@ -125,7 +128,7 @@ private fun TopArtistContent(
         modifier = modifier
     ) {
         LazyVerticalGrid(
-            columns = GridCells.Adaptive(minSize = 200.dp),
+            columns = GridCells.Adaptive(minSize = ProtonDimension.ComponentSize200),
             modifier = modifier
         ) {
             items(
@@ -134,7 +137,7 @@ private fun TopArtistContent(
                 TopArtistCard(
                     artist = artist,
                     modifier = Modifier.padding(ProtonDimension.Spacing8),
-                    onArtistClicked = { }
+                    onArtistClicked = { onNewEvent(ArtistClick(artist.id)) },
                 )
             }
         }
@@ -152,9 +155,9 @@ private fun TopArtistCard(
     Card(
         modifier = modifier
             .clip(RoundedCornerShape(ProtonDimension.Corner8))
-            .requiredHeight(200.dp)
+            .requiredHeight(ProtonDimension.ComponentSize200)
             .clickable(onClick = onArtistClicked),
-        elevation = ProtonDimension.Spacing16
+        elevation = ProtonDimension.Spacing16,
     ) {
         Box(
             modifier = Modifier
@@ -179,13 +182,23 @@ private fun TopArtistCard(
                         )
                     )
             )
-            ProtonText(
-                text = artist.name,
+            Row(
                 modifier = Modifier
-                    .align(Alignment.BottomStart)
+                    .fillMaxWidth()
                     .padding(all = ProtonDimension.Spacing8)
-            )
+                    .align(Alignment.BottomStart),
+                verticalAlignment = Alignment.Bottom
+            ) {
+                ProtonText(
+                    text = artist.name,
+                    modifier = Modifier
+                        .weight(1.0f),
+                )
+                ProtonText(
+                    text = artist.position.toString(),
+                    style = ProtonTheme.typography.titleLarge
+                )
+            }
         }
     }
-
 }
