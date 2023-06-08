@@ -8,4 +8,7 @@ sealed class TopArtistEvent {
 
     @Immutable
     data class TimeRangeChange(val timeRange: TimeRange): TopArtistEvent()
+
+    @Immutable
+    data class ArtistClick(val id: String): TopArtistEvent()
 }

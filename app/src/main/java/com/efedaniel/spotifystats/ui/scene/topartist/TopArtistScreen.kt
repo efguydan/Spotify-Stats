@@ -40,7 +40,6 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.efedaniel.spotifystats.core.ScreenState
 import com.efedaniel.spotifystats.domain.model.TimeRange
@@ -49,6 +48,7 @@ import com.efedaniel.spotifystats.ui.proton.components.image.ProtonImage
 import com.efedaniel.spotifystats.ui.proton.components.text.ProtonText
 import com.efedaniel.spotifystats.ui.proton.theme.ProtonTheme
 import com.efedaniel.spotifystats.ui.proton.tokens.dimension.ProtonDimension
+import com.efedaniel.spotifystats.ui.scene.topartist.TopArtistEvent.ArtistClick
 
 @OptIn(ExperimentalLayoutApi::class, ExperimentalMaterialApi::class,
     ExperimentalAnimationApi::class
@@ -128,7 +128,7 @@ private fun TopArtistContent(
         modifier = modifier
     ) {
         LazyVerticalGrid(
-            columns = GridCells.Adaptive(minSize = 200.dp),
+            columns = GridCells.Adaptive(minSize = ProtonDimension.ComponentSize200),
             modifier = modifier
         ) {
             items(
@@ -137,7 +137,7 @@ private fun TopArtistContent(
                 TopArtistCard(
                     artist = artist,
                     modifier = Modifier.padding(ProtonDimension.Spacing8),
-                    onArtistClicked = { }
+                    onArtistClicked = { onNewEvent(ArtistClick(artist.id)) },
                 )
             }
         }
@@ -155,9 +155,9 @@ private fun TopArtistCard(
     Card(
         modifier = modifier
             .clip(RoundedCornerShape(ProtonDimension.Corner8))
-            .requiredHeight(200.dp)
+            .requiredHeight(ProtonDimension.ComponentSize200)
             .clickable(onClick = onArtistClicked),
-        elevation = ProtonDimension.Spacing16
+        elevation = ProtonDimension.Spacing16,
     ) {
         Box(
             modifier = Modifier
@@ -199,5 +199,4 @@ private fun TopArtistCard(
             }
         }
     }
-
 }

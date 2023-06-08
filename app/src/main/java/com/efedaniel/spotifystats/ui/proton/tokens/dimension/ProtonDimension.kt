@@ -20,6 +20,12 @@ object ProtonDimension {
     @Stable
     val ComponentSize48 = 48.dp
 
+    @Stable
+    val ComponentSize100 = 100.dp
+
+    @Stable
+    val ComponentSize200 = 200.dp
+
     // endregion
 
     // region Icon Size
