@@ -41,6 +41,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import com.efedaniel.spotifystats.core.ScreenState
 import com.efedaniel.spotifystats.domain.model.TimeRange
 import com.efedaniel.spotifystats.domain.model.TopArtist
@@ -49,18 +50,24 @@ import com.efedaniel.spotifystats.ui.proton.components.text.ProtonText
 import com.efedaniel.spotifystats.ui.proton.theme.ProtonTheme
 import com.efedaniel.spotifystats.ui.proton.tokens.dimension.ProtonDimension
 import com.efedaniel.spotifystats.ui.scene.topartist.TopArtistEvent.ArtistClick
+import kotlinx.coroutines.flow.collectLatest
 
-@OptIn(ExperimentalLayoutApi::class, ExperimentalMaterialApi::class,
+@OptIn(
+    ExperimentalLayoutApi::class,
+    ExperimentalMaterialApi::class,
     ExperimentalAnimationApi::class
 )
 @Composable
 fun TopArtistScreen(
+    navController: NavHostController,
     modifier: Modifier = Modifier,
     viewModel: TopArtistViewModel = hiltViewModel(),
     timeRanges: List<TimeRange> = TimeRange.values().toList(), // Fixme: Change to ImmutableList
 ) {
     LaunchedEffect(Unit) {
-        viewModel.fetchTopArtists()
+        viewModel.destinations.collectLatest {
+            viewModel.navigator.navigate(it, navController)
+        }
     }
 
     Column(
