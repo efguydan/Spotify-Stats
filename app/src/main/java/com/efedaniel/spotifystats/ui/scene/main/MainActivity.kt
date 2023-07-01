@@ -20,10 +20,10 @@ import com.efedaniel.spotifystats.ui.proton.components.text.ProtonText
 import com.efedaniel.spotifystats.ui.proton.theme.ProtonTheme
 import com.efedaniel.spotifystats.ui.proton.tokens.icon.ProtonIcon
 import com.efedaniel.spotifystats.ui.scene.artist.ArtistScreen
-import com.efedaniel.spotifystats.ui.scene.music.MusicScreen
 import com.efedaniel.spotifystats.ui.scene.overview.OverviewScreen
 import com.efedaniel.spotifystats.ui.scene.profile.ProfileScreen
 import com.efedaniel.spotifystats.ui.scene.topartist.TopArtistScreen
+import com.efedaniel.spotifystats.ui.scene.toptrack.TopTrackScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -74,7 +74,7 @@ class MainActivity : ComponentActivity() {
             ) {
                 composable(MainBottomDestination.Overview.route) { OverviewScreen() }
                 composable(MainBottomDestination.Profile.route) { ProfileScreen() }
-                composable(MainBottomDestination.TopMusic.route) { MusicScreen() }
+                composable(MainBottomDestination.TopTrack.route) { TopTrackScreen() }
                 composable(MainBottomDestination.TopArtist.route) { TopArtistScreen(navController) }
 
                 composable(MainDestination.Artist.route) { ArtistScreen() }

@@ -31,16 +31,16 @@ sealed class MainBottomDestination(
     )
 
     @Immutable
-    object TopMusic: MainBottomDestination(
-        route = "topmusic",
-        titleRes = R.string.music,
+    object TopTrack: MainBottomDestination(
+        route = "top_track",
+        titleRes = R.string.tracks,
         icon = ProtonIconAsset.Spotify
     )
 
     @Immutable
     object TopArtist: MainBottomDestination(
-        route = "topartist",
-        titleRes = R.string.artist,
+        route = "top_artist",
+        titleRes = R.string.artists,
         icon = ProtonIconAsset.Spotify
     )
 }
@@ -58,7 +58,7 @@ sealed class MainDestination (
 
 val AllDestinations = listOf(
     MainBottomDestination.Overview,
-    MainBottomDestination.TopMusic,
+    MainBottomDestination.TopTrack,
     MainBottomDestination.TopArtist,
     MainBottomDestination.Profile,
 )
