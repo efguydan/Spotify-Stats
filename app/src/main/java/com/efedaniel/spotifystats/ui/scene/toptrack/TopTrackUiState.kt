@@ -8,6 +8,6 @@ import com.efedaniel.spotifystats.domain.model.TopTrack
 @Immutable
 data class TopTrackUiState(
     val screenState: ScreenState = ScreenState.SUCCESS,
-    val artists: List<TopTrack> = emptyList(), // Fixme: Change to ImmutableList
+    val tracks: List<TopTrack> = emptyList(), // Fixme: Change to ImmutableList
     val timeRange: TimeRange = TimeRange.SHORT_TERM
 )

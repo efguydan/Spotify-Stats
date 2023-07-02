@@ -7,6 +7,8 @@ import com.efedaniel.spotifystats.core.BaseViewModel
 import com.efedaniel.spotifystats.core.ScreenState
 import com.efedaniel.spotifystats.domain.manager.StatsDomainManager
 import com.efedaniel.spotifystats.domain.model.TimeRange
+import com.efedaniel.spotifystats.ui.scene.toptrack.TopTrackEvent.TimeRangeChange
+import com.efedaniel.spotifystats.ui.scene.toptrack.TopTrackEvent.TrackClick
 import com.efedaniel.spotifystats.utility.constants.Constants.STATS_LIMIT
 import com.efedaniel.spotifystats.utility.constants.Constants.STATS_OFFSET
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -39,7 +41,7 @@ class TopTrackViewModel @Inject constructor(
                 onSuccess = {
                     state = state.copy(
                         screenState = ScreenState.SUCCESS,
-                        artists = it,
+                        tracks = it,
                     )
                 },
                 onError = {
@@ -49,6 +51,15 @@ class TopTrackViewModel @Inject constructor(
                 }
             )
             .addTo(disposables)
+    }
+
+    fun onNewEvent(event: TopTrackEvent) {
+        when(event) {
+            is TimeRangeChange -> onTimeRangeSelected(event.timeRange)
+            is TrackClick -> {
+                // TODO Handle Click
+            }
+        }
     }
 
     private fun onTimeRangeSelected(timeRange: TimeRange) {

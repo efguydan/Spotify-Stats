@@ -15,7 +15,7 @@ data class TopTrackDto(
     @SerializedName("popularity")
     val popularity: Int,
     @SerializedName("preview_url")
-    val previewUrl: String,
+    val previewUrl: String?,
     @SerializedName("uri")
     val uri: String,
 )

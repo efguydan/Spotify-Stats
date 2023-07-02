@@ -10,6 +10,6 @@ data class TopTrack(
     val imageUrl: String?,
     val isExplicit: Boolean,
     val popularity: Int,
-    val previewUrl: String,
+    val previewUrl: String?,
     val uri: String,
 )
