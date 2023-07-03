@@ -20,6 +20,7 @@ import com.efedaniel.spotifystats.ui.proton.components.text.ProtonText
 import com.efedaniel.spotifystats.ui.proton.theme.ProtonTheme
 import com.efedaniel.spotifystats.ui.proton.tokens.icon.ProtonIcon
 import com.efedaniel.spotifystats.ui.scene.artist.ArtistScreen
+import com.efedaniel.spotifystats.ui.scene.main.MainDestination.Artist
 import com.efedaniel.spotifystats.ui.scene.overview.OverviewScreen
 import com.efedaniel.spotifystats.ui.scene.profile.ProfileScreen
 import com.efedaniel.spotifystats.ui.scene.topartist.TopArtistScreen
@@ -49,7 +50,7 @@ class MainActivity : ComponentActivity() {
                 BottomNavigation(
                     backgroundColor = ProtonTheme.colors.black,
                 ) {
-                    AllDestinations.forEach { destination ->
+                    BottomDestinations.forEach { destination ->
                         BottomNavigationItem(
                             icon = { ProtonIcon(asset = destination.icon) },
                             label = { ProtonText(stringResource(destination.titleRes)) },
@@ -77,7 +78,9 @@ class MainActivity : ComponentActivity() {
                 composable(MainBottomDestination.TopTrack.route) { TopTrackScreen() }
                 composable(MainBottomDestination.TopArtist.route) { TopArtistScreen(navController) }
 
-                composable(MainDestination.Artist.route) { ArtistScreen() }
+                composable(Artist.route, Artist.arguments) {
+                    ArtistScreen(it.arguments?.getString("id"))
+                }
             }
         }
     }

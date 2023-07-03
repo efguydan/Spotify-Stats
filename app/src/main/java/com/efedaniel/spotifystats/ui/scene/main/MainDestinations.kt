@@ -2,6 +2,9 @@ package com.efedaniel.spotifystats.ui.scene.main
 
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Immutable
+import androidx.navigation.NamedNavArgument
+import androidx.navigation.NavType
+import androidx.navigation.navArgument
 import com.efedaniel.spotifystats.R
 import com.efedaniel.spotifystats.ui.proton.tokens.icon.ProtonIconAsset
 
@@ -47,16 +50,20 @@ sealed class MainBottomDestination(
 
 @Immutable
 sealed class MainDestination (
-    override val route: String
+    override val route: String,
+    val arguments: List<NamedNavArgument> = emptyList(),
 ) : Destination {
 
     @Immutable
     object Artist: MainDestination(
-        route = "artist"
-    )
+        route = "artist/{id}",
+        arguments = listOf(navArgument("id") { type = NavType.StringType })
+    ) {
+        fun getRoute(id: String): String = route.replace("{id}", id)
+    }
 }
 
-val AllDestinations = listOf(
+val BottomDestinations = listOf(
     MainBottomDestination.Overview,
     MainBottomDestination.TopTrack,
     MainBottomDestination.TopArtist,

@@ -24,7 +24,6 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.ChipDefaults
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.FilterChip
 import androidx.compose.runtime.Composable
@@ -45,6 +44,7 @@ import com.efedaniel.spotifystats.domain.model.TimeRange
 import com.efedaniel.spotifystats.domain.model.TopTrack
 import com.efedaniel.spotifystats.ui.proton.components.image.ProtonImage
 import com.efedaniel.spotifystats.ui.proton.components.text.ProtonText
+import com.efedaniel.spotifystats.ui.proton.patterns.loader.ProtonLoader
 import com.efedaniel.spotifystats.ui.proton.theme.ProtonTheme
 import com.efedaniel.spotifystats.ui.proton.tokens.dimension.ProtonDimension
 import com.efedaniel.spotifystats.ui.scene.toptrack.TopTrackEvent.TimeRangeChange
@@ -94,12 +94,7 @@ fun TopTrackScreen(
             when(it) {
                 ScreenState.LOADING -> {
                     // FixMe: Replace with shimmer effect loading
-                    Box(
-                        modifier = Modifier.fillMaxSize(),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        CircularProgressIndicator(color = ProtonTheme.colors.white)
-                    }
+                    ProtonLoader()
                 }
                 ScreenState.SUCCESS -> {
                     TopTracksContent(
