@@ -6,13 +6,23 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.with
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.efedaniel.spotifystats.core.ScreenState
+import com.efedaniel.spotifystats.domain.model.Artist
+import com.efedaniel.spotifystats.ui.proton.components.image.ProtonImage
 import com.efedaniel.spotifystats.ui.proton.components.text.ProtonText
 import com.efedaniel.spotifystats.ui.proton.patterns.loader.ProtonLoader
+import com.efedaniel.spotifystats.ui.proton.theme.ProtonTheme
+import com.efedaniel.spotifystats.ui.proton.tokens.dimension.ProtonDimension
 
 @OptIn(
     ExperimentalAnimationApi::class
@@ -49,6 +59,28 @@ fun ArtistContent(
     Column(
         modifier = modifier
     ) {
-        ProtonText(text = state.artist?.name.toString())
+        ArtistSection(artist = state.artist)
+    }
+}
+
+@Composable
+fun ArtistSection(
+    artist: Artist,
+    modifier: Modifier = Modifier
+) {
+    Column(modifier = modifier) {
+        ProtonImage(
+            url = artist.imageUrl.orEmpty(),
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .fillMaxWidth()
+                .aspectRatio(1.0f)
+        )
+        Spacer(modifier = Modifier.height(ProtonDimension.Spacing4))
+        ProtonText(
+            text = artist.name,
+            style = ProtonTheme.typography.headlineMedium,
+            modifier = Modifier.padding(start = ProtonDimension.Spacing8)
+        )
     }
 }

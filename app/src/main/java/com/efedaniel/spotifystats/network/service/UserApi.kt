@@ -11,6 +11,6 @@ interface UserApi {
     @GET("me")
     fun getCurrentUser(): Single<UserResponse>
 
-    @GET("artist/{id}")
+    @GET("artists/{id}")
     fun getArtist(@Path("id") id: String): Single<ArtistDto>
 }

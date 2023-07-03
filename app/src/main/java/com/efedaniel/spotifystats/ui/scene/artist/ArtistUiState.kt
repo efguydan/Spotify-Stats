@@ -7,5 +7,5 @@ import com.efedaniel.spotifystats.domain.model.Artist
 @Immutable
 data class ArtistUiState(
     val screenState: ScreenState = ScreenState.SUCCESS,
-    val artist: Artist? = null
+    val artist: Artist = Artist()
 )
