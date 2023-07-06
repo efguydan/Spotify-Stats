@@ -2,6 +2,7 @@ package com.efedaniel.spotifystats.network.di
 
 import com.efedaniel.spotifystats.network.interceptors.AuthorizationInterceptor
 import com.efedaniel.spotifystats.network.interceptors.ErrorInterceptor
+import com.efedaniel.spotifystats.network.interceptors.TokenAuthenticator
 import com.efedaniel.spotifystats.utility.constants.Constants.SPOTIFY_AUTH_BASE_URL
 import com.efedaniel.spotifystats.utility.constants.Constants.SPOTIFY_BASE_URL
 import com.google.gson.Gson
@@ -59,11 +60,13 @@ class ApiModule {
     @Provides
     @Singleton
     internal fun provideOkHttpClient(
+        tokenAuthenticator: TokenAuthenticator,
         authInterceptor: AuthorizationInterceptor,
         errorInterceptor: ErrorInterceptor,
         logger: HttpLoggingInterceptor,
     ): OkHttpClient = OkHttpClient
         .Builder()
+        .authenticator(tokenAuthenticator)
         .addInterceptor(authInterceptor)
         .addInterceptor(errorInterceptor)
         .addInterceptor(logger)

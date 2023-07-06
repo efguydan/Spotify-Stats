@@ -15,4 +15,11 @@ interface AuthApi {
         @Field("code") code: String,
         @Field("redirect_uri") redirectUri: String,
     ): Single<AuthenticationResponse>
+
+    @FormUrlEncoded
+    @POST("/api/token")
+    fun refreshToken(
+        @Field("grant_type") grantType: String = "refresh_token",
+        @Field("refresh_token") refreshToken: String,
+    ): AuthenticationResponse
 }
