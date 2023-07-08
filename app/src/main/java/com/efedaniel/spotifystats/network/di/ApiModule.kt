@@ -3,8 +3,6 @@ package com.efedaniel.spotifystats.network.di
 import com.efedaniel.spotifystats.network.interceptors.AuthorizationInterceptor
 import com.efedaniel.spotifystats.network.interceptors.ErrorInterceptor
 import com.efedaniel.spotifystats.network.interceptors.TokenAuthenticator
-import com.efedaniel.spotifystats.network.interceptors.tokenprovider.AccessTokenProvider
-import com.efedaniel.spotifystats.network.interceptors.tokenprovider.AccessTokenProviderImpl
 import com.efedaniel.spotifystats.utility.constants.Constants.SPOTIFY_AUTH_BASE_URL
 import com.efedaniel.spotifystats.utility.constants.Constants.SPOTIFY_BASE_URL
 import com.google.gson.Gson
@@ -85,12 +83,6 @@ class ApiModule {
         .addInterceptor(authInterceptor)
         .addInterceptor(logger)
         .build()
-
-    @Provides
-    @Singleton
-    internal fun provideAccessTokenProvider(
-        provider: AccessTokenProviderImpl
-    ): AccessTokenProvider = provider
 
     @Provides
     @Singleton

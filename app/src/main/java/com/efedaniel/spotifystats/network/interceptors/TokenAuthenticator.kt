@@ -1,6 +1,6 @@
 package com.efedaniel.spotifystats.network.interceptors
 
-import com.efedaniel.spotifystats.network.interceptors.tokenprovider.AccessTokenProvider
+import com.efedaniel.spotifystats.network.tokenprovider.AccessTokenProvider
 import okhttp3.Authenticator
 import okhttp3.Request
 import okhttp3.Response

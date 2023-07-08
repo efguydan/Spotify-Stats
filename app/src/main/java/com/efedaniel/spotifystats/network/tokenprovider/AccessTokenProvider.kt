@@ -1,4 +1,4 @@
-package com.efedaniel.spotifystats.network.interceptors.tokenprovider
+package com.efedaniel.spotifystats.network.tokenprovider
 
 import com.efedaniel.spotifystats.network.service.AuthApi
 import com.efedaniel.spotifystats.persistence.cache.SessionCache
@@ -6,12 +6,12 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class AccessTokenProviderImpl @Inject constructor(
+class AccessTokenProvider @Inject constructor(
     private val sessionCache: SessionCache,
     private val authApi: AuthApi,
-): AccessTokenProvider {
+){
 
-    override fun refreshToken(): String? {
+    fun refreshToken(): String? {
         val refreshToken = sessionCache.retrieveRefreshToken() ?: return null
 
         // Fixme: Write this in a safer way
