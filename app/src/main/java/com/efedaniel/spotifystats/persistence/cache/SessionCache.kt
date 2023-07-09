@@ -16,6 +16,10 @@ class SessionCache @Inject constructor(
         prefsHelper.storeString(PrefKeys.REFRESH_TOKEN, refreshToken)
     }
 
+    fun storeAccessToken(token: String) {
+        prefsHelper.storeString(PrefKeys.ACCESS_TOKEN, token)
+    }
+
     fun retrieveAccessToken(): String? = prefsHelper
         .readString(PrefKeys.ACCESS_TOKEN)
 

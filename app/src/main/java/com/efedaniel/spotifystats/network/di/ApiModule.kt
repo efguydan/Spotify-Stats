@@ -2,6 +2,7 @@ package com.efedaniel.spotifystats.network.di
 
 import com.efedaniel.spotifystats.network.interceptors.AuthorizationInterceptor
 import com.efedaniel.spotifystats.network.interceptors.ErrorInterceptor
+import com.efedaniel.spotifystats.network.interceptors.TokenAuthenticator
 import com.efedaniel.spotifystats.utility.constants.Constants.SPOTIFY_AUTH_BASE_URL
 import com.efedaniel.spotifystats.utility.constants.Constants.SPOTIFY_BASE_URL
 import com.google.gson.Gson
@@ -30,42 +31,56 @@ class ApiModule {
 
     @Provides
     internal fun provideRetrofitBuilder(
-        client: OkHttpClient,
         callAdapterFactory: CallAdapter.Factory,
         converterFactory: Converter.Factory,
     ): Retrofit.Builder = Retrofit
         .Builder()
         .addCallAdapterFactory(callAdapterFactory)
         .addConverterFactory(converterFactory)
-        .client(client)
 
     @Provides
     @Singleton
     @Named("Auth_Retrofit")
     internal fun provideAuthRetrofit(
-        builder: Retrofit.Builder
+        builder: Retrofit.Builder,
+        @Named("BaseOkHttp") okhttp: OkHttpClient,
     ): Retrofit = builder
+        .client(okhttp)
         .baseUrl(SPOTIFY_AUTH_BASE_URL)
         .build()
 
     @Provides
     @Singleton
     internal fun provideRetrofit(
-        builder: Retrofit.Builder
+        builder: Retrofit.Builder,
+        @Named("InterceptedOkHttp") okhttp: OkHttpClient,
     ): Retrofit = builder
+        .client(okhttp)
         .baseUrl(SPOTIFY_BASE_URL)
         .build()
 
     @Provides
     @Singleton
+    @Named("InterceptedOkHttp")
     internal fun provideOkHttpClient(
-        authInterceptor: AuthorizationInterceptor,
+        @Named("BaseOkHttp") okhttp: OkHttpClient,
+        tokenAuthenticator: TokenAuthenticator,
         errorInterceptor: ErrorInterceptor,
+    ): OkHttpClient = okhttp
+        .newBuilder()
+        .authenticator(tokenAuthenticator)
+        .addInterceptor(errorInterceptor)
+        .build()
+
+    @Provides
+    @Singleton
+    @Named("BaseOkHttp")
+    internal fun provideBaseOkHttp(
+        authInterceptor: AuthorizationInterceptor,
         logger: HttpLoggingInterceptor,
     ): OkHttpClient = OkHttpClient
         .Builder()
         .addInterceptor(authInterceptor)
-        .addInterceptor(errorInterceptor)
         .addInterceptor(logger)
         .build()
 
