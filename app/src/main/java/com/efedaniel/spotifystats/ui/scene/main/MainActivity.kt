@@ -19,10 +19,12 @@ import androidx.navigation.compose.rememberNavController
 import com.efedaniel.spotifystats.ui.proton.components.text.ProtonText
 import com.efedaniel.spotifystats.ui.proton.theme.ProtonTheme
 import com.efedaniel.spotifystats.ui.proton.tokens.icon.ProtonIcon
-import com.efedaniel.spotifystats.ui.scene.music.MusicScreen
+import com.efedaniel.spotifystats.ui.scene.artist.ArtistScreen
+import com.efedaniel.spotifystats.ui.scene.main.MainDestination.Artist
 import com.efedaniel.spotifystats.ui.scene.overview.OverviewScreen
 import com.efedaniel.spotifystats.ui.scene.profile.ProfileScreen
 import com.efedaniel.spotifystats.ui.scene.topartist.TopArtistScreen
+import com.efedaniel.spotifystats.ui.scene.toptrack.TopTrackScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -48,7 +50,7 @@ class MainActivity : ComponentActivity() {
                 BottomNavigation(
                     backgroundColor = ProtonTheme.colors.black,
                 ) {
-                    MainDestinations.forEach { destination ->
+                    BottomDestinations.forEach { destination ->
                         BottomNavigationItem(
                             icon = { ProtonIcon(asset = destination.icon) },
                             label = { ProtonText(stringResource(destination.titleRes)) },
@@ -68,13 +70,17 @@ class MainActivity : ComponentActivity() {
         ) { padding ->
             NavHost(
                 navController = navController,
-                startDestination = MainDestination.Overview.route,
+                startDestination = MainBottomDestination.Overview.route,
                 modifier = Modifier.padding(padding)
             ) {
-                composable(MainDestination.Overview.route) { OverviewScreen() }
-                composable(MainDestination.Music.route) { MusicScreen() }
-                composable(MainDestination.Artist.route) { TopArtistScreen() }
-                composable(MainDestination.Profile.route) { ProfileScreen() }
+                composable(MainBottomDestination.Overview.route) { OverviewScreen() }
+                composable(MainBottomDestination.Profile.route) { ProfileScreen() }
+                composable(MainBottomDestination.TopTrack.route) { TopTrackScreen() }
+                composable(MainBottomDestination.TopArtist.route) { TopArtistScreen(navController) }
+
+                composable(Artist.route, Artist.arguments) {
+                    ArtistScreen(it.arguments?.getString("id"))
+                }
             }
         }
     }

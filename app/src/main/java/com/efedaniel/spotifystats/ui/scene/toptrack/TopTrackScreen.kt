@@ -1,4 +1,4 @@
-package com.efedaniel.spotifystats.ui.scene.topartist
+package com.efedaniel.spotifystats.ui.scene.toptrack
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -27,7 +27,6 @@ import androidx.compose.material.ChipDefaults
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.FilterChip
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -40,17 +39,16 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavHostController
 import com.efedaniel.spotifystats.core.ScreenState
 import com.efedaniel.spotifystats.domain.model.TimeRange
-import com.efedaniel.spotifystats.domain.model.TopArtist
+import com.efedaniel.spotifystats.domain.model.TopTrack
 import com.efedaniel.spotifystats.ui.proton.components.image.ProtonImage
 import com.efedaniel.spotifystats.ui.proton.components.text.ProtonText
 import com.efedaniel.spotifystats.ui.proton.patterns.loader.ProtonLoader
 import com.efedaniel.spotifystats.ui.proton.theme.ProtonTheme
 import com.efedaniel.spotifystats.ui.proton.tokens.dimension.ProtonDimension
-import com.efedaniel.spotifystats.ui.scene.topartist.TopArtistEvent.ArtistClick
-import kotlinx.coroutines.flow.collectLatest
+import com.efedaniel.spotifystats.ui.scene.toptrack.TopTrackEvent.TimeRangeChange
+import com.efedaniel.spotifystats.ui.scene.toptrack.TopTrackEvent.TrackClick
 
 @OptIn(
     ExperimentalLayoutApi::class,
@@ -58,18 +56,11 @@ import kotlinx.coroutines.flow.collectLatest
     ExperimentalAnimationApi::class
 )
 @Composable
-fun TopArtistScreen(
-    navController: NavHostController,
+fun TopTrackScreen(
     modifier: Modifier = Modifier,
-    viewModel: TopArtistViewModel = hiltViewModel(),
+    viewModel: TopTrackViewModel = hiltViewModel(),
     timeRanges: List<TimeRange> = TimeRange.values().toList(), // Fixme: Change to ImmutableList
 ) {
-    LaunchedEffect(Unit) {
-        viewModel.destinations.collectLatest {
-            viewModel.navigator.navigate(it, navController)
-        }
-    }
-
     Column(
         modifier = modifier
     ) {
@@ -81,7 +72,7 @@ fun TopArtistScreen(
             timeRanges.forEach { timeRange ->
                 FilterChip(
                     selected = viewModel.state.timeRange == timeRange,
-                    onClick = { viewModel.onNewEvent(TopArtistEvent.TimeRangeChange(timeRange)) },
+                    onClick = { viewModel.onNewEvent(TimeRangeChange(timeRange)) },
                     border = BorderStroke(
                         width = ProtonDimension.Stroke1,
                         color = ProtonTheme.colors.white.copy(alpha = 0.1f)
@@ -106,7 +97,7 @@ fun TopArtistScreen(
                     ProtonLoader()
                 }
                 ScreenState.SUCCESS -> {
-                    TopArtistContent(
+                    TopTracksContent(
                         state = viewModel.state,
                         onNewEvent = viewModel::onNewEvent,
                         modifier = Modifier.weight(1.0f)
@@ -121,9 +112,9 @@ fun TopArtistScreen(
 }
 
 @Composable
-private fun TopArtistContent(
-    state: TopArtistUiState,
-    onNewEvent: (TopArtistEvent) -> Unit,
+private fun TopTracksContent(
+    state: TopTrackUiState,
+    onNewEvent: (TopTrackEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -134,12 +125,12 @@ private fun TopArtistContent(
             modifier = modifier
         ) {
             items(
-                items = state.artists
-            ) { artist ->
-                TopArtistCard(
-                    artist = artist,
+                items = state.tracks
+            ) { track ->
+                TopTrackCard(
+                    track = track,
                     modifier = Modifier.padding(ProtonDimension.Spacing8),
-                    onArtistClicked = { onNewEvent(ArtistClick(artist.id)) },
+                    onTrackClicked = { onNewEvent(TrackClick(track.id)) },
                 )
             }
         }
@@ -147,9 +138,9 @@ private fun TopArtistContent(
 }
 
 @Composable
-private fun TopArtistCard(
-    artist: TopArtist,
-    onArtistClicked: () -> Unit,
+private fun TopTrackCard(
+    track: TopTrack,
+    onTrackClicked: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     var height by remember { mutableStateOf(0) }
@@ -158,7 +149,7 @@ private fun TopArtistCard(
         modifier = modifier
             .clip(RoundedCornerShape(ProtonDimension.Corner8))
             .requiredHeight(ProtonDimension.ComponentSize200)
-            .clickable(onClick = onArtistClicked),
+            .clickable(onClick = onTrackClicked),
         elevation = ProtonDimension.Spacing16,
     ) {
         Box(
@@ -167,7 +158,7 @@ private fun TopArtistCard(
                 .onGloballyPositioned { height = it.size.height }
         ) {
             ProtonImage(
-                url = artist.imageUrl.orEmpty(),
+                url = track.imageUrl.orEmpty(),
                 contentScale = ContentScale.Crop,
             )
             Box(
@@ -192,12 +183,12 @@ private fun TopArtistCard(
                 verticalAlignment = Alignment.Bottom
             ) {
                 ProtonText(
-                    text = artist.name,
+                    text = track.name,
                     modifier = Modifier
                         .weight(1.0f),
                 )
                 ProtonText(
-                    text = artist.position.toString(),
+                    text = track.position.toString(),
                     style = ProtonTheme.typography.titleLarge
                 )
             }
