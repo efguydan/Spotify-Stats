@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.efedaniel.spotifystats.core.ScreenState
 import com.efedaniel.spotifystats.domain.model.Artist
+import com.efedaniel.spotifystats.ui.proton.components.chips.Chip
 import com.efedaniel.spotifystats.ui.proton.components.image.ProtonImage
 import com.efedaniel.spotifystats.ui.proton.components.text.ProtonText
 import com.efedaniel.spotifystats.ui.proton.patterns.loader.ProtonLoader
@@ -102,25 +103,3 @@ fun ArtistSection(
         }
     }
 }
-
-@Composable
-fun Chip(text: String) {
-    // You can customize the appearance of your chips here.
-    // This is a simple example with a colored background and padding.
-    Box(
-        modifier = Modifier.padding(4.dp)
-            .clip(shape = CircleShape),
-        contentAlignment = Alignment.Center,
-        content = {
-            Text(
-                text = text,
-                color = Color.White,
-                modifier = Modifier
-                    .background(Color.Blue)
-                    .padding(horizontal = 12.dp, vertical = 8.dp)
-            )
-        }
-    )
-}
-
-
