@@ -10,12 +10,12 @@ plugins {
 
 android {
     namespace = "com.efedaniel.spotifystats"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.efedaniel.spotifystats"
         minSdk = 26
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -70,7 +70,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     implementation("androidx.startup:startup-runtime:1.1.1")
     implementation("androidx.browser:browser:1.5.0")
-    implementation("androidx.activity:activity-compose:1.7.2")
+    implementation("androidx.activity:activity-compose:1.8.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("androidx.security:security-crypto:1.1.0-alpha01")
     implementation("com.google.android.material:material:1.9.0")
