@@ -17,6 +17,7 @@ import com.efedaniel.spotifystats.ui.proton.tokens.color.ProtonColor
 
 @Composable
 fun Chip(genre: String) {
+
     SuggestionChip(modifier = Modifier.padding((4.dp)),
         onClick = { /*TODO*/ },
         label = { Text( text = genre, color = ProtonColor.White)})
