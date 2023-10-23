@@ -11,6 +11,8 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
@@ -18,11 +20,13 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.efedaniel.spotifystats.core.ScreenState
 import com.efedaniel.spotifystats.domain.model.Artist
+import com.efedaniel.spotifystats.ui.proton.components.chips.Chip
 import com.efedaniel.spotifystats.ui.proton.components.image.ProtonImage
 import com.efedaniel.spotifystats.ui.proton.components.text.ProtonText
 import com.efedaniel.spotifystats.ui.proton.patterns.loader.ProtonLoader
 import com.efedaniel.spotifystats.ui.proton.theme.ProtonTheme
 import com.efedaniel.spotifystats.ui.proton.tokens.dimension.ProtonDimension
+
 
 @OptIn(
     ExperimentalAnimationApi::class
@@ -82,5 +86,12 @@ fun ArtistSection(
             style = ProtonTheme.typography.headlineMedium,
             modifier = Modifier.padding(start = ProtonDimension.Spacing8)
         )
+    }
+
+    Spacer(modifier = Modifier.height(ProtonDimension.Spacing4))
+    LazyRow() {
+        items(artist.genres) { item ->
+            Chip(text = item)
+        }
     }
 }
