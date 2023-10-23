@@ -12,13 +12,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
 import com.efedaniel.spotifystats.ui.proton.tokens.color.ProtonColor
 
 @Composable
-fun Chip(genre: String) {
+fun Chip(text: String,
+         textColor : Color = ProtonColor.White,
+         onclick : () -> Unit = {},
+         shape: Shape = CircleShape
 
+
+) {
     SuggestionChip(modifier = Modifier.padding((4.dp)),
-        onClick = { /*TODO*/ },
-        label = { Text( text = genre, color = ProtonColor.White)})
+        onClick = onclick,
+        label = { Text( text = text, color = textColor)},
+        shape = shape)
 }
