@@ -91,7 +91,7 @@ fun ArtistSection(
     Spacer(modifier = Modifier.height(ProtonDimension.Spacing4))
     LazyRow() {
         items(artist.genres) { item ->
-            Chip(item)
+            Chip(text = item)
         }
     }
 }
