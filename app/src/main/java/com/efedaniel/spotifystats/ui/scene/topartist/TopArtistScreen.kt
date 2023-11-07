@@ -76,7 +76,7 @@ fun TopArtistScreen(
         FlowRow(
             modifier = Modifier.padding(horizontal = ProtonDimension.Spacing8),
             horizontalArrangement = Arrangement.spacedBy(ProtonDimension.Spacing8),
-            verticalAlignment = Alignment.CenterVertically
+            verticalArrangement = Arrangement.Center,
         ) {
             timeRanges.forEach { timeRange ->
                 FilterChip(
