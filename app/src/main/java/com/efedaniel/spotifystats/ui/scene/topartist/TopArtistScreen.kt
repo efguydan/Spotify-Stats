@@ -2,6 +2,11 @@ package com.efedaniel.spotifystats.ui.scene.topartist
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.with
@@ -14,10 +19,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -35,10 +42,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.efedaniel.spotifystats.core.ScreenState
@@ -102,8 +112,11 @@ fun TopArtistScreen(
         ) {
             when(it) {
                 ScreenState.LOADING -> {
+                    repeat(7) {
+                        shimmerCardItems(brush = shimmerBrush())
+                    }
                     // FixMe: Replace with shimmer effect loading
-                    ProtonLoader()
+                    //ProtonLoader()
                 }
                 ScreenState.SUCCESS -> {
                     TopArtistContent(
@@ -204,3 +217,39 @@ private fun TopArtistCard(
         }
     }
 }
+
+@Composable
+fun shimmerBrush(showShimmer: Boolean = true,targetValue:Float = 1000f): Brush {
+
+    val shimmerColors = listOf(
+        Color.Blue.copy(alpha = 0.6f),
+        Color.Yellow.copy(alpha = 0.2f),
+        Color.Red.copy(alpha = 0.6f),
+        /* Color.LightGray.copy(alpha = 0.6f),
+         Color.LightGray.copy(alpha = 0.2f),
+         Color.LightGray.copy(alpha = 0.6f),*/
+    )
+
+    val transition = rememberInfiniteTransition()
+    val translateAnimation = transition.animateFloat(
+        initialValue = 0f,
+        targetValue = targetValue,
+        animationSpec = infiniteRepeatable(
+            animation = tween(800),
+            repeatMode = RepeatMode.Reverse
+        )
+    )
+    return Brush.linearGradient(
+        colors = shimmerColors,
+        start = Offset.Zero,
+        end = Offset(x = translateAnimation.value, y = translateAnimation.value)
+    )
+}
+
+@Composable
+fun shimmerCardItems(modifier: Modifier = Modifier, brush: Brush) {
+    Spacer( modifier = modifier
+        .size(200.dp)
+        .background(brush = brush))
+}
+
