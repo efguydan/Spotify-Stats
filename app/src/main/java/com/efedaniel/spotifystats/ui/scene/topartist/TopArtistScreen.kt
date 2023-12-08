@@ -225,15 +225,21 @@ private fun TopArtistCard(
 @Composable
 fun TopArtistShimmerScreen(modifier: Modifier = Modifier, brush: Brush) {
 
-    Column {
-        repeat(3) {
-            Spacer( modifier = Modifier
-                .fillMaxWidth()
-                .padding(all = ProtonDimension.Spacing8)
-                .clip(RoundedCornerShape(ProtonDimension.Corner8))
-                .requiredHeight(ProtonDimension.ComponentSize200)
-                .size(ProtonDimension.ComponentSize200)
-                .background(brush = brush))
+    Column() {
+        LazyVerticalGrid(
+            columns = GridCells.Adaptive(minSize = ProtonDimension.ComponentSize200),
+            modifier = modifier
+        ) {
+            items(
+                items = List<Int>(30, {0})
+            ) { item ->
+                Spacer( modifier = Modifier
+                    .padding(all = ProtonDimension.Spacing8)
+                    .clip(RoundedCornerShape(ProtonDimension.Corner8))
+                    .requiredHeight(ProtonDimension.ComponentSize200)
+                    .size(ProtonDimension.ComponentSize200)
+                    .background(brush = brush))
+            }
         }
     }
 }
