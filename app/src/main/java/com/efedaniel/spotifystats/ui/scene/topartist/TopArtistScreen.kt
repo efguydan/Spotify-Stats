@@ -22,6 +22,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.size
@@ -57,6 +58,7 @@ import com.efedaniel.spotifystats.domain.model.TopArtist
 import com.efedaniel.spotifystats.ui.proton.components.image.ProtonImage
 import com.efedaniel.spotifystats.ui.proton.components.text.ProtonText
 import com.efedaniel.spotifystats.ui.proton.patterns.loader.ProtonLoader
+import com.efedaniel.spotifystats.ui.proton.patterns.loader.shimmerBrush
 import com.efedaniel.spotifystats.ui.proton.theme.ProtonTheme
 import com.efedaniel.spotifystats.ui.proton.tokens.dimension.ProtonDimension
 import com.efedaniel.spotifystats.ui.scene.topartist.TopArtistEvent.ArtistClick
@@ -112,9 +114,10 @@ fun TopArtistScreen(
         ) {
             when(it) {
                 ScreenState.LOADING -> {
-                    repeat(7) {
-                        shimmerCardItems(brush = shimmerBrush())
+                    Column {
+
                     }
+                    TopArtistShimmerScreen(brush = shimmerBrush())
                     // FixMe: Replace with shimmer effect loading
                     //ProtonLoader()
                 }
@@ -218,38 +221,20 @@ private fun TopArtistCard(
     }
 }
 
-@Composable
-fun shimmerBrush(showShimmer: Boolean = true,targetValue:Float = 1000f): Brush {
-
-    val shimmerColors = listOf(
-        Color.Blue.copy(alpha = 0.6f),
-        Color.Yellow.copy(alpha = 0.2f),
-        Color.Red.copy(alpha = 0.6f),
-        /* Color.LightGray.copy(alpha = 0.6f),
-         Color.LightGray.copy(alpha = 0.2f),
-         Color.LightGray.copy(alpha = 0.6f),*/
-    )
-
-    val transition = rememberInfiniteTransition()
-    val translateAnimation = transition.animateFloat(
-        initialValue = 0f,
-        targetValue = targetValue,
-        animationSpec = infiniteRepeatable(
-            animation = tween(800),
-            repeatMode = RepeatMode.Reverse
-        )
-    )
-    return Brush.linearGradient(
-        colors = shimmerColors,
-        start = Offset.Zero,
-        end = Offset(x = translateAnimation.value, y = translateAnimation.value)
-    )
-}
 
 @Composable
-fun shimmerCardItems(modifier: Modifier = Modifier, brush: Brush) {
-    Spacer( modifier = modifier
-        .size(200.dp)
-        .background(brush = brush))
+fun TopArtistShimmerScreen(modifier: Modifier = Modifier, brush: Brush) {
+
+    Column {
+        repeat(3) {
+            Spacer( modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = ProtonDimension.Spacing8)
+                .clip(RoundedCornerShape(ProtonDimension.Corner8))
+                .requiredHeight(ProtonDimension.ComponentSize200)
+                .size(ProtonDimension.ComponentSize200)
+                .background(brush = brush))
+        }
+    }
 }
 
