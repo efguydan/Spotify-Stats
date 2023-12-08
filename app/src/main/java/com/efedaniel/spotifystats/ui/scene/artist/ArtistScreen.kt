@@ -20,6 +20,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.efedaniel.spotifystats.core.ScreenState
 import com.efedaniel.spotifystats.domain.model.Artist
+import com.efedaniel.spotifystats.ui.proton.components.chips.Chip
 import com.efedaniel.spotifystats.ui.proton.components.image.ProtonImage
 import com.efedaniel.spotifystats.ui.proton.components.text.ProtonText
 import com.efedaniel.spotifystats.ui.proton.patterns.loader.ProtonLoader
@@ -86,5 +87,4 @@ fun ArtistSection(
             modifier = Modifier.padding(start = ProtonDimension.Spacing8)
         )
     }
-
 }
