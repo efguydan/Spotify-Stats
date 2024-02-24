@@ -105,7 +105,7 @@ dependencies {
 
     // Timber
     implementation("com.jakewharton.timber:timber:5.0.1")
-    implementation("io.coil-kt:coil-compose:2.5.0")
+    implementation("io.coil-kt:coil-compose:2.6.0")
 
     // Test
     testImplementation("junit:junit:4.13.2")
