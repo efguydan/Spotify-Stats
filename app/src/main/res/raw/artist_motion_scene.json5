@@ -1,0 +1,72 @@
+{
+  ConstraintSets: {
+    start: {
+      artist_picture: {
+        width: 'parent',
+        height: '200',
+        start: ['parent', 'start'],
+        bottom: ['parent', 'bottom' ]
+      },
+      nav_button: {
+        width: 'wrap',
+        height: 'wrap',
+        start: ['parent', 'start', 8],
+        top: ['parent', 'top', 8],
+      },
+      artist_name: {
+        width: 'parent',
+        height: '28',
+        start: ['parent','start', 8],
+        bottom: ['artist_picture', 'bottom', 8],
+      }
+    },
+    end: {
+      artist_picture: {
+        width: 'parent',
+        height: 50,
+        end: ['parent', 'end', ],
+        top: ['parent', 'top', ]
+      },
+      artist_name: {
+        width: 'wrap',
+        height: '18',
+        top: ['parent', 'top', ],
+        bottom: ['parent', 'bottom'],
+        end: ['parent', 'end'],
+        start: ['parent', 'start'],
+      },
+      nav_button: {
+        width: 'wrap',
+        height: 'wrap',
+        start: ['parent', 'start', 8],
+        top: ['parent', 'top', 8],
+      }
+    }
+  },
+  Transitions: {  //to set transition properties between Start and End point.
+    default: {
+      from: 'start',
+      to: 'end',
+      pathMotionArc: 'startHorizontal', // Text will move down with slight circular arc
+      KeyFrames: {
+        KeyAttributes: [  //We define different Attr and how we want this to Animate, during transition for a specific composable
+          {
+            target: ['content_img'],
+            //[collapsed -> expanded]
+            frames: [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100], //For frames we pass a List containing number between 0 - 100
+            rotationZ: [0, 9, 18, 27, 36, 45, 54, 63, 72, 81, 90, 81, 72, 63, 54, 45, 36, 27, 18, 9, 0],  //For dangling effect
+            translationX: [0, 9, 18, 27, 36, 45, 54, 63, 72, 81, 90, 81, 72, 63, 54, 45, 36, 27, 18, 9, 0],
+            translationY: [0, -14, -28, -42, -56, -70, -84, -98, -112, -126, -130, -126, -112, -98, -84, -70, -56, -42, -28, -14, 0],
+            translationZ: [-1.0, -0.9, -0.8, -0.7, -0.6, -0.5, -0.4, -0.3, -0.2, -0.1, 0.0, 0.0, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+          },
+          {
+            target: ['data_content'],
+            frames: [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100],  //For frames we pass a List containing number between 0 - 100
+            translationY: [110, 98, 92, 87, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5, 2]
+          }
+        ]
+      }
+    }
+
+  }
+}

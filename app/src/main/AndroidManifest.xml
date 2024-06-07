@@ -55,5 +55,4 @@
                 android:value="androidx.startup" />
         </provider>
     </application>
-
 </manifest>

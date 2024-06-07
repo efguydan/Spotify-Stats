@@ -13,6 +13,7 @@ fun ProtonImage(
     modifier: Modifier = Modifier,
     contentScale: ContentScale = ContentScale.Fit,
     contentDescription: String = "Image",
+
 ) {
     AsyncImage(
         model = ImageRequest.Builder(LocalContext.current)

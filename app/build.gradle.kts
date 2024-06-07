@@ -115,7 +115,13 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation(platform("androidx.compose:compose-bom:2023.10.01"))
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+
+    // Jetpack Compose Constraint Layout
+    implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
+
+
 }
+
 
 // Fixme: Move to different file
 fun getSecret(key: String): String {
