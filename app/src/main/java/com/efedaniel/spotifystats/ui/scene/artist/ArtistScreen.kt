@@ -8,6 +8,7 @@ import androidx.compose.animation.with
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -45,8 +46,8 @@ fun ArtistScreen(
         label = "Screen State"
     ) {
         when (it) {
-            ScreenState.LOADING -> ProtonLoader(modifier)
-            ScreenState.SUCCESS -> ArtistContent(viewModel.state, modifier)
+            ScreenState.LOADING -> ProtonLoader(modifier.fillMaxSize())
+            ScreenState.SUCCESS -> ArtistContent(viewModel.state, modifier.fillMaxSize())
             ScreenState.ERROR -> {
                 // TODO: Add Error Component
                 ProtonText(text = "There was an error")
@@ -89,7 +90,7 @@ fun ArtistSection(
     }
 
     Spacer(modifier = Modifier.height(ProtonDimension.Spacing4))
-    LazyRow() {
+    LazyRow {
         items(artist.genres) { item ->
             Chip(text = item)
         }
