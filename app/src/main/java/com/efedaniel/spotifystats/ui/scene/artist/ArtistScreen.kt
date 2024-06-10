@@ -4,7 +4,7 @@ import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.animation.with
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
@@ -28,10 +28,6 @@ import com.efedaniel.spotifystats.ui.proton.patterns.loader.ProtonLoader
 import com.efedaniel.spotifystats.ui.proton.theme.ProtonTheme
 import com.efedaniel.spotifystats.ui.proton.tokens.dimension.ProtonDimension
 
-
-@OptIn(
-    ExperimentalAnimationApi::class
-)
 @Composable
 fun ArtistScreen(
     id: String?,
@@ -42,7 +38,7 @@ fun ArtistScreen(
 
     AnimatedContent(
         targetState = viewModel.state.screenState,
-        transitionSpec = { fadeIn() with fadeOut() },
+        transitionSpec = { fadeIn() togetherWith  fadeOut() },
         label = "Screen State"
     ) {
         when (it) {

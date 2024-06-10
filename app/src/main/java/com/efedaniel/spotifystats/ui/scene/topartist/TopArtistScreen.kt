@@ -1,10 +1,9 @@
 package com.efedaniel.spotifystats.ui.scene.topartist
 
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.animation.with
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -55,7 +54,6 @@ import kotlinx.coroutines.flow.collectLatest
 @OptIn(
     ExperimentalLayoutApi::class,
     ExperimentalMaterialApi::class,
-    ExperimentalAnimationApi::class
 )
 @Composable
 fun TopArtistScreen(
@@ -97,7 +95,7 @@ fun TopArtistScreen(
 
         AnimatedContent(
             targetState = viewModel.state.screenState,
-            transitionSpec = { fadeIn() with fadeOut() },
+            transitionSpec = { fadeIn() togetherWith fadeOut() },
             label = "Screen State"
         ) {
             when(it) {
