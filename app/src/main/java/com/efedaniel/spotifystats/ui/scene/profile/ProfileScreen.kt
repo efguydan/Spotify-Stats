@@ -12,8 +12,8 @@ import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowRight
-import androidx.compose.material3.Divider
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -98,13 +98,13 @@ private fun Option(
             text = text,
             modifier = Modifier.weight(1.0f)
         )
-        ProtonIcon(icon = Icons.Filled.KeyboardArrowRight)
+        ProtonIcon(icon = Icons.AutoMirrored.Filled.KeyboardArrowRight)
     }
 }
 
 @Composable
 private fun ProfileDivider(modifier: Modifier = Modifier,) {
-    Divider(
+    HorizontalDivider(
         modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = ProtonDimension.Spacing16)
