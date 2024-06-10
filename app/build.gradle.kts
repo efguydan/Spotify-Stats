@@ -66,7 +66,7 @@ kapt {
 
 dependencies {
     // AndroidX
-    implementation("androidx.core:core-ktx:1.12.0")
+    implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     implementation("androidx.startup:startup-runtime:1.1.1")
     implementation("androidx.browser:browser:1.7.0")
