@@ -42,11 +42,11 @@ class LoginActivity : ComponentActivity() {
         }
     }
 
-    override fun onNewIntent(intent: Intent?) {
+    override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         viewModel.onConnectSpotifyResult(
-            code = intent?.data?.getQueryParameter("code"),
-            error = intent?.data?.getQueryParameter("error"),
+            code = intent.data?.getQueryParameter("code"),
+            error = intent.data?.getQueryParameter("error"),
         )
     }
 
