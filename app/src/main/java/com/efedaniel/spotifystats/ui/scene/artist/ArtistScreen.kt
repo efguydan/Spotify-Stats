@@ -161,9 +161,7 @@ fun ArtistSection(
                 },
         )
 
-        /**
-         * Text - Collapsing
-         */
+
 
         ProtonText(
             text = artist.name,
