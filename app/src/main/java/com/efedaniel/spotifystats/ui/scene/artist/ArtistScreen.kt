@@ -7,6 +7,7 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.with
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
@@ -16,9 +17,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithCache
@@ -29,6 +33,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.constraintlayout.compose.ExperimentalMotionApi
 import androidx.constraintlayout.compose.MotionLayout
@@ -43,6 +49,7 @@ import com.efedaniel.spotifystats.ui.proton.components.text.ProtonText
 import com.efedaniel.spotifystats.ui.proton.patterns.loader.ProtonLoader
 import com.efedaniel.spotifystats.ui.proton.theme.ProtonTheme
 import com.efedaniel.spotifystats.ui.proton.tokens.dimension.ProtonDimension
+import kotlin.math.min
 
 
 @OptIn(
@@ -120,7 +127,7 @@ fun ArtistSection(
     artist: Artist,
     modifier: Modifier = Modifier,
     progress: Float,
-    scrollState: ScrollState = rememberScrollState(),
+    scrollState: ScrollState = rememberScrollState(0),
 ) {
 
     val context = LocalContext.current
@@ -134,49 +141,43 @@ fun ArtistSection(
 
     MotionLayout(
         motionScene = MotionScene(content = motionScene),
-        progress = progress,
-        modifier = Modifier
+        progress = min((scrollState.value) / 600f, 1f),
+        modifier = Modifier,
     ) {
 
-        /**
-         * bg-image
-         **/
         ProtonImage(
             url = artist.imageUrl.orEmpty(),
             contentScale = ContentScale.Crop,
             modifier = Modifier
-                .layoutId(" artist_picture")
+                .layoutId("artist_picture")
                 .fillMaxWidth()
                 .aspectRatio(1.0f)
-                .drawWithCache {
-                    val gradient = Brush.verticalGradient(
-                        colors = listOf(Color.Transparent, Color.Black),
-                        startY = size.height / 3,
-                        endY = size.height
-                    )
-                    onDrawWithContent {
-                        drawContent()
-                        drawRect(gradient, blendMode = BlendMode.Multiply)
-                    }
-                },
         )
-
-
 
         ProtonText(
-            text = artist.name,
-            style = ProtonTheme.typography.headlineMedium,
             modifier = Modifier
                 .padding(start = ProtonDimension.Spacing8)
-                .layoutId("artist_name")
-                .zIndex(1f),
+                .layoutId("artist_name"),
+            text = artist.name,
+            style = ProtonTheme.typography.headlineMedium,
+            color = Color.White
         )
-
-
-
-
-
-
     }
 
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.verticalScroll(scrollState)
+    ) {
+        Spacer(Modifier.height(200.dp))
+        repeat(5) {
+            Text(
+                text = LoremIpsum(222).values.first(),
+                modifier = Modifier
+                    .background(Color.White)
+                    .padding(16.dp)
+            )
+        }
+    }
 }
+
+
