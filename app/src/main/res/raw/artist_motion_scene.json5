@@ -3,9 +3,9 @@
     start: {
       artist_picture: {
         width: 'parent',
-        height: '200',
+        height: '800',
         start: ['parent', 'start'],
-        top: ['parent', 'top' ]
+        top: ['parent', 'top', 16 ]
       },
       nav_button: {
         width: 'wrap',
@@ -47,7 +47,15 @@
     default: {
       from: 'start',
       to: 'end',
-      pathMotionArc: 'startHorizontal'
+      pathMotionArc: 'startHorizontal',
+      KeyFrames: {
+        KeyAttributes: [
+          {
+            target: ['artist_picture'],
+          /*  frames: [0, 100],*/
+
+        }],
+      }
     }
   }
 }
