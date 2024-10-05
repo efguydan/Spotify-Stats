@@ -62,6 +62,7 @@ kapt {
     correctErrorTypes = true
 }
 
+
 dependencies {
     // AndroidX
     implementation("androidx.core:core-ktx:1.13.1")
@@ -113,6 +114,9 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation(platform("androidx.compose:compose-bom:2024.05.00"))
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+
+    //Spotify
+    implementation("com.spotify.android:auth:2.1.2")
 }
 
 // Fixme: Move to different file
