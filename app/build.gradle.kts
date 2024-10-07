@@ -24,6 +24,12 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        addManifestPlaceholders(mapOf(
+            "redirectHostName" to "",
+            "redirectSchemeName" to "",
+        ))
+
     }
 
     buildTypes {
