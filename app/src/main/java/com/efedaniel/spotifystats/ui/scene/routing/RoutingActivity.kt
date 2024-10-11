@@ -1,16 +1,22 @@
 package com.efedaniel.spotifystats.ui.scene.routing
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
-import androidx.compose.runtime.currentCompositionLocalContext
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.efedaniel.spotifystats.BuildConfig.CLIENT_ID
+import com.spotify.sdk.android.auth.AccountsQueryParameters.REDIRECT_URI
+import com.spotify.sdk.android.auth.AuthorizationClient
+import com.spotify.sdk.android.auth.AuthorizationRequest
+import com.spotify.sdk.android.auth.AuthorizationResponse
+import com.spotify.sdk.android.auth.LoginActivity
 import com.spotify.sdk.android.auth.app.SpotifyNativeAuthUtil
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class RoutingActivity : ComponentActivity() {
@@ -27,6 +33,8 @@ class RoutingActivity : ComponentActivity() {
         navigateToNextScreenSDK()
     }
 
+
+
     private fun navigateToNextScreen() {
         if (viewModel.isUserAuthenticated()) {
             navigator.navigateToMain(this)
@@ -41,11 +49,31 @@ class RoutingActivity : ComponentActivity() {
         if (SpotifyNativeAuthUtil.isSpotifyInstalled(context)) {
             Timber.tag("ROUTINGACTIVITY").d("${SpotifyNativeAuthUtil.isSpotifyInstalled(context)}")
 
-           var intent = SpotifyNativeAuthUtil.createAuthActivityIntent(this@RoutingActivity)
-            Timber.tag("ROUTINGACTIVITY").d("${intent}")
+           //var intent = SpotifyNativeAuthUtil.createAuthActivityIntent(this@RoutingActivity)
+           // Timber.tag("ROUTINGACTIVITY").d("${intent}")
 
-            println(intent?.data)
+            val REQUEST_CODE = 1337
+
+            val request = AuthorizationRequest.Builder(
+                CLIENT_ID,
+                AuthorizationResponse.Type.TOKEN,
+                REDIRECT_URI
+            )
+                .setScopes(
+                    arrayOf<String>(
+                        "user-read-private",
+                        "playlist-read",
+                        "playlist-read-private",
+                        "streaming"
+                    )
+                )
+                .build()
+
+            AuthorizationClient.openLoginActivity(this, REQUEST_CODE, request)
+
+            val intent = AuthorizationClient.createLoginActivityIntent(this, request)
             startActivity(intent)
+            Timber.d(request.toString())
         } else {
 
         }
