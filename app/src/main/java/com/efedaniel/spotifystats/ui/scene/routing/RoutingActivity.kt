@@ -14,6 +14,7 @@ import com.spotify.sdk.android.auth.AccountsQueryParameters.REDIRECT_URI
 import com.spotify.sdk.android.auth.AuthorizationClient
 import com.spotify.sdk.android.auth.AuthorizationRequest
 import com.spotify.sdk.android.auth.AuthorizationResponse
+import com.spotify.sdk.android.auth.LoginActivity.REQUEST_CODE
 import com.spotify.sdk.android.auth.app.SpotifyNativeAuthUtil
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -88,9 +89,9 @@ class RoutingActivity : ComponentActivity() {
             AuthorizationRequest.Builder(CLIENT_ID, AuthorizationResponse.Type.TOKEN, REDIRECT_URI)
                 .setScopes(
                     arrayOf(
-                       // "user-read-private",
+                        "user-read-private",
                         "playlist-read",
-                      //  "playlist-read-private",
+                        "playlist-read-private",
 
                     )
                 )
@@ -101,6 +102,7 @@ class RoutingActivity : ComponentActivity() {
 
         // Launch the authorization activity using the new ActivityResult API
         authResultLauncher.launch(authIntent)
+
     }
 
 
@@ -111,6 +113,8 @@ class RoutingActivity : ComponentActivity() {
         if (result.resultCode == RESULT_OK) {
             val intent = result.data
             if (intent != null) {
+
+
                 // Handle the authorization response
                 val response = AuthorizationClient.getResponse(result.resultCode, intent)
                 Timber.tag("ROUTINGACTIVITY").d("${response}")
@@ -120,16 +124,11 @@ class RoutingActivity : ComponentActivity() {
 
                 when (response.type) {
 
-
                     AuthorizationResponse.Type.TOKEN -> {
                         Timber.tag("ROUTINGACTIVITY").d("${response.accessToken}")
                         Timber.tag("ROUTINGACTIVITY").d("${response.type}")
                         Timber.tag("ROUTINGACTIVITY").d("${response.expiresIn}")
                     }                            // Extract the access token
-                       /* var token
-                        : String
-                        ?
-                        = response.accessToken*/
                     AuthorizationResponse.Type.ERROR -> {
                         Timber.tag("ROUTINGACTIVITY").d("${response.accessToken}")
                         Timber.tag("ROUTINGACTIVITY").d("${response.type}")
