@@ -154,6 +154,10 @@ class LoginActivity : ComponentActivity() {
         if (uri != null) {
             // Extract the authorization response from the URI
             val response = AuthorizationResponse.fromUri(uri)
+            Timber.tag("ROUTINGACTIVITY").d("${response}")
+            Timber.tag("ROUTINGACTIVITY").d("${response.accessToken}")
+            Timber.tag("ROUTINGACTIVITY").d("${response.type}")
+            Timber.tag("ROUTINGACTIVITY").d("${response.expiresIn}")
 
             // Handle the different types of responses (TOKEN or ERROR)
             when (response.type) {
@@ -169,8 +173,7 @@ class LoginActivity : ComponentActivity() {
         // Create the AuthorizationRequest with client credentials and scopes
         val request =
             AuthorizationRequest.Builder(CLIENT_ID, AuthorizationResponse.Type.TOKEN,
-                Uri.parse("mystats://authenticate").toString()
-            )
+                Uri.parse("mystats://authenticate").toString())
                 .setScopes(
                     arrayOf(
                         "user-read-private",
