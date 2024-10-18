@@ -2,6 +2,7 @@ package com.efedaniel.spotifystats.ui.scene.auth
 
 import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import android.view.WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
 import androidx.activity.ComponentActivity
@@ -28,6 +29,7 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
+
 @AndroidEntryPoint
 class LoginActivity : ComponentActivity() {
     private val viewModel: LoginViewModel by viewModels()
@@ -38,7 +40,8 @@ class LoginActivity : ComponentActivity() {
         makeFullScreen()
         setContent {
             ProtonTheme {
-                startAuthorizationFlow()
+                //startAuthorizationFlow()
+                BrowserAuthFlow()
                 LoginScreen(
                     onNewDestination = ::onNewDestination,
                     viewModel = viewModel,
@@ -54,13 +57,13 @@ class LoginActivity : ComponentActivity() {
         }
     }
 
-    override fun onNewIntent(intent: Intent) {
+   /* override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         viewModel.onConnectSpotifyResult(
             code = intent.data?.getQueryParameter("code"),
             error = intent.data?.getQueryParameter("error"),
         )
-    }
+    }*/
 
     private fun makeFullScreen() {
         window.run {
@@ -140,6 +143,48 @@ class LoginActivity : ComponentActivity() {
                 }
             }
         }
+    }
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+
+
+        // Get the data from the intent (this should be the redirect URI)
+        val uri = intent.data
+
+        if (uri != null) {
+            // Extract the authorization response from the URI
+            val response = AuthorizationResponse.fromUri(uri)
+
+            // Handle the different types of responses (TOKEN or ERROR)
+            when (response.type) {
+                AuthorizationResponse.Type.TOKEN -> {}                // Handle successful response and extract the token
+                AuthorizationResponse.Type.ERROR -> {}
+                else -> {}
+            }
+        }
+    }
+
+    fun BrowserAuthFlow() {
+
+        // Create the AuthorizationRequest with client credentials and scopes
+        val request =
+            AuthorizationRequest.Builder(CLIENT_ID, AuthorizationResponse.Type.TOKEN,
+                Uri.parse("mystats://authenticate").toString()
+            )
+                .setScopes(
+                    arrayOf(
+                        "user-read-private",
+                        "playlist-read",
+                        "playlist-read-private",
+                        "streaming"
+                    )
+                )
+                .build()
+
+
+        // Open the login in the browser
+        AuthorizationClient.openLoginInBrowser(this, request)
+
     }
 
 }
