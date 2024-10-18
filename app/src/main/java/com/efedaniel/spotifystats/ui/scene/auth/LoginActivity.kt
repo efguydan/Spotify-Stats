@@ -40,8 +40,8 @@ class LoginActivity : ComponentActivity() {
         makeFullScreen()
         setContent {
             ProtonTheme {
-                //startAuthorizationFlow()
-                BrowserAuthFlow()
+                startAuthorizationFlow()
+               // BrowserAuthFlow()
                 LoginScreen(
                     onNewDestination = ::onNewDestination,
                     viewModel = viewModel,
@@ -82,7 +82,8 @@ class LoginActivity : ComponentActivity() {
 
     private fun startAuthorizationFlow() {
         val request =
-            AuthorizationRequest.Builder(CLIENT_ID, AuthorizationResponse.Type.TOKEN, REDIRECT_URI)
+            AuthorizationRequest.Builder(CLIENT_ID, AuthorizationResponse.Type.TOKEN,
+                Uri.parse("mystats://authenticate").toString())
                 .setScopes(
                     arrayOf(
                         "user-read-private",
