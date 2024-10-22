@@ -26,8 +26,8 @@ android {
         }
 
         addManifestPlaceholders(mapOf(
-            "redirectHostName" to "authenticate",
-            "redirectSchemeName" to "mystats",
+            "redirectHostName" to "",
+            "redirectSchemeName" to "",
         ))
 
     }
