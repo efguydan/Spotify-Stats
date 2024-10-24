@@ -23,25 +23,4 @@ class RoutingViewModel @Inject constructor(
         authDomainManager
             .isUserAuthenticated()
 
-
-
-    private fun startAuthorizationFlow(contextActivity: Activity, authResultLauncher: ActivityResultLauncher<Intent>) {
-        val request = AuthorizationRequest.Builder(CLIENT_ID, AuthorizationResponse.Type.TOKEN, REDIRECT_URI)
-                .setScopes(
-                    arrayOf(
-                        "user-read-private",
-                        "playlist-read",
-                        "playlist-read-private",
-
-                        )
-                )
-                .build()
-
-        // Create the login intent
-        val authIntent = AuthorizationClient.createLoginActivityIntent(contextActivity, request)
-
-        // Launch the authorization activity using the new ActivityResult API
-        authResultLauncher.launch(authIntent)
-
-    }
 }

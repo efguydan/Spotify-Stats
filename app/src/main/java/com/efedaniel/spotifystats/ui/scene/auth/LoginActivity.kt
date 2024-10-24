@@ -40,7 +40,7 @@ class LoginActivity : ComponentActivity() {
         makeFullScreen()
         setContent {
             ProtonTheme {
-                startAuthorizationFlow()
+               // startAuthorizationFlow()
                // BrowserAuthFlow()
                 LoginScreen(
                     onNewDestination = ::onNewDestination,
@@ -52,12 +52,13 @@ class LoginActivity : ComponentActivity() {
 
     private fun onNewDestination(destination: LoginDestination) {
         when (destination) {
-            SPOTIFY_CONNECT -> navigator.openLoginWithSpotify(context = this)
+            //SPOTIFY_CONNECT -> navigator.openLoginWithSpotify(context = this)
+            SPOTIFY_CONNECT -> navigator.openLoginWithSpotify(activity = this, authResultLauncher = authResultLauncher)
             MAIN -> navigator.navigateToMain(activity = this)
         }
     }
 
-   /* override fun onNewIntent(intent: Intent) {
+    /*override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         viewModel.onConnectSpotifyResult(
             code = intent.data?.getQueryParameter("code"),
@@ -78,8 +79,6 @@ class LoginActivity : ComponentActivity() {
     }
 
 
-
-
     private fun startAuthorizationFlow() {
         val request =
             AuthorizationRequest.Builder(CLIENT_ID, AuthorizationResponse.Type.TOKEN,
@@ -95,8 +94,6 @@ class LoginActivity : ComponentActivity() {
 
         // Create the login intent
         val authIntent = AuthorizationClient.createLoginActivityIntent(this, request)
-        // val authIntent = AuthorizationClient.openLoginActivity(this, REQUEST_CODE, request);
-
 
         // Launch the authorization activity using the new ActivityResult API
         authResultLauncher.launch(authIntent)
@@ -114,9 +111,6 @@ class LoginActivity : ComponentActivity() {
 
                 CoroutineScope(coroutineContext).launch {
 
-
-                    // Handle the authorization response
-                    Timber.tag("ROUTINGACTIVITY").d("${result.data}")
                     val response = AuthorizationClient.getResponse(result.resultCode, intent)
                     Timber.tag("ROUTINGACTIVITY").d("${response}")
                     Timber.tag("ROUTINGACTIVITY").d("${response.accessToken}")
@@ -124,21 +118,9 @@ class LoginActivity : ComponentActivity() {
                     Timber.tag("ROUTINGACTIVITY").d("${response.expiresIn}")
 
 
-                    delay(10000)
-
                     when (response.type) {
-
-                        AuthorizationResponse.Type.TOKEN -> {
-                            Timber.tag("ROUTINGACTIVITY").d("${response.accessToken}")
-                            Timber.tag("ROUTINGACTIVITY").d("${response.type}")
-                            Timber.tag("ROUTINGACTIVITY").d("${response.expiresIn}")
-                        }                            // Extract the access token
-                        AuthorizationResponse.Type.ERROR -> {
-                            Timber.tag("ROUTINGACTIVITY").d("${response.accessToken}")
-                            Timber.tag("ROUTINGACTIVITY").d("${response.type}")
-                            Timber.tag("ROUTINGACTIVITY").d("${response.expiresIn}")
-                        }
-
+                        AuthorizationResponse.Type.TOKEN -> {}
+                        AuthorizationResponse.Type.ERROR -> {}
                         else -> {}
                     }
                 }
@@ -148,9 +130,10 @@ class LoginActivity : ComponentActivity() {
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
 
-
-        // Get the data from the intent (this should be the redirect URI)
+        //Get the data from the intent (this should be the redirect URI)
         val uri = intent.data
+        Timber.tag("ROUTINGACTIVITY").d("${uri}")
+
 
         if (uri != null) {
             // Extract the authorization response from the URI
@@ -160,9 +143,9 @@ class LoginActivity : ComponentActivity() {
             Timber.tag("ROUTINGACTIVITY").d("${response.type}")
             Timber.tag("ROUTINGACTIVITY").d("${response.expiresIn}")
 
-            // Handle the different types of responses (TOKEN or ERROR)
+
             when (response.type) {
-                AuthorizationResponse.Type.TOKEN -> {}                // Handle successful response and extract the token
+                AuthorizationResponse.Type.TOKEN -> {}
                 AuthorizationResponse.Type.ERROR -> {}
                 else -> {}
             }
@@ -171,7 +154,6 @@ class LoginActivity : ComponentActivity() {
 
     fun BrowserAuthFlow() {
 
-        // Create the AuthorizationRequest with client credentials and scopes
         val request =
             AuthorizationRequest.Builder(CLIENT_ID, AuthorizationResponse.Type.TOKEN,
                 Uri.parse("mystats://authenticate").toString())
@@ -185,10 +167,8 @@ class LoginActivity : ComponentActivity() {
                 )
                 .build()
 
-
         // Open the login in the browser
         AuthorizationClient.openLoginInBrowser(this, request)
-
     }
 
 }

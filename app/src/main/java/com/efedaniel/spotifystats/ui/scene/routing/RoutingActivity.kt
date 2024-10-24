@@ -32,5 +32,4 @@ class RoutingActivity : ComponentActivity() {
             navigator.navigateToLogin(this)
         }
     }
-
 }
