@@ -57,4 +57,9 @@ class LoginViewModel @Inject constructor(
             )
             .addTo(disposables)
     }
+
+    private fun authenticateUserr(token: String) {
+        authDomainManager
+
+    }
 }

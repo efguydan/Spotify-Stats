@@ -40,8 +40,6 @@ class LoginActivity : ComponentActivity() {
         makeFullScreen()
         setContent {
             ProtonTheme {
-               // startAuthorizationFlow()
-               // BrowserAuthFlow()
                 LoginScreen(
                     onNewDestination = ::onNewDestination,
                     viewModel = viewModel,
@@ -79,28 +77,6 @@ class LoginActivity : ComponentActivity() {
     }
 
 
-    private fun startAuthorizationFlow() {
-        val request =
-            AuthorizationRequest.Builder(CLIENT_ID, AuthorizationResponse.Type.TOKEN,
-                Uri.parse("mystats://authenticate").toString())
-                .setScopes(
-                    arrayOf(
-                        "user-read-private",
-                        "playlist-read",
-                        "playlist-read-private",
-                    )
-                )
-                .build()
-
-        // Create the login intent
-        val authIntent = AuthorizationClient.createLoginActivityIntent(this, request)
-
-        // Launch the authorization activity using the new ActivityResult API
-        authResultLauncher.launch(authIntent)
-
-    }
-
-
     // ActivityResultLauncher to handle the authorization result
     private val authResultLauncher = registerForActivityResult<Intent, ActivityResult>(
         ActivityResultContracts.StartActivityForResult()
@@ -112,10 +88,9 @@ class LoginActivity : ComponentActivity() {
                 CoroutineScope(coroutineContext).launch {
 
                     val response = AuthorizationClient.getResponse(result.resultCode, intent)
-                    Timber.tag("ROUTINGACTIVITY").d("${response}")
+
                     Timber.tag("ROUTINGACTIVITY").d("${response.accessToken}")
                     Timber.tag("ROUTINGACTIVITY").d("${response.type}")
-                    Timber.tag("ROUTINGACTIVITY").d("${response.expiresIn}")
 
 
                     when (response.type) {
@@ -127,22 +102,20 @@ class LoginActivity : ComponentActivity() {
             }
         }
     }
+
+    //This method is needed to handle to the fallback to customtab if
+    // Spotify is not installed on the user's phone
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
 
-        //Get the data from the intent (this should be the redirect URI)
+        //Extract the uri from the intent's data
         val uri = intent.data
-        Timber.tag("ROUTINGACTIVITY").d("${uri}")
-
 
         if (uri != null) {
             // Extract the authorization response from the URI
             val response = AuthorizationResponse.fromUri(uri)
-            Timber.tag("ROUTINGACTIVITY").d("${response}")
             Timber.tag("ROUTINGACTIVITY").d("${response.accessToken}")
-            Timber.tag("ROUTINGACTIVITY").d("${response.type}")
-            Timber.tag("ROUTINGACTIVITY").d("${response.expiresIn}")
-
+            Timber.tag("ROUTINGACTIVITY").d("${response.error}")
 
             when (response.type) {
                 AuthorizationResponse.Type.TOKEN -> {}
@@ -152,6 +125,8 @@ class LoginActivity : ComponentActivity() {
         }
     }
 
+    //This method is for custom tab authorization flow, it is not in use because of the above method
+    //which is preferred to this
     fun BrowserAuthFlow() {
 
         val request =
