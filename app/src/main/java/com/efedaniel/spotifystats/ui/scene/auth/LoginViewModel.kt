@@ -7,6 +7,7 @@ import com.efedaniel.spotifystats.core.BaseViewModel
 import com.efedaniel.spotifystats.core.Event
 import com.efedaniel.spotifystats.domain.manager.AuthDomainManager
 import com.efedaniel.spotifystats.domain.manager.UserDomainManager
+import com.efedaniel.spotifystats.persistence.cache.SessionCache
 import com.efedaniel.spotifystats.ui.scene.auth.LoginDestination.MAIN
 import com.efedaniel.spotifystats.utility.constants.Constants.DEFAULT_ERROR_MESSAGE
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -57,9 +58,43 @@ class LoginViewModel @Inject constructor(
             )
             .addTo(disposables)
     }
-
-    private fun authenticateUserr(token: String) {
-        authDomainManager
-
+    fun onConnectSpotifyResultt(accessToken: String?, error: String?) {
+        if (accessToken != null) {
+            storeAccessToken(accessToken = accessToken)
+        } else {
+            state = state.copy(
+                error = Event(error ?: DEFAULT_ERROR_MESSAGE)
+            )
+        }
     }
+
+    private fun storeAccessToken(accessToken: String) {
+        authDomainManager
+            .storeAccessToken(accessToken = accessToken)
+
+        authenticateUser()
+    }
+
+    private fun authenticateUser() {
+            userDomainManager.fetchCurrentUser()
+            .doOnSubscribe { state = state.copy(isConnecting = true) }
+            .subscribeBy(
+                onSuccess = {
+                    Timber.e(it.toString())
+                    state = state.copy(
+                        isConnecting = false,
+                        destination = Event(MAIN)
+                    )
+                },
+                onError = {
+                    Timber.e(it)
+                    state = state.copy(
+                        isConnecting = false,
+                        error = Event(it.message ?: DEFAULT_ERROR_MESSAGE)
+                    )
+                },
+            )
+            .addTo(disposables)
+    }
+
 }

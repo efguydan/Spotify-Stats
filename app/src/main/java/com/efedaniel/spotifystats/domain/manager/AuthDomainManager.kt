@@ -32,5 +32,10 @@ class AuthDomainManager @Inject constructor(
         const val GRANT_TYPE = "authorization_code"
     }
 
+    //store the accesstoken
+    fun storeAccessToken(accessToken: String) = sessionCache
+        .storeAccessToken(
+            accessToken
+        )
 
 }

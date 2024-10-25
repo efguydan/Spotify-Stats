@@ -92,10 +92,19 @@ class LoginActivity : ComponentActivity() {
                     Timber.tag("ROUTINGACTIVITY").d("${response.accessToken}")
                     Timber.tag("ROUTINGACTIVITY").d("${response.type}")
 
-
                     when (response.type) {
-                        AuthorizationResponse.Type.TOKEN -> {}
-                        AuthorizationResponse.Type.ERROR -> {}
+                        AuthorizationResponse.Type.TOKEN -> {
+                            viewModel.onConnectSpotifyResultt(
+                                accessToken = response.accessToken,
+                                error = response.error
+                            )
+                        }
+                        AuthorizationResponse.Type.ERROR -> {
+                            viewModel.onConnectSpotifyResultt(
+                                accessToken = response.accessToken,
+                                error = response.error
+                            )
+                        }
                         else -> {}
                     }
                 }
@@ -111,6 +120,7 @@ class LoginActivity : ComponentActivity() {
         //Extract the uri from the intent's data
         val uri = intent.data
 
+
         if (uri != null) {
             // Extract the authorization response from the URI
             val response = AuthorizationResponse.fromUri(uri)
@@ -118,8 +128,18 @@ class LoginActivity : ComponentActivity() {
             Timber.tag("ROUTINGACTIVITY").d("${response.error}")
 
             when (response.type) {
-                AuthorizationResponse.Type.TOKEN -> {}
-                AuthorizationResponse.Type.ERROR -> {}
+                AuthorizationResponse.Type.TOKEN -> {
+                    viewModel.onConnectSpotifyResultt(
+                        accessToken = response.accessToken,
+                        error = response.error
+                    )
+                }
+                AuthorizationResponse.Type.ERROR -> {
+                    viewModel.onConnectSpotifyResultt(
+                        accessToken = response.accessToken,
+                        error = response.error
+                    )
+                }
                 else -> {}
             }
         }
