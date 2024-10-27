@@ -69,7 +69,7 @@ class ApiModule {
     ): OkHttpClient = okhttp
         .newBuilder()
         .authenticator(tokenAuthenticator)
-        .addInterceptor(errorInterceptor)
+//        .addInterceptor(errorInterceptor)
         .build()
 
     @Provides

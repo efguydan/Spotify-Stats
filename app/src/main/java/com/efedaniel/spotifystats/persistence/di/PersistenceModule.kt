@@ -2,8 +2,6 @@ package com.efedaniel.spotifystats.persistence.di
 
 import android.content.Context
 import android.content.SharedPreferences
-import androidx.security.crypto.EncryptedSharedPreferences
-import androidx.security.crypto.MasterKey
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,26 +17,9 @@ class PersistenceModule {
     @Singleton
     internal fun providesSharedPrefs(
         @ApplicationContext context: Context,
-        masterKey: MasterKey,
-    ): SharedPreferences = EncryptedSharedPreferences.create(
-        context,
-        PREFS_NAME,
-        masterKey,
-        EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-        EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-    )
-
-    @Provides
-    @Singleton
-    internal fun providesMasterKey(
-        @ApplicationContext context: Context,
-    ): MasterKey = MasterKey
-        .Builder(context, MASTER_KEY_ALIAS)
-        .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
-        .build()
+    ): SharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
 
     private companion object {
-        const val MASTER_KEY_ALIAS = "master_key_alias"
         const val PREFS_NAME = "spotify_stats_cache"
     }
 }

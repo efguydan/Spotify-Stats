@@ -70,7 +70,6 @@ dependencies {
     implementation("androidx.browser:browser:1.8.0")
     implementation("androidx.activity:activity-compose:1.9.0")
     implementation("androidx.appcompat:appcompat:1.7.0")
-    implementation("androidx.security:security-crypto:1.1.0-alpha01")
     implementation("com.google.android.material:material:1.12.0")
     implementation("androidx.core:core-splashscreen:1.0.1")
 
