@@ -77,7 +77,6 @@ dependencies {
     implementation("androidx.browser:browser:1.8.0")
     implementation("androidx.activity:activity-compose:1.9.0")
     implementation("androidx.appcompat:appcompat:1.7.0")
-    implementation("androidx.security:security-crypto:1.1.0-alpha01")
     implementation("com.google.android.material:material:1.12.0")
     implementation("androidx.core:core-splashscreen:1.0.1")
 
@@ -121,7 +120,7 @@ dependencies {
     androidTestImplementation(platform("androidx.compose:compose-bom:2024.05.00"))
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
 
-    //Spotify
+    //Spotify Auth
     implementation("com.spotify.android:auth:2.1.2")
 }
 
