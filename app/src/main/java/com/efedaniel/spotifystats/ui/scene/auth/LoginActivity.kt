@@ -1,11 +1,12 @@
 package com.efedaniel.spotifystats.ui.scene.auth
 
-import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
@@ -13,6 +14,7 @@ import androidx.core.view.WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_B
 import com.efedaniel.spotifystats.ui.proton.theme.ProtonTheme
 import com.efedaniel.spotifystats.ui.scene.auth.LoginDestination.MAIN
 import com.efedaniel.spotifystats.ui.scene.auth.LoginDestination.SPOTIFY_CONNECT
+import com.spotify.sdk.android.auth.AuthorizationClient
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -21,6 +23,13 @@ class LoginActivity : ComponentActivity() {
 
     private val viewModel: LoginViewModel by viewModels()
     @Inject lateinit var navigator: LoginNavigator
+
+    private val authResultLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result: ActivityResult ->
+        val response = AuthorizationClient.getResponse(result.resultCode, result.data)
+        viewModel.onConnectSpotifyResponse(response = response)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,17 +46,9 @@ class LoginActivity : ComponentActivity() {
 
     private fun onNewDestination(destination: LoginDestination) {
         when (destination) {
-            SPOTIFY_CONNECT -> navigator.openLoginWithSpotify(context = this)
+            SPOTIFY_CONNECT -> navigator.openLoginWithSpotify(activity = this, authResultLauncher = authResultLauncher)
             MAIN -> navigator.navigateToMain(activity = this)
         }
-    }
-
-    override fun onNewIntent(intent: Intent) {
-        super.onNewIntent(intent)
-        viewModel.onConnectSpotifyResult(
-            code = intent.data?.getQueryParameter("code"),
-            error = intent.data?.getQueryParameter("error"),
-        )
     }
 
     private fun makeFullScreen() {

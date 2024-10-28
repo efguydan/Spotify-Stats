@@ -9,6 +9,7 @@ import com.efedaniel.spotifystats.domain.manager.AuthDomainManager
 import com.efedaniel.spotifystats.domain.manager.UserDomainManager
 import com.efedaniel.spotifystats.ui.scene.auth.LoginDestination.MAIN
 import com.efedaniel.spotifystats.utility.constants.Constants.DEFAULT_ERROR_MESSAGE
+import com.spotify.sdk.android.auth.AuthorizationResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.kotlin.addTo
 import io.reactivex.rxjava3.kotlin.subscribeBy
@@ -24,19 +25,34 @@ class LoginViewModel @Inject constructor(
     var state by mutableStateOf(LoginUiState())
         private set
 
-    fun onConnectSpotifyResult(code: String?, error: String?) {
-        if (code != null) {
-            authenticateUser(code)
-        } else {
-            state = state.copy(
-                error = Event(error ?: DEFAULT_ERROR_MESSAGE)
-            )
+    fun onConnectSpotifyResponse(response: AuthorizationResponse) {
+        Timber.e(response.type.toString())
+        Timber.e(response.accessToken.toString())
+        when (response.type) {
+            AuthorizationResponse.Type.TOKEN -> {
+                onConnectSpotifySuccess(
+                    accessToken = response.accessToken,
+                )
+            }
+
+            AuthorizationResponse.Type.ERROR -> {
+                onConnectSpotifyError(
+                    errorMessage = response.error
+                )
+            }
+
+            else -> {
+                Timber.e("Spotify Login Failed for unknown reasons")
+                onConnectSpotifyError(
+                    errorMessage = DEFAULT_ERROR_MESSAGE
+                )
+            }
         }
     }
 
-    private fun authenticateUser(code: String) {
+    private fun onConnectSpotifySuccess(accessToken: String) {
         authDomainManager
-            .authenticateUser(code)
+            .storeAccessToken(accessToken = accessToken)
             .andThen(userDomainManager.fetchCurrentUser())
             .doOnSubscribe { state = state.copy(isConnecting = true) }
             .subscribeBy(
@@ -56,5 +72,15 @@ class LoginViewModel @Inject constructor(
                 },
             )
             .addTo(disposables)
+
+
+    }
+
+    private fun onConnectSpotifyError(errorMessage: String) {
+        Timber.e(errorMessage)
+        state = state.copy(
+            isConnecting = false,
+            error = Event(errorMessage)
+        )
     }
 }

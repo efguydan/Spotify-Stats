@@ -28,7 +28,15 @@ class AuthDomainManager @Inject constructor(
 
     fun logout() = sessionCache.clearPrefs()
 
+    fun storeAccessToken(accessToken: String): Completable {
+        sessionCache.storeAccessToken(accessToken)
+        return Completable.complete()
+    }
+
     companion object {
         const val GRANT_TYPE = "authorization_code"
     }
+
+
+
 }

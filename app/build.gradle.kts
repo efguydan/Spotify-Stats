@@ -24,6 +24,12 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        addManifestPlaceholders(mapOf(
+            "redirectHostName" to "",
+            "redirectSchemeName" to "",
+        ))
+
     }
 
     buildTypes {
@@ -61,6 +67,7 @@ android {
 kapt {
     correctErrorTypes = true
 }
+
 
 dependencies {
     // AndroidX
@@ -112,6 +119,9 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation(platform("androidx.compose:compose-bom:2024.05.00"))
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+
+    //Spotify Auth
+    implementation("com.spotify.android:auth:2.1.2")
 }
 
 // Fixme: Move to different file
