@@ -5,8 +5,9 @@ import com.efedaniel.spotifystats.domain.model.TopTrack
 import com.efedaniel.spotifystats.network.dto.TopAlbumDto
 import com.efedaniel.spotifystats.network.dto.TopTrackDto
 import timber.log.Timber
+import javax.inject.Inject
 
-class AlbumMapper {
+class AlbumMapper @Inject constructor(){
     private fun dtoToDomain(
         dto: TopAlbumDto,
         position: Int
