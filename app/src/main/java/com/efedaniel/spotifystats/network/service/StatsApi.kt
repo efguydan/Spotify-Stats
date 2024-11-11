@@ -23,3 +23,4 @@ interface StatsApi {
         @Query("offset") offset: Int,
     ): Single<PaginatedResponse<TopTrackDto>>
 }
+

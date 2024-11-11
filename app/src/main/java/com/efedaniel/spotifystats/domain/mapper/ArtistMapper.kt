@@ -15,3 +15,4 @@ class ArtistMapper @Inject constructor() {
         popularity = dto.popularity
     )
 }
+
