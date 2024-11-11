@@ -41,4 +41,22 @@ class ArtistViewModel @Inject constructor(
             )
             .addTo(disposables)
     }
+
+    fun fecthArtistAlbum(id: String) {
+
+        userDomainManager
+            .getArtistAlbum( id)
+            .doOnSubscribe { state = state.copy(screenState = LOADING) }
+            .subscribeBy(
+                onSuccess = {
+
+                },
+                onError = {
+                    state = ArtistUiState(screenState = ERROR,)
+                    Timber.e("There was an error")
+                    Timber.e(it)
+                }
+            )
+            .addTo(disposables)
+    }
 }

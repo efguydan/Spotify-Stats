@@ -1,9 +1,11 @@
 package com.efedaniel.spotifystats.domain.manager
 
+import com.efedaniel.spotifystats.domain.mapper.AlbumMapper
 import com.efedaniel.spotifystats.domain.mapper.ArtistMapper
 import com.efedaniel.spotifystats.domain.mapper.TopArtistMapper
 import com.efedaniel.spotifystats.domain.mapper.TopTrackMapper
 import com.efedaniel.spotifystats.domain.mapper.UserMapper
+import com.efedaniel.spotifystats.domain.model.Album
 import com.efedaniel.spotifystats.domain.model.Artist
 import com.efedaniel.spotifystats.domain.model.User
 import com.efedaniel.spotifystats.network.dto.PaginatedResponse
@@ -21,8 +23,7 @@ class UserDomainManager @Inject constructor(
     private val cache: UserCache,
     private val userMapper: UserMapper,
     private val artistMapper: ArtistMapper,
-    private val topArtistMapper: TopArtistMapper,
-    private val topTrackMapper: TopTrackMapper,
+    private val albumMapper: AlbumMapper,
 
 ) {
 
@@ -41,9 +42,9 @@ class UserDomainManager @Inject constructor(
         .getArtist(id)
         .map(artistMapper::dtoToDomain)
 
-   /* fun getArtistAlbum(id: String): Single<PaginatedResponse<TopAlbumDto>> = userApi
+    fun getArtistAlbum(id: String): Single<List<Album>> = userApi
         .getArtistAlbum(id)
         .map(PaginatedResponse<TopAlbumDto>::items)
-        .map(top::dtoListToDomainList)*/
+        .map(albumMapper::dtoListToDomainList)
 
 }
