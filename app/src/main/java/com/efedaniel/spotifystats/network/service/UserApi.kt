@@ -6,7 +6,6 @@ import com.efedaniel.spotifystats.network.dto.TopAlbumDto
 import com.efedaniel.spotifystats.network.dto.TopArtistDto
 import com.efedaniel.spotifystats.network.dto.TopTrackDto
 import com.efedaniel.spotifystats.network.dto.UserResponse
-import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -19,7 +18,7 @@ interface UserApi {
     @GET("artists/{id}")
     fun getArtist(@Path("id") id: String): Single<ArtistDto>
 
-    @GET("artist/{id}/albums")
+    @GET("artists/{id}/albums")
     fun getArtistAlbum(@Path("id") id: String): Single<PaginatedResponse<TopAlbumDto>>
 
     @GET("artist/{id}/tracks")
