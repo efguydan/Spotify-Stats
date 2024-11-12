@@ -44,7 +44,8 @@ class LoginNavigator @Inject constructor() {
         val scopes = listOf(
             "user-read-private",
             "user-top-read",
-            "user-read-recently-played"
+            "user-read-recently-played",
+            "user-read-playback-state",
         ).joinToString(separator = " ")
 
         const val AUTHORIZE_PATH = "authorize"
