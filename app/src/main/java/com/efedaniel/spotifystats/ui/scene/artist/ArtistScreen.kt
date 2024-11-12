@@ -34,7 +34,12 @@ fun ArtistScreen(
     modifier: Modifier = Modifier,
     viewModel: ArtistViewModel = hiltViewModel(),
 ) {
-    LaunchedEffect(key1 = id) { viewModel.fetchArtist(id) }
+    LaunchedEffect(key1 = id) {
+        viewModel.fetchArtist(id)
+        if (id != null) {
+            viewModel.fetchArtistAlbum(id)
+        }
+    }
 
     AnimatedContent(
         targetState = viewModel.state.screenState,
