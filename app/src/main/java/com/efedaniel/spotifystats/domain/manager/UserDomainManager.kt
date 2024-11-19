@@ -8,6 +8,7 @@ import com.efedaniel.spotifystats.domain.mapper.UserMapper
 import com.efedaniel.spotifystats.domain.model.Album
 import com.efedaniel.spotifystats.domain.model.Artist
 import com.efedaniel.spotifystats.domain.model.User
+import com.efedaniel.spotifystats.network.dto.AlbumDto
 import com.efedaniel.spotifystats.network.dto.PaginatedResponse
 import com.efedaniel.spotifystats.network.dto.TopAlbumDto
 import com.efedaniel.spotifystats.network.dto.TopArtistDto
@@ -44,7 +45,7 @@ class UserDomainManager @Inject constructor(
 
     fun getArtistAlbum(id: String): Single<List<Album>> = userApi
         .getArtistAlbum(id)
-        .map(PaginatedResponse<TopAlbumDto>::items)
+        .map(PaginatedResponse<AlbumDto>::items)
         .map(albumMapper::dtoListToDomainList)
 
 }

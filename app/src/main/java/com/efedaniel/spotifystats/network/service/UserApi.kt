@@ -1,5 +1,6 @@
 package com.efedaniel.spotifystats.network.service
 
+import com.efedaniel.spotifystats.network.dto.AlbumDto
 import com.efedaniel.spotifystats.network.dto.ArtistDto
 import com.efedaniel.spotifystats.network.dto.PaginatedResponse
 import com.efedaniel.spotifystats.network.dto.TopAlbumDto
@@ -19,7 +20,7 @@ interface UserApi {
     fun getArtist(@Path("id") id: String): Single<ArtistDto>
 
     @GET("artists/{id}/albums")
-    fun getArtistAlbum(@Path("id") id: String): Single<PaginatedResponse<TopAlbumDto>>
+    fun getArtistAlbum(@Path("id") id: String): Single<PaginatedResponse<AlbumDto>>
 
     @GET("artist/{id}/tracks")
     fun getArtistTracks(@Path("id") id: String): Single<PaginatedResponse<TopTrackDto>>
