@@ -1,5 +1,6 @@
 package com.efedaniel.spotifystats.network.di
 
+import com.efedaniel.spotifystats.network.service.ArtistApi
 import com.efedaniel.spotifystats.network.service.AuthApi
 import com.efedaniel.spotifystats.network.service.PlaybackService
 import com.efedaniel.spotifystats.network.service.StatsApi
@@ -36,4 +37,9 @@ class NetworkModule {
     @Singleton
     internal fun providePlaybackService(retrofit: Retrofit): PlaybackService =
         retrofit.create(PlaybackService::class.java)
+
+    @Provides
+    @Singleton
+    internal fun provideArtistApi(retrofit: Retrofit): ArtistApi =
+        retrofit.create(ArtistApi::class.java)
 }
