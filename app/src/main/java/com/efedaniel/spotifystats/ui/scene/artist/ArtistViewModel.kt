@@ -7,6 +7,7 @@ import com.efedaniel.spotifystats.core.BaseViewModel
 import com.efedaniel.spotifystats.core.ScreenState.ERROR
 import com.efedaniel.spotifystats.core.ScreenState.LOADING
 import com.efedaniel.spotifystats.core.ScreenState.SUCCESS
+import com.efedaniel.spotifystats.domain.manager.ArtistDomainManager
 import com.efedaniel.spotifystats.domain.manager.UserDomainManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.kotlin.addTo
@@ -17,13 +18,14 @@ import javax.inject.Inject
 @HiltViewModel
 class ArtistViewModel @Inject constructor(
     private val userDomainManager: UserDomainManager,
+    private val artistDomainManager: ArtistDomainManager,
 ): BaseViewModel() {
 
     var state by mutableStateOf(ArtistUiState(screenState = LOADING))
         private set
 
     fun fetchArtist(id: String?) {
-        userDomainManager
+        artistDomainManager
             .getArtist(id.orEmpty())
             .doOnSubscribe { state = state.copy(screenState = LOADING) }
             .subscribeBy(
@@ -55,7 +57,7 @@ class ArtistViewModel @Inject constructor(
     }*/
 
     fun fetchArtistAlbum(id: String) {
-        userDomainManager.getArtistAlbum(id)
+        artistDomainManager.getArtistAlbum(id)
             .doOnSubscribe {
                 state = state.copy(screenState = LOADING)
             }
