@@ -26,5 +26,4 @@ class ArtistDomainManager @Inject constructor(
         .map(PaginatedResponse<AlbumDto>::items)
         .map(albumMapper::dtoListToDomainList)
 
-
 }
