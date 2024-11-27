@@ -23,8 +23,8 @@ class UserDomainManager @Inject constructor(
     private val userApi: UserApi,
     private val cache: UserCache,
     private val userMapper: UserMapper,
-    private val artistMapper: ArtistMapper,
-    private val albumMapper: AlbumMapper,
+   /* private val artistMapper: ArtistMapper,
+    private val albumMapper: AlbumMapper,*/
 
 ) {
 
@@ -39,13 +39,13 @@ class UserDomainManager @Inject constructor(
             ?.let { Single.just(userMapper.mapEntityToDomain(it)) }
             ?: Single.error(Exception("User does not exist in cache"))
 
-    fun getArtist(id: String): Single<Artist> = userApi
+  /*  fun getArtist(id: String): Single<Artist> = userApi
         .getArtist(id)
         .map(artistMapper::dtoToDomain)
 
     fun getArtistAlbum(id: String): Single<List<Album>> = userApi
         .getArtistAlbum(id)
         .map(PaginatedResponse<AlbumDto>::items)
-        .map(albumMapper::dtoListToDomainList)
+        .map(albumMapper::dtoListToDomainList)*/
 
 }

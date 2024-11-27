@@ -16,6 +16,8 @@ interface UserApi {
     @GET("me")
     fun getCurrentUser(): Single<UserResponse>
 
+    
+/*
     @GET("artists/{id}")
     fun getArtist(@Path("id") id: String): Single<ArtistDto>
 
@@ -26,6 +28,6 @@ interface UserApi {
     fun getArtistTracks(@Path("id") id: String): Single<PaginatedResponse<TopTrackDto>>
 
     @GET("artist/{id}/related-artist")
-    fun getRelatedArtist(@Path("id") id: String): Single<PaginatedResponse<TopArtistDto>>
+    fun getRelatedArtist(@Path("id") id: String): Single<PaginatedResponse<TopArtistDto>>*/
 
 }
