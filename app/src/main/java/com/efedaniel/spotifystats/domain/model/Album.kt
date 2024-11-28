@@ -8,3 +8,7 @@ data class Album(
     val spotifyUrl: String = "",
     val uri : String?= "",
     )
+
+
+
+
