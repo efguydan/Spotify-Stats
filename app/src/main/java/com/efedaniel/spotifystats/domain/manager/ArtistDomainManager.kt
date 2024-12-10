@@ -36,9 +36,9 @@ class ArtistDomainManager @Inject constructor(
         .map(PaginatedResponse<AlbumDto>::items)
         .map(albumMapper::dtoListToDomainList)
 
-   /* fun getArtistTopTracks(id: String): Single<List<ArtistTopTracks>> = artistAPi
+    fun getArtistTopTracks(id: String): Single<List<ArtistTopTracks>> = artistAPi
         .getArtistTopTracks(id)
         .map(PaginatedResponse<ArtistTopTracksDto>::items)
-        .map(artistTopTracksMapper::dtoListToDomainList)*/
+        .map(artistTopTracksMapper::dtoListToDomainList)
 
 }

@@ -10,7 +10,7 @@ data class ArtistTopTracksDto(
     @SerializedName("album")
     val album: AlbumDto,
     @SerializedName("artists")
-    val artist: ArtistDto,
+    val artist: List<ArtistDto>,
     @SerializedName("explicit")
     val explicit: Boolean,
     @SerializedName("popularity")
