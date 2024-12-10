@@ -22,5 +22,7 @@ data class ArtistTopTracksDto(
     @SerializedName("external_urls")
     val externalUrls: ExternalUrls,
     @SerializedName("track_number")
-    val trackNumber: Int
+    val trackNumber: Int,
+    @SerializedName("images")
+    val images: List<ImageDto>,
 )

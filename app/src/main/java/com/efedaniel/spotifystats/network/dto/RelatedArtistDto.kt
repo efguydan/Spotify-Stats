@@ -2,7 +2,7 @@ package com.efedaniel.spotifystats.network.dto
 
 import com.google.gson.annotations.SerializedName
 
-data class ArtistRelatedArtistDto(
+data class RelatedArtistDto(
     @SerializedName("id")
     val id: String,
     @SerializedName("external_urls")
