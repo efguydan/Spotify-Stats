@@ -38,6 +38,7 @@ fun ArtistScreen(
         viewModel.fetchArtist(id)
         if (id != null) {
             viewModel.fetchArtistAlbum(id)
+            viewModel.fetchArtistTrackAlbum(id)
         }
     }
 

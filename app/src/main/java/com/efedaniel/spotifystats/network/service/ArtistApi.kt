@@ -2,6 +2,7 @@ package com.efedaniel.spotifystats.network.service
 
 import com.efedaniel.spotifystats.network.dto.AlbumDto
 import com.efedaniel.spotifystats.network.dto.ArtistDto
+import com.efedaniel.spotifystats.network.dto.ArtistTopTracksDto
 import com.efedaniel.spotifystats.network.dto.PaginatedResponse
 import com.efedaniel.spotifystats.network.dto.TopArtistDto
 import com.efedaniel.spotifystats.network.dto.TopTrackDto
@@ -11,7 +12,6 @@ import retrofit2.http.Path
 
 interface ArtistApi {
 
-
     @GET("artists/{id}")
     fun getArtist(@Path("id") id: String): Single<ArtistDto>
 
@@ -19,8 +19,8 @@ interface ArtistApi {
     fun getArtistAlbum(@Path("id") id: String): Single<PaginatedResponse<AlbumDto>>
 
     @GET("artist/{id}/tracks")
-    fun getArtistTopTracks(@Path("id") id: String): Single<PaginatedResponse<TopTrackDto>>
+    fun getArtistTopTracks(@Path("id") id: String): Single<ArtistTopTracksDto>
 
     @GET("artist/{id}/related-artist")
-    fun getRelatedArtist(@Path("id") id: String): Single<List<TopArtistDto>>
+    fun getRelatedArtist(@Path("id") id: String): Single<TopArtistDto>
 }

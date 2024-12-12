@@ -9,9 +9,9 @@ import timber.log.Timber
 import javax.inject.Inject
 
 class AlbumMapper @Inject constructor(){
-    private fun dtoToDomain(
+    fun dtoToDomain(
         dto: AlbumDto,
-        position: Int
+        position: Int?
     ): Album = Album(
         id = dto.id,
         name = dto.name,

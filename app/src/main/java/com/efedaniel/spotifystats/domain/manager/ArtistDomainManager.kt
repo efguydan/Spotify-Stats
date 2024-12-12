@@ -12,9 +12,11 @@ import com.efedaniel.spotifystats.network.dto.AlbumDto
 import com.efedaniel.spotifystats.network.dto.ArtistTopTracksDto
 import com.efedaniel.spotifystats.network.dto.PaginatedResponse
 import com.efedaniel.spotifystats.network.dto.RelatedArtistDto
+import com.efedaniel.spotifystats.network.dto.TopAlbumDto
 import com.efedaniel.spotifystats.network.dto.TopTrackDto
 import com.efedaniel.spotifystats.network.service.ArtistApi
 import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
 
@@ -36,9 +38,10 @@ class ArtistDomainManager @Inject constructor(
         .map(PaginatedResponse<AlbumDto>::items)
         .map(albumMapper::dtoListToDomainList)
 
-    fun getArtistTopTracks(id: String): Single<List<ArtistTopTracks>> = artistAPi
+
+    fun getArtistTopTracks(id: String): Single<Album> = artistAPi
         .getArtistTopTracks(id)
-        .map(PaginatedResponse<ArtistTopTracksDto>::items)
-        .map(artistTopTracksMapper::dtoListToDomainList)
+        .map{it.album}
+        .map{albumMapper.dtoToDomain(it, position = null)}
 
 }

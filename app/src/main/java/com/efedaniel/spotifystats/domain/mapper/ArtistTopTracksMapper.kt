@@ -6,30 +6,30 @@ import javax.inject.Inject
 
 class ArtistTopTracksMapper @Inject constructor() {
 
-    private fun dtoToDomain(
-        dto: ArtistTopTracksDto,
-        position:Int
-    ) {
-        val artistTopTracks = ArtistTopTracks(
-            id = dto.id,
-            name = dto.name,
-            imageUrl = dto.images.firstOrNull()?.url,
-            popularity = dto.popularity,
-            isExplicit = dto.explicit,
-            previewUrl = dto.previewUrl,
-            uri = dto.uri,
-            images = dto.images,
-            artist = dto.artist,
-            album = dto.album
-        )
-    }
+            private fun dtoToDomain(
+                dto: ArtistTopTracksDto,
+                position:Int
+            ) {
+                val artistTopTracks = ArtistTopTracks(
+                    id = dto.id,
+                    name = dto.name,
+                    imageUrl = dto.images.firstOrNull()?.url,
+                    popularity = dto.popularity,
+                    isExplicit = dto.explicit,
+                    previewUrl = dto.previewUrl,
+                    uri = dto.uri,
+                    images = dto.images,
+                    artist = dto.artist,
+                        album = dto.album
+                )
+            }
 
-    fun dtoListToDomainList(
-        dtos: List<ArtistTopTracksDto>
-    ) {
-        dtos.mapIndexed { index, artistTopTracksDto ->
-            dtoToDomain(dto = artistTopTracksDto, position = index + 1)
-        }
+            fun dtoListToDomainList(
+                dtos: List<ArtistTopTracksDto>
+            ) {
+                dtos.mapIndexed { index, artistTopTracksDto ->
+                    dtoToDomain(dto = artistTopTracksDto, position = index + 1)
+                }
 
-    }
+            }
 }
