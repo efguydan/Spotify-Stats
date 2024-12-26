@@ -23,7 +23,6 @@ class ArtistTrackMapper @Inject constructor() {
                     previewUrl = dto.previewUrl,
                     uri = dto.uri,
                     images = dto.images,
-                   /* artist = dto.artist,*/
                     album = dto.album
                 )
 
