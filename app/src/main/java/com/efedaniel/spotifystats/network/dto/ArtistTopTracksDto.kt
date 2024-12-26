@@ -6,4 +6,3 @@ data class ArtistTopTracksDto(
     @SerializedName("tracks")
     val track: List<ArtistTrackDto>,
 )
-

@@ -13,6 +13,6 @@ data class ArtistTrack(
     val previewUrl: String?,
     val uri: String?,
     val images: List<ImageDto>?,
-    val artist: ArtistDto?,
+    /*val artists: List<ArtistDto>?,*/
     val album: AlbumDto
 )
