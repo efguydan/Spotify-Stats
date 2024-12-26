@@ -1,16 +1,20 @@
 package com.efedaniel.spotifystats.domain.mapper
 
-import com.efedaniel.spotifystats.domain.model.ArtistTopTracks
+import com.efedaniel.spotifystats.domain.model.Album
+import com.efedaniel.spotifystats.domain.model.ArtistTrack
+import com.efedaniel.spotifystats.network.dto.AlbumDto
 import com.efedaniel.spotifystats.network.dto.ArtistTopTracksDto
+import com.efedaniel.spotifystats.network.dto.ArtistTrackDto
+import timber.log.Timber
 import javax.inject.Inject
 
-class ArtistTopTracksMapper @Inject constructor() {
+class ArtistTrackMapper @Inject constructor() {
 
             private fun dtoToDomain(
-                dto: ArtistTopTracksDto,
+                dto: ArtistTrackDto,
                 position:Int
-            ) {
-                val artistTopTracks = ArtistTopTracks(
+            ) :
+                ArtistTrack = ArtistTrack(
                     id = dto.id,
                     name = dto.name,
                     imageUrl = dto.images.firstOrNull()?.url,
@@ -20,16 +24,15 @@ class ArtistTopTracksMapper @Inject constructor() {
                     uri = dto.uri,
                     images = dto.images,
                     artist = dto.artist,
-                        album = dto.album
+                    album = dto.album
                 )
-            }
+
 
             fun dtoListToDomainList(
-                dtos: List<ArtistTopTracksDto>
-            ) {
-                dtos.mapIndexed { index, artistTopTracksDto ->
-                    dtoToDomain(dto = artistTopTracksDto, position = index + 1)
-                }
-
+                dtos: List<ArtistTrackDto>
+            ) =
+                dtos.mapIndexed { index, artistTrackDto ->
+                    dtoToDomain(dto = artistTrackDto, position = index + 1)
             }
+
 }

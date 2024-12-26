@@ -4,7 +4,7 @@ import com.efedaniel.spotifystats.network.dto.AlbumDto
 import com.efedaniel.spotifystats.network.dto.ArtistDto
 import com.efedaniel.spotifystats.network.dto.ImageDto
 
-data class ArtistTopTracks(
+data class ArtistTrack(
     val id: String,
     val name: String,
     val imageUrl: String?,
@@ -13,6 +13,6 @@ data class ArtistTopTracks(
     val previewUrl: String?,
     val uri: String?,
     val images: List<ImageDto>?,
-    val artist: List<ArtistDto>?,
+    val artist: ArtistDto?,
     val album: AlbumDto
 )

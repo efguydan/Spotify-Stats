@@ -18,7 +18,7 @@ interface ArtistApi {
     @GET("artists/{id}/albums")
     fun getArtistAlbum(@Path("id") id: String): Single<PaginatedResponse<AlbumDto>>
 
-    @GET("artist/{id}/tracks")
+    @GET("artist/{id}/top-tracks")
     fun getArtistTopTracks(@Path("id") id: String): Single<ArtistTopTracksDto>
 
     @GET("artist/{id}/related-artist")

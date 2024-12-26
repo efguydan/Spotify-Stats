@@ -71,10 +71,7 @@ class ArtistViewModel @Inject constructor(
             .doOnSubscribe { state = state.copy(screenState = LOADING) }
             .subscribe({ albumList ->
                 // Update the state with the first album on success
-                state = state.copy(
-                    screenState = SUCCESS,
-                    album = albumList
-                )
+               println(albumList)
             }, { error ->
                 // Update the state to reflect an error
                 state = ArtistUiState(screenState = ERROR,)
