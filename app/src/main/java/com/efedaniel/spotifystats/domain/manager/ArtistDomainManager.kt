@@ -3,6 +3,7 @@ package com.efedaniel.spotifystats.domain.manager
 import com.efedaniel.spotifystats.domain.mapper.AlbumMapper
 import com.efedaniel.spotifystats.domain.mapper.ArtistMapper
 import com.efedaniel.spotifystats.domain.mapper.ArtistTrackMapper
+import com.efedaniel.spotifystats.domain.mapper.SeveralArtistsMapper
 import com.efedaniel.spotifystats.domain.model.Album
 import com.efedaniel.spotifystats.domain.model.Artist
 import com.efedaniel.spotifystats.domain.model.ArtistTrack
@@ -17,7 +18,9 @@ class ArtistDomainManager @Inject constructor(
     private val artistAPi: ArtistApi,
     private val artistMapper: ArtistMapper,
     private val albumMapper: AlbumMapper,
-    private val artistTrackMapper: ArtistTrackMapper
+    private val artistTrackMapper: ArtistTrackMapper,
+    private val severalArtistsMapper: SeveralArtistsMapper
+
 ) {
 
     fun getArtist(id: String): Single<Artist> = artistAPi
@@ -34,5 +37,11 @@ class ArtistDomainManager @Inject constructor(
         .getArtistTopTracks(id)
         .map{it.track}
         .map{artistTrackMapper.dtoListToDomainList(it)}
+
+    fun getSeveralArtists(): Single<List<Artist>> = artistAPi
+        .getSeveralArtist()
+        .map {it.artists}
+        .map {severalArtistsMapper.dtoListToDomainList(it)}
+
 
 }
