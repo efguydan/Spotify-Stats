@@ -52,7 +52,18 @@ class ArtistViewModel @Inject constructor(
                 state = state.copy(
                     screenState = SUCCESS,
                     album = albumList.first()
+
                 )
+                Timber.d(albumList.toString())
+                Timber.d(albumList.toString())
+                Timber.d(albumList.toString())
+                Timber.d(albumList.toString())
+                Timber.d(albumList.toString())
+                Timber.d(albumList.toString())
+                Timber.d(albumList.toString())
+                Timber.d(albumList.toString())
+
+
             }, { error ->
                 // Update the state to reflect an error
                 state = ArtistUiState(screenState = ERROR,)
@@ -68,10 +79,20 @@ class ArtistViewModel @Inject constructor(
             .getArtistTopTracks(id.orEmpty())
             .doOnSubscribe { state = state.copy(screenState = LOADING) }
             .subscribeBy (
-                onSuccess = {
-                   /* state = ArtistUiState(
+                onSuccess = { topTracks ->
+                    /*state = ArtistUiState(
                         screenState = SUCCESS,
                         tracks = it )*/
+                    println(topTracks)
+                    Timber.d(topTracks.toString())
+                    Timber.d(topTracks.toString())
+                    Timber.d(topTracks.toString())
+
+                    Timber.d(topTracks.toString())
+                    Timber.d(topTracks.toString())
+                    Timber.d(topTracks.toString())
+
+
                 },
                 onError = {
                     state = ArtistUiState(screenState = ERROR,)

@@ -26,7 +26,6 @@ class ArtistTrackMapper @Inject constructor() {
                     album = dto.album
                 )
 
-
             fun dtoListToDomainList(
                 dtos: List<ArtistTrackDto>
             ) =
