@@ -48,30 +48,20 @@ class ArtistViewModel @Inject constructor(
         artistDomainManager.getArtistAlbum(id)
             .doOnSubscribe { state = state.copy(screenState = LOADING) }
             .subscribe({ albumList ->
-                // Update the state with the first album on success
                 state = state.copy(
                     screenState = SUCCESS,
                     album = albumList.first()
 
                 )
                 Timber.d(albumList.toString())
-                Timber.d(albumList.toString())
-                Timber.d(albumList.toString())
-                Timber.d(albumList.toString())
-                Timber.d(albumList.toString())
-                Timber.d(albumList.toString())
-                Timber.d(albumList.toString())
-                Timber.d(albumList.toString())
-
 
             }, { error ->
-                // Update the state to reflect an error
-                state = ArtistUiState(screenState = ERROR,)
+                state = state.copy(screenState = ERROR,)
                 Timber.e("There was an error")
                 Timber.e(error)
 
             })
-            .let { disposables.add(it) }  // Add the disposable to the CompositeDisposable
+            .let { disposables.add(it) }
     }
 
     fun fetchArtistTopTracks(id: String?) {
@@ -80,36 +70,17 @@ class ArtistViewModel @Inject constructor(
             .doOnSubscribe { state = state.copy(screenState = LOADING) }
             .subscribeBy (
                 onSuccess = { topTracks ->
-                    /*state = ArtistUiState(
+                    state = state.copy(
                         screenState = SUCCESS,
-                        tracks = it )*/
-                    println(topTracks)
+                        tracks = topTracks )
                     Timber.d(topTracks.toString())
-                    Timber.d(topTracks.toString())
-                    Timber.d(topTracks.toString())
-
-                    Timber.d(topTracks.toString())
-                    Timber.d(topTracks.toString())
-                    Timber.d(topTracks.toString())
-
-
                 },
                 onError = {
-                    state = ArtistUiState(screenState = ERROR,)
+                    state = state.copy(screenState = ERROR,)
                     Timber.e("There was an error")
                     Timber.e(it)
                 }
             )
-            /*.subscribe({ topTracks ->
-                // Update the state with the first album on success
-               println(topTracks)
-            }, { error ->
-                // Update the state to reflect an error
-                state = ArtistUiState(screenState = ERROR,)
-                Timber.e("There was an error")
-                Timber.e(error)
-
-            })*/
             .let { disposables.add(it) }  // Add the disposable to the CompositeDisposable
     }
 

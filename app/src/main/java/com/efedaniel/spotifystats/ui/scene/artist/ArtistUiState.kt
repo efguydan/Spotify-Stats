@@ -12,5 +12,5 @@ data class ArtistUiState(
     val screenState: ScreenState = ScreenState.SUCCESS,
     val artist: Artist = Artist(),
     val album: Album = Album(),
-    val tracks: List<ArtistTrack> = listOf()
+    val tracks: List<ArtistTrack> = emptyList()
 )
