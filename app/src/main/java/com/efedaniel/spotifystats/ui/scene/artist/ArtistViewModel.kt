@@ -46,9 +46,7 @@ class ArtistViewModel @Inject constructor(
 
     fun fetchArtistAlbum(id: String) {
         artistDomainManager.getArtistAlbum(id)
-            .doOnSubscribe {
-                state = state.copy(screenState = LOADING)
-            }
+            .doOnSubscribe { state = state.copy(screenState = LOADING) }
             .subscribe({ albumList ->
                 // Update the state with the first album on success
                 state = state.copy(
@@ -65,20 +63,32 @@ class ArtistViewModel @Inject constructor(
             .let { disposables.add(it) }  // Add the disposable to the CompositeDisposable
     }
 
-    fun fetchArtistTrackAlbum(id: String?) {
+    fun fetchArtistTopTracks(id: String?) {
         artistDomainManager
             .getArtistTopTracks(id.orEmpty())
             .doOnSubscribe { state = state.copy(screenState = LOADING) }
-            .subscribe({ albumList ->
+            .subscribeBy (
+                onSuccess = {
+                   /* state = ArtistUiState(
+                        screenState = SUCCESS,
+                        tracks = it )*/
+                },
+                onError = {
+                    state = ArtistUiState(screenState = ERROR,)
+                    Timber.e("There was an error")
+                    Timber.e(it)
+                }
+            )
+            /*.subscribe({ topTracks ->
                 // Update the state with the first album on success
-               println(albumList)
+               println(topTracks)
             }, { error ->
                 // Update the state to reflect an error
                 state = ArtistUiState(screenState = ERROR,)
                 Timber.e("There was an error")
                 Timber.e(error)
 
-            })
+            })*/
             .let { disposables.add(it) }  // Add the disposable to the CompositeDisposable
     }
 

@@ -17,7 +17,7 @@ class ArtistTrackMapper @Inject constructor() {
                 ArtistTrack = ArtistTrack(
                     id = dto.id,
                     name = dto.name,
-                    imageUrl = dto.images.firstOrNull()?.url,
+                  //  imageUrl = dto.images.firstOrNull()?.url,
                     popularity = dto.popularity,
                     isExplicit = dto.explicit,
                     previewUrl = dto.previewUrl,
