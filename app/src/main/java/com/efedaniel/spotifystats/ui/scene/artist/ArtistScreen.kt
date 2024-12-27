@@ -36,6 +36,7 @@ fun ArtistScreen(
 ) {
     LaunchedEffect(key1 = id) {
         viewModel.fetchArtist(id)
+        viewModel.fetchSeveralArtists()
         if (id != null) {
             viewModel.fetchArtistAlbum(id)
             viewModel.fetchArtistTopTracks(id)

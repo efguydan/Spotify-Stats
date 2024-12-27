@@ -84,4 +84,25 @@ class ArtistViewModel @Inject constructor(
             .let { disposables.add(it) }  // Add the disposable to the CompositeDisposable
     }
 
+    fun fetchSeveralArtists() {
+        artistDomainManager
+            .getSeveralArtists()
+            .doOnSubscribe { state = state.copy(screenState = LOADING) }
+            .subscribeBy(
+                onSuccess = { artists ->
+                    state = state.copy(
+                        screenState = SUCCESS,
+                        severalArtist = artists
+                    )
+                    Timber.d(artists.toString())
+                },
+                onError = {
+                    state = state.copy(screenState = ERROR,)
+                    Timber.e("There was an error")
+                    Timber.e(it)
+                }
+            )
+            .let { disposables.add(it) }  // Add the disposable to the CompositeDisposable
+    }
+
 }
