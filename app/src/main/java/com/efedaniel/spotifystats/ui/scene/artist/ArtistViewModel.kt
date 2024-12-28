@@ -29,8 +29,8 @@ class ArtistViewModel @Inject constructor(
             return
         }
 
-//        fetchArtist(id)
-//        fetchArtistAlbums(id)
+        fetchArtist(id)
+        fetchArtistAlbums(id)
         fetchArtistTopTracks(id)
     }
 
