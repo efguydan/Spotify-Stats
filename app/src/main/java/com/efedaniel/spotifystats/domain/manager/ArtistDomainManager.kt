@@ -38,8 +38,8 @@ class ArtistDomainManager @Inject constructor(
         .map{it.track}
         .map{artistTrackMapper.dtoListToDomainList(it)}
 
-    fun getSeveralArtists(): Single<List<Artist>> = artistAPi
-        .getSeveralArtist()
+    fun getSeveralArtists(ids: List<String>): Single<List<Artist>> = artistAPi
+        .getSeveralArtist(ids)
         .map {it.artists}
         .map {severalArtistsMapper.dtoListToDomainList(it)}
 

@@ -10,6 +10,7 @@ import com.efedaniel.spotifystats.network.dto.TopTrackDto
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface ArtistApi {
 
@@ -23,5 +24,5 @@ interface ArtistApi {
     fun getArtistTopTracks(@Path("id") id: String): Single<ArtistTopTracksDto>
 
     @GET("artists")
-    fun getSeveralArtist(): Single<SeveralArtistsDto>
+    fun getSeveralArtist( @Query("ids") ids: List<String>): Single<SeveralArtistsDto>
 }

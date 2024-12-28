@@ -34,10 +34,13 @@ fun ArtistScreen(
     modifier: Modifier = Modifier,
     viewModel: ArtistViewModel = hiltViewModel(),
 ) {
+
+    val ids = listOf("2LuHL7im4aCEmfOlD4rxBC","1WgXqy2Dd70QQOU7Ay074N","2LuHL7im4aCEmfOlD4rxBC")
+
     LaunchedEffect(key1 = id) {
         viewModel.fetchArtist(id)
-        viewModel.fetchSeveralArtists()
         if (id != null) {
+            viewModel.fetchSeveralArtists(ids)
             viewModel.fetchArtistAlbum(id)
             viewModel.fetchArtistTopTracks(id)
         }

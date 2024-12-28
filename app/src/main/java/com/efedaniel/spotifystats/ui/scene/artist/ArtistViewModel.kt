@@ -84,9 +84,9 @@ class ArtistViewModel @Inject constructor(
             .let { disposables.add(it) }  // Add the disposable to the CompositeDisposable
     }
 
-    fun fetchSeveralArtists() {
+    fun fetchSeveralArtists(id: List<String>) {
         artistDomainManager
-            .getSeveralArtists()
+            .getSeveralArtists(id)
             .doOnSubscribe { state = state.copy(screenState = LOADING) }
             .subscribeBy(
                 onSuccess = { artists ->
