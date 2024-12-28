@@ -9,5 +9,4 @@ data class RelatedArtist(
     val name: String = "",
     val popularity: Int = 0,
     val followersDto: FollowersDto? = null,
-
 )

@@ -8,7 +8,6 @@ import com.efedaniel.spotifystats.core.ScreenState.ERROR
 import com.efedaniel.spotifystats.core.ScreenState.LOADING
 import com.efedaniel.spotifystats.core.ScreenState.SUCCESS
 import com.efedaniel.spotifystats.domain.manager.ArtistDomainManager
-import com.efedaniel.spotifystats.domain.manager.UserDomainManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.kotlin.addTo
 import io.reactivex.rxjava3.kotlin.subscribeBy
@@ -17,16 +16,27 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ArtistViewModel @Inject constructor(
-    private val userDomainManager: UserDomainManager,
     private val artistDomainManager: ArtistDomainManager,
 ): BaseViewModel() {
 
     var state by mutableStateOf(ArtistUiState(screenState = LOADING))
         private set
 
-    fun fetchArtist(id: String?) {
+    fun fetchArtistInformation(id: String?) {
+        id ?: kotlin.run {
+            state = ArtistUiState(screenState = ERROR)
+            Timber.e("The ID should not be null")
+            return
+        }
+
+//        fetchArtist(id)
+//        fetchArtistAlbums(id)
+        fetchArtistTopTracks(id)
+    }
+
+    fun fetchArtist(id: String) {
         artistDomainManager
-            .getArtist(id.orEmpty())
+            .getArtist(id)
             .doOnSubscribe { state = state.copy(screenState = LOADING) }
             .subscribeBy(
                 onSuccess = {
@@ -36,7 +46,7 @@ class ArtistViewModel @Inject constructor(
                     )
                 },
                 onError = {
-                    state = ArtistUiState(screenState = ERROR,)
+                    state = ArtistUiState(screenState = ERROR)
                     Timber.e("There was an error")
                     Timber.e(it)
                 }
@@ -44,14 +54,13 @@ class ArtistViewModel @Inject constructor(
             .addTo(disposables)
     }
 
-    fun fetchArtistAlbum(id: String) {
+    fun fetchArtistAlbums(id: String) {
         artistDomainManager.getArtistAlbum(id)
             .doOnSubscribe { state = state.copy(screenState = LOADING) }
             .subscribe({ albumList ->
                 state = state.copy(
                     screenState = SUCCESS,
-                    album = albumList.first()
-
+                    album = albumList
                 )
                 Timber.d(albumList.toString())
 
@@ -61,7 +70,7 @@ class ArtistViewModel @Inject constructor(
                 Timber.e(error)
 
             })
-            .let { disposables.add(it) }
+            .addTo(disposables)
     }
 
     fun fetchArtistTopTracks(id: String?) {
@@ -81,9 +90,10 @@ class ArtistViewModel @Inject constructor(
                     Timber.e(it)
                 }
             )
-            .let { disposables.add(it) }  // Add the disposable to the CompositeDisposable
+            .addTo(disposables)
     }
 
+    // TODO @ufuoma remove this
     fun fetchSeveralArtists(id: List<String>) {
         artistDomainManager
             .getSeveralArtists(id)
@@ -102,7 +112,6 @@ class ArtistViewModel @Inject constructor(
                     Timber.e(it)
                 }
             )
-            .let { disposables.add(it) }  // Add the disposable to the CompositeDisposable
+            .addTo(disposables)
     }
-
 }

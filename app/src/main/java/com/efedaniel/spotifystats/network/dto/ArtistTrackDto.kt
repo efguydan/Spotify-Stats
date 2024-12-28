@@ -2,7 +2,6 @@ package com.efedaniel.spotifystats.network.dto
 
 import com.google.gson.annotations.SerializedName
 
-
 data class ArtistTrackDto(
     @SerializedName("id")
     val id: String,
@@ -23,5 +22,5 @@ data class ArtistTrackDto(
     @SerializedName("track_number")
     val trackNumber: Int,
     @SerializedName("images")
-    val images: List<ImageDto>,
+    val images: List<ImageDto>?,
 )

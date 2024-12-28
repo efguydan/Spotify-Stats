@@ -14,7 +14,7 @@ data class AlbumDto(
     @SerializedName("release_date")
     val releaseDate: String,
     @SerializedName("release_date_precision")
-    val releaseDateProduction : String,
+    val releaseDatePrecision : String,
     @SerializedName("type")
     val type: String,
     @SerializedName("uri")
