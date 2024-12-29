@@ -18,7 +18,7 @@ class OverviewViewModel @Inject constructor(
             .getPlaybackState()
             .subscribeBy(
                 onSuccess = {
-                    Timber.e("The Playbck was fetched")
+                    Timber.e("The Playback was fetched")
                     Timber.e(it.toString())
                 },
                 onError = {

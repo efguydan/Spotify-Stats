@@ -4,7 +4,6 @@ import com.efedaniel.spotifystats.network.dto.AlbumDto
 import com.efedaniel.spotifystats.network.dto.ArtistDto
 import com.efedaniel.spotifystats.network.dto.ArtistTopTracksDto
 import com.efedaniel.spotifystats.network.dto.PaginatedResponse
-import com.efedaniel.spotifystats.network.dto.SeveralArtistsDto
 import com.efedaniel.spotifystats.network.dto.TopArtistDto
 import com.efedaniel.spotifystats.network.dto.TopTrackDto
 import io.reactivex.rxjava3.core.Single
@@ -23,6 +22,4 @@ interface ArtistApi {
     @GET("artists/{id}/top-tracks")
     fun getArtistTopTracks(@Path("id") id: String): Single<ArtistTopTracksDto>
 
-    @GET("artists")
-    fun getSeveralArtist( @Query("ids") ids: List<String>): Single<SeveralArtistsDto>
 }
