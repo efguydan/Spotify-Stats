@@ -99,6 +99,7 @@ dependencies {
     implementation("io.reactivex.rxjava3:rxjava:3.1.8")
     implementation("io.reactivex.rxjava3:rxkotlin:3.0.1")
     implementation("io.reactivex.rxjava3:rxandroid:3.0.2")
+    implementation("com.github.mrmike:ok2curl:0.8.0")
 
     // Timber
     implementation("com.jakewharton.timber:timber:5.0.1")

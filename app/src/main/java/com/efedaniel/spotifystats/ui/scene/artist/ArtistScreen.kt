@@ -1,7 +1,6 @@
 package com.efedaniel.spotifystats.ui.scene.artist
 
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
@@ -34,7 +33,9 @@ fun ArtistScreen(
     modifier: Modifier = Modifier,
     viewModel: ArtistViewModel = hiltViewModel(),
 ) {
-    LaunchedEffect(key1 = id) { viewModel.fetchArtist(id) }
+    LaunchedEffect(key1 = id) {
+        viewModel.fetchArtistInformation(id)
+    }
 
     AnimatedContent(
         targetState = viewModel.state.screenState,

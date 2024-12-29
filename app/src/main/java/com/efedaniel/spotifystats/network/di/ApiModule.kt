@@ -7,6 +7,8 @@ import com.efedaniel.spotifystats.utility.constants.Constants.SPOTIFY_AUTH_BASE_
 import com.efedaniel.spotifystats.utility.constants.Constants.SPOTIFY_BASE_URL
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.moczul.ok2curl.CurlInterceptor
+import com.moczul.ok2curl.logger.Logger
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,6 +22,7 @@ import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import timber.log.Timber
 import javax.inject.Named
 import javax.inject.Singleton
 
@@ -66,10 +69,12 @@ class ApiModule {
         @Named("BaseOkHttp") okhttp: OkHttpClient,
         tokenAuthenticator: TokenAuthenticator,
         errorInterceptor: ErrorInterceptor,
+        curlInterceptor: CurlInterceptor
     ): OkHttpClient = okhttp
         .newBuilder()
         .authenticator(tokenAuthenticator)
 //        .addInterceptor(errorInterceptor)
+        .addInterceptor(curlInterceptor)
         .build()
 
     @Provides
@@ -89,6 +94,15 @@ class ApiModule {
     internal fun provideLoggingInterceptor(): HttpLoggingInterceptor =
         HttpLoggingInterceptor()
             .also { it.level = BODY }
+
+    @Provides
+    @Singleton
+    internal fun provideCurlInterceptor(): CurlInterceptor =
+        CurlInterceptor(object : Logger {
+            override fun log(message: String) {
+                Timber.d(message)
+            }
+        })
 
     @Provides
     @Singleton
