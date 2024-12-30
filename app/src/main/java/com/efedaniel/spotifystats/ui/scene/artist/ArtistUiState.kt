@@ -12,5 +12,4 @@ data class ArtistUiState(
     val artist: Artist = Artist(),
     val album: List<Album> = emptyList(),
     val tracks: List<ArtistTrack> = emptyList(),
-    val severalArtist: List<Artist> = emptyList()
 )

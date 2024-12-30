@@ -92,26 +92,4 @@ class ArtistViewModel @Inject constructor(
             )
             .addTo(disposables)
     }
-
-    // TODO @ufuoma remove this
-    fun fetchSeveralArtists(id: List<String>) {
-        artistDomainManager
-            .getSeveralArtists(id)
-            .doOnSubscribe { state = state.copy(screenState = LOADING) }
-            .subscribeBy(
-                onSuccess = { artists ->
-                    state = state.copy(
-                        screenState = SUCCESS,
-                        severalArtist = artists
-                    )
-                    Timber.d(artists.toString())
-                },
-                onError = {
-                    state = state.copy(screenState = ERROR,)
-                    Timber.e("There was an error")
-                    Timber.e(it)
-                }
-            )
-            .addTo(disposables)
-    }
 }
