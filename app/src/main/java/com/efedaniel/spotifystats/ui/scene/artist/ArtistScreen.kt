@@ -4,7 +4,10 @@ import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,8 +18,11 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.efedaniel.spotifystats.core.ScreenState
 import com.efedaniel.spotifystats.domain.model.Artist
@@ -71,25 +77,76 @@ fun ArtistSection(
     modifier: Modifier = Modifier
 ) {
     Column(modifier = modifier) {
-        ProtonImage(
-            url = artist.imageUrl.orEmpty(),
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .fillMaxWidth()
-                .aspectRatio(1.0f)
-        )
-        Spacer(modifier = Modifier.height(ProtonDimension.Spacing4))
-        ProtonText(
-            text = artist.name,
-            style = ProtonTheme.typography.headlineMedium,
-            modifier = Modifier.padding(start = ProtonDimension.Spacing8)
-        )
-    }
 
-    Spacer(modifier = Modifier.height(ProtonDimension.Spacing4))
-    LazyRow {
-        items(artist.genres) { item ->
-            Chip(text = item)
+        Box(modifier = modifier) {
+            ProtonImage(
+                url = artist.imageUrl.orEmpty(),
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .aspectRatio(1.0f)
+            )
+
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(
+                        Brush.verticalGradient(
+                            colors = listOf(
+                                ProtonTheme.colors.transparent,
+                                ProtonTheme.colors.black,
+                            ),
+                            startY = height * 0.5f,
+                            endY = height * 1.0f,
+                        )
+                    )
+            )
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = ProtonDimension.Spacing8)
+                    .align(Alignment.BottomStart),
+                verticalAlignment = Alignment.Bottom
+            ) {
+                ProtonText(
+                    text = artist.name,
+                    modifier = Modifier
+                        .weight(1.0f),
+                )
+                ProtonText(
+                    text = artist.position.toString(),
+                    style = ProtonTheme.typography.titleLarge
+                )
+            }
+
+            ProtonText(
+                text = artist.name,
+                style = ProtonTheme.typography.displayLarge,
+                modifier = Modifier.padding(start = ProtonDimension.Spacing16)
+                    .align(Alignment.BottomStart)
+            )
+        }
+
+
+
+        Spacer(modifier = Modifier.height(ProtonDimension.Spacing16))
+
+        ProtonText(
+            text = "Genres",
+            style = ProtonTheme.typography.titleMedium,
+            modifier = Modifier.padding(start = ProtonDimension.Spacing16)
+        )
+        LazyRow(modifier = Modifier.padding(start = ProtonDimension.Spacing16)) {
+            items(artist.genres) { item ->
+                Chip(text = item)
+            }
         }
     }
+}
+
+@Preview
+@Composable
+fun ArtistScreenPreview() {
+
+
 }
