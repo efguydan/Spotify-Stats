@@ -1,5 +1,6 @@
 package com.efedaniel.spotifystats.ui.scene.artist
 
+import android.util.Log
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -7,22 +8,28 @@ import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.efedaniel.spotifystats.core.ScreenState
 import com.efedaniel.spotifystats.domain.model.Artist
@@ -32,6 +39,7 @@ import com.efedaniel.spotifystats.ui.proton.components.text.ProtonText
 import com.efedaniel.spotifystats.ui.proton.patterns.loader.ProtonLoader
 import com.efedaniel.spotifystats.ui.proton.theme.ProtonTheme
 import com.efedaniel.spotifystats.ui.proton.tokens.dimension.ProtonDimension
+import timber.log.Timber
 
 @Composable
 fun ArtistScreen(
@@ -76,67 +84,49 @@ fun ArtistSection(
     artist: Artist,
     modifier: Modifier = Modifier
 ) {
-    Column(modifier = modifier) {
 
-        Box(modifier = modifier) {
+    var height by remember { mutableStateOf(0) }
+
+    Column(modifier = modifier) {
+        Box(modifier = modifier.requiredHeight(360.dp)) {
             ProtonImage(
                 url = artist.imageUrl.orEmpty(),
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .fillMaxWidth()
                     .aspectRatio(1.0f)
+                    .onGloballyPositioned { layoutCoordinates ->
+                        height = layoutCoordinates.size.height }
             )
-
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(
-                        Brush.verticalGradient(
-                            colors = listOf(
-                                ProtonTheme.colors.transparent,
-                                ProtonTheme.colors.black,
-                            ),
-                            startY = height * 0.5f,
-                            endY = height * 1.0f,
-                        )
-                    )
-            )
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(all = ProtonDimension.Spacing8)
-                    .align(Alignment.BottomStart),
-                verticalAlignment = Alignment.Bottom
+            Box(modifier = Modifier
+                .fillMaxWidth()
+                .requiredHeight(360.dp)
+                .background(brush = Brush.verticalGradient(
+                    colors = listOf(
+                        ProtonTheme.colors.transparent,
+                        ProtonTheme.colors.black,
+                    ),
+                    startY = 360 * 0.9f,
+                )
+                )
             ) {
                 ProtonText(
                     text = artist.name,
-                    modifier = Modifier
-                        .weight(1.0f),
+                    style = ProtonTheme.typography.headlineLarge,
+                    modifier = Modifier.padding(start = ProtonDimension.Spacing8)
+                        .align(Alignment.BottomStart)
                 )
-                ProtonText(
-                    text = artist.position.toString(),
-                    style = ProtonTheme.typography.titleLarge
-                )
+
             }
 
-            ProtonText(
-                text = artist.name,
-                style = ProtonTheme.typography.displayLarge,
-                modifier = Modifier.padding(start = ProtonDimension.Spacing16)
-                    .align(Alignment.BottomStart)
-            )
         }
-
-
-
         Spacer(modifier = Modifier.height(ProtonDimension.Spacing16))
-
         ProtonText(
             text = "Genres",
             style = ProtonTheme.typography.titleMedium,
-            modifier = Modifier.padding(start = ProtonDimension.Spacing16)
+            modifier = Modifier.padding(start = ProtonDimension.Spacing8)
         )
-        LazyRow(modifier = Modifier.padding(start = ProtonDimension.Spacing16)) {
+        LazyRow {
             items(artist.genres) { item ->
                 Chip(text = item)
             }
