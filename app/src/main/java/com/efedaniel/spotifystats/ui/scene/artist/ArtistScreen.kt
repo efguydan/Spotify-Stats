@@ -88,7 +88,7 @@ fun ArtistSection(
     var height by remember { mutableStateOf(0) }
 
     Column(modifier = modifier) {
-        Box(modifier = modifier.requiredHeight(360.dp)) {
+        Box(modifier = Modifier.requiredHeight(height.dp)) {
             ProtonImage(
                 url = artist.imageUrl.orEmpty(),
                 contentScale = ContentScale.Crop,
@@ -96,17 +96,18 @@ fun ArtistSection(
                     .fillMaxWidth()
                     .aspectRatio(1.0f)
                     .onGloballyPositioned { layoutCoordinates ->
-                        height = layoutCoordinates.size.height }
+                        height = layoutCoordinates.size.height/2 }
             )
+
+            //It returns the image height as 720dp when it is actually 360dp
+            //Log.d("Artist", height.toString())
             Box(modifier = Modifier
-                .fillMaxWidth()
-                .requiredHeight(360.dp)
+                .fillMaxSize()
                 .background(brush = Brush.verticalGradient(
                     colors = listOf(
                         ProtonTheme.colors.transparent,
                         ProtonTheme.colors.black,
                     ),
-                    startY = 360 * 0.9f,
                 )
                 )
             ) {
@@ -120,7 +121,7 @@ fun ArtistSection(
             }
 
         }
-        Spacer(modifier = Modifier.height(ProtonDimension.Spacing16))
+        Spacer(modifier = Modifier.height(ProtonDimension.Spacing24))
         ProtonText(
             text = "Genres",
             style = ProtonTheme.typography.titleMedium,
