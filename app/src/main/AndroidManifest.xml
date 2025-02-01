@@ -29,7 +29,8 @@
             android:name=".ui.scene.auth.LoginActivity"
             android:exported="true"
             android:launchMode="singleTask"
-            android:theme="@style/Theme.SpotifyStats">
+            android:theme="@style/Theme.SpotifyStats"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -44,7 +45,8 @@
         <activity
             android:name=".ui.scene.main.MainActivity"
             android:exported="false"
-            android:theme="@style/Theme.SpotifyStats" />
+            android:theme="@style/Theme.SpotifyStats"
+            android:windowSoftInputMode="adjustResize"/>
 
         <provider
             android:name="androidx.startup.InitializationProvider"
