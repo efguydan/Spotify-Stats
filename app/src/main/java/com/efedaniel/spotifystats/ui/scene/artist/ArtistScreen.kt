@@ -117,9 +117,7 @@ fun ArtistSection(
                     modifier = Modifier.padding(start = ProtonDimension.Spacing8)
                         .align(Alignment.BottomStart)
                 )
-
             }
-
         }
         Spacer(modifier = Modifier.height(ProtonDimension.Spacing24))
         ProtonText(
@@ -133,11 +131,4 @@ fun ArtistSection(
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun ArtistScreenPreview() {
-
-
 }
