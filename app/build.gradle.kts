@@ -11,12 +11,12 @@ plugins {
 
 android {
     namespace = "com.efedaniel.spotifystats"
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.efedaniel.spotifystats"
         minSdk = 26
-        targetSdk = 34
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 
@@ -74,7 +74,7 @@ dependencies {
     implementation("androidx.core:core-splashscreen:1.0.1")
 
     // Compose
-    implementation(platform("androidx.compose:compose-bom:2024.05.00"))
+    implementation(platform("androidx.compose:compose-bom:2025.11.00"))
     implementation("androidx.navigation:navigation-compose:2.7.7")
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
@@ -85,9 +85,9 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
     // Hilt
-    implementation("com.google.dagger:hilt-android:2.51.1")
+    implementation("com.google.dagger:hilt-android:2.57.2")
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
-    kapt("com.google.dagger:hilt-android-compiler:2.51.1")
+    kapt("com.google.dagger:hilt-android-compiler:2.57.2")
 
     // Network
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
@@ -111,7 +111,7 @@ dependencies {
     // Android Test
     androidTestImplementation("androidx.test.ext:junit:1.3.0")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation(platform("androidx.compose:compose-bom:2024.05.00"))
+    androidTestImplementation(platform("androidx.compose:compose-bom:2025.11.00"))
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
 }
 
