@@ -11,8 +11,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,7 +23,6 @@ import com.efedaniel.spotifystats.R
 import com.efedaniel.spotifystats.ui.proton.components.image.ProtonImage
 import com.efedaniel.spotifystats.ui.proton.components.text.ProtonText
 import com.efedaniel.spotifystats.ui.proton.tokens.dimension.ProtonDimension
-import com.efedaniel.spotifystats.ui.proton.tokens.icon.ProtonIcon
 import com.efedaniel.spotifystats.ui.scene.profile.ProfileDestination.LOGIN
 import com.efedaniel.spotifystats.ui.scene.profile.ProfileEvent.Logout
 import com.efedaniel.spotifystats.utility.extensions.findActivity
@@ -98,7 +95,8 @@ private fun Option(
             text = text,
             modifier = Modifier.weight(1.0f)
         )
-        ProtonIcon(icon = Icons.AutoMirrored.Filled.KeyboardArrowRight)
+//        ProtonIcon(icon = Icons.AutoMirrored.Filled.KeyboardArrowRight)
+        // TODO Replace the Icon
     }
 }
 
