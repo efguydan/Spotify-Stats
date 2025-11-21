@@ -4,8 +4,10 @@ import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,8 +17,15 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.efedaniel.spotifystats.core.ScreenState
 import com.efedaniel.spotifystats.domain.model.Artist
@@ -70,26 +79,59 @@ fun ArtistSection(
     artist: Artist,
     modifier: Modifier = Modifier
 ) {
+
+    var height by remember { mutableStateOf(0) }
+
     Column(modifier = modifier) {
-        ProtonImage(
-            url = artist.imageUrl.orEmpty(),
-            contentScale = ContentScale.Crop,
+        Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .aspectRatio(1.0f)
-        )
-        Spacer(modifier = Modifier.height(ProtonDimension.Spacing4))
+                .height(IntrinsicSize.Min)
+        ) {
+            ProtonImage(
+                url = artist.imageUrl.orEmpty(),
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .aspectRatio(1.0f)
+                    .onGloballyPositioned { height = it.size.height }
+            )
+
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(
+                        brush = Brush.verticalGradient(
+                            colors = listOf(
+                                ProtonTheme.colors.transparent,
+                                ProtonTheme.colors.black,
+                            ),
+                            startY = height * 0.5f,
+                            endY = height * 1.0f,
+                        )
+                    )
+            ) {
+                ProtonText(
+                    text = artist.name,
+                    style = ProtonTheme.typography.headlineLarge,
+                    modifier = Modifier
+                        .align(Alignment.BottomStart)
+                        .padding(
+                            start = ProtonDimension.Spacing8,
+                            bottom = ProtonDimension.Spacing8,
+                        ),
+                )
+            }
+        }
         ProtonText(
-            text = artist.name,
-            style = ProtonTheme.typography.headlineMedium,
+            text = "Genres",
+            style = ProtonTheme.typography.titleMedium,
             modifier = Modifier.padding(start = ProtonDimension.Spacing8)
         )
-    }
-
-    Spacer(modifier = Modifier.height(ProtonDimension.Spacing4))
-    LazyRow {
-        items(artist.genres) { item ->
-            Chip(text = item)
+        LazyRow {
+            items(artist.genres) { item ->
+                Chip(text = item)
+            }
         }
     }
 }
