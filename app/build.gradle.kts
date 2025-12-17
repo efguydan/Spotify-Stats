@@ -68,7 +68,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.10.0")
     implementation("androidx.startup:startup-runtime:1.2.0")
     implementation("androidx.browser:browser:1.9.0")
-    implementation("androidx.activity:activity-compose:1.12.0")
+    implementation("androidx.activity:activity-compose:1.12.2")
     implementation("androidx.appcompat:appcompat:1.7.1")
     implementation("com.google.android.material:material:1.13.0")
     implementation("androidx.core:core-splashscreen:1.2.0")
